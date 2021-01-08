@@ -1,73 +1,74 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        nihonskitchen-frontend
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div class="home-page">
+    <h2>Popular Recipes</h2>
+    <div class="articles">
+      <div class="article" v-for="article of articles" :key="article">
+        <nuxt-link :to="{ name: 'recipes-slug', params: {slug: article.slug }}">
+          <div class="article-inner">
+            <img :src="require(`~/assets/resources/${article.img}`)" alt="" />
+            <div class="detail">
+              <h3>{{ article.title }}</h3>
+              <p>{{ article.description }}</p>
+            </div>
+          </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  async asyncData({ $content, params }) {
+    const articles = await $content("recipes", params.slug)
+      .only(["title", "description", "img", "slug"])
+      .sortBy("createdAt", "asc")
+      .fetch();
+
+    return { articles };
+  },
+};
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.home-page {
+  padding: 50px 30px;
+}
+h2 {
+  margin-bottom: 30px;
   text-align: center;
 }
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+.articles {
+  margin: 0 auto;
+  max-width: 800px;
+}
+.article {
+  margin-bottom: 15px;
+}
+.article-inner {
+  padding: 15px;
+  background: #FFF;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+}
+.article-inner img {
   display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+  width: 100%;
+  max-width: 300px;
 }
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.article-inner .detail {
+  padding-left: 15px;
+  padding-right: 15px;
 }
-
-.links {
-  padding-top: 15px;
+h3 {
+  color: #212121;
+  font-size: 24px;
+  text-decoration: none;
+}
+p {
+  color: #888;
+  font-size: 18px;
+  text-decoration: none;
 }
 </style>
