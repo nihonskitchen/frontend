@@ -20,12 +20,7 @@ footer {
 	align-items: center;
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
 }
-footer .title {
-	color: #212121;
-	font-size: 24px;
-	font-weight: 900;
-	text-transform: uppercase;
-}
+
 nav {
 	display: flex;
 	align-items: center;
@@ -34,6 +29,6 @@ nav {
 nav a {
 	display: block;
 	margin: 0 15px;
-	color: #9f25cf;
+	color: #000;
 }
 </style>

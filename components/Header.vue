@@ -1,6 +1,6 @@
 <template>
   <header>
-	  <div class="title"><nuxt-link to="/">Nihon's Kitchen</nuxt-link></div>
+	  <div class="title" ><nuxt-link to="/" id="main-title">Nihon's Kitchen</nuxt-link></div>
 	  <nav>
 		  <nuxt-link to="/cookbook">Cookbook</nuxt-link>
 		  <nuxt-link to="/user-profile">Profile</nuxt-link>
@@ -21,11 +21,15 @@ header {
 	align-items: center;
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
 }
+#main-title {
+	color: #000;
+}
 header .title {
-	color: #212121;
+	
 	font-size: 24px;
 	font-weight: 900;
 	text-transform: uppercase;
+	color: #000;
 }
 nav {
 	display: flex;
@@ -35,6 +39,5 @@ nav {
 nav a {
 	display: block;
 	margin: 0 15px;
-	color: #000000;
 }
 </style>
