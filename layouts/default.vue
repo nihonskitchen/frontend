@@ -14,7 +14,7 @@
   font-family: sans-serif;
 }
 body {
-  background-color: #EEE;
+  background-color: #F4F2EE;
 }
 a {
   text-decoration: none;

@@ -15,7 +15,7 @@ header {
     left: 0; */
     width: 100%;
 	padding: 15px 30px;
-	background-color: #FFF;
+	background-color: #F4F2EE;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -35,6 +35,6 @@ nav {
 nav a {
 	display: block;
 	margin: 0 15px;
-	color: #9f25cf;
+	color: #000000;
 }
 </style>
