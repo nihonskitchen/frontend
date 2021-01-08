@@ -9,7 +9,11 @@
               <div class="detail">
                 <h3>{{ article.title }}</h3>
                 <p>{{ article.description }}</p>
+                  
               </div>
+                <div class="timer">
+                  <img :src="require('~/assets/resources/food-timer.png')" alt="" />
+                </div>
             </div>
           </nuxt-link>
         </div>
@@ -102,6 +106,10 @@ h2 {
   content: "";
   display: table;
   clear: both;
+}
+
+.timer {
+  padding-bottom: 15px;
 }
 
 h3 {
