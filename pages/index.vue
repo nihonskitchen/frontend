@@ -13,6 +13,7 @@
               </div>
                 <div class="timer">
                   <img :src="require('~/assets/resources/food-timer.png')" alt="" />
+                  <h4>{{ article.timer }}</h4>
                 </div>
             </div>
           </nuxt-link>
@@ -115,6 +116,11 @@ h2 {
 h3 {
   color: #212121;
   font-size: 20px;
+  text-decoration: none;
+}
+h4 {
+  color: #E76C73;
+  font-size: 14px;
   text-decoration: none;
 }
 p {

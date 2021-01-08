@@ -1,6 +1,7 @@
 ---
 title: LaShawn's Cinnamon Buns
 description: Soft and Fluffy Cinnamon Buns
+timer: 30
 slug: second-recipe
 img: tea.jpg
 ---

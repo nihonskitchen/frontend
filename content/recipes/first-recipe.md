@@ -1,6 +1,7 @@
 ---
 title: Sayaka's Spicy Curry
 description: Awesome Japanese Curry
+timer: 30
 slug: first-recipe
 img: tea.jpg
 ---
