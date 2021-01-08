@@ -1,27 +1,27 @@
 <template>
-  <header>
-	  <div class="title"><nuxt-link to="/">Nihon's Kitchen</nuxt-link></div>
+  <footer>
 	  <nav>
-		  <nuxt-link to="/favorites">Favorites</nuxt-link>
-		  <nuxt-link to="/user-profile">Profile</nuxt-link>
+          <input type="text" placeholder="Search">
+          <nuxt-link to="/barcode">Scan Barcode</nuxt-link>
+		  <nuxt-link to="/create-recipe">Add Recipe</nuxt-link>
 	  </nav>
-  </header>
+  </footer>
 </template>
 
 <style>
-header {
-	/* position: fixed;
-    top: 0;
-    left: 0; */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
 	padding: 15px 30px;
 	background-color: #FFF;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
 }
-header .title {
+footer .title {
 	color: #212121;
 	font-size: 24px;
 	font-weight: 900;
