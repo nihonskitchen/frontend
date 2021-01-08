@@ -3,7 +3,6 @@
 	  <nav>
           <input type="text" placeholder="Search">
           <nuxt-link to="/barcode">Scan Barcode</nuxt-link>
-		  <nuxt-link to="/create-recipe">Add Recipe</nuxt-link>
 	  </nav>
   </footer>
 </template>

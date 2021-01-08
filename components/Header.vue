@@ -2,7 +2,7 @@
   <header>
 	  <div class="title"><nuxt-link to="/">Nihon's Kitchen</nuxt-link></div>
 	  <nav>
-		  <nuxt-link to="/favorites">Favorites</nuxt-link>
+		  <nuxt-link to="/cookbook">Cookbook</nuxt-link>
 		  <nuxt-link to="/user-profile">Profile</nuxt-link>
 	  </nav>
   </header>

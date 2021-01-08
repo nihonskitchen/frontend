@@ -40,7 +40,7 @@ h2 {
 }
 .articles {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 400px;
 }
 .article {
   margin-bottom: 15px;
@@ -54,8 +54,11 @@ h2 {
 }
 .article-inner img {
   display: block;
+  position: relative;
   width: 100%;
   max-width: 300px;
+  max-height: 200px;
+  object-fit: cover;
 }
 .article-inner .detail {
   padding-left: 15px;
