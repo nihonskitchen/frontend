@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card">
+    <div class="form-card">
       <form action="submit">
           <h2>
         Login
@@ -23,7 +23,7 @@ export default {};
 </script>
 
 <style>
-.card {
+.form-card {
     position: relative;
     /* justify-content: center; */
     /* align-content: center; */
