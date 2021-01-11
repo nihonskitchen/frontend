@@ -1,3 +1,6 @@
+const environment = process.env.NODE_ENV || development;
+const envSet = require(`./env.${environment}.js`);
+
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
@@ -35,8 +38,12 @@ export default {
     '@nuxt/content',
     '@nuxtjs/axios',
   ],
+  env: envSet,
   axios: {
-    // proxy: true
+    proxy: true
+  },
+  proxy: {
+    "/barcode": envSet.apiBaseUrl
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

@@ -1,0 +1,20 @@
+{
+  "barcode": [
+    {
+      "id": 1,
+      "jancode": "4901777317567",
+      "product_name": "南アルプス天然水 Sparkling",
+      "front_pic": "",
+      "back_pic": "",
+      "description": "Strong Sparkling"
+    },
+    {
+      "id": 2,  
+      "jancode": "4547894155004",
+      "product_name": "Clorets Original mints",
+      "front_pic": "",
+      "back_pic": "",
+      "description": "Bottled chewing gums"
+    }
+  ]
+}

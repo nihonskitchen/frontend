@@ -3,18 +3,21 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": ">=0.10.3 <0.12"
+    "node": ">=0.10.3 <0.13"
   },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "server": "node server/index.js"
   },
   "dependencies": {
     "@nuxt/content": "^1.11.1",
     "@nuxtjs/axios": "^5.12.5",
     "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "nuxt": "^2.14.6",
     "quagga": "^0.12.1"
   },
