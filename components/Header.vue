@@ -2,8 +2,9 @@
   <header>
 	  <div class="title" ><nuxt-link to="/" id="main-title">Nihon's Kitchen</nuxt-link></div>
 	  <nav>
-		  <nuxt-link to="/cookbook">Cookbook</nuxt-link>
-		  <nuxt-link to="/user-profile">Profile</nuxt-link>
+		  <nuxt-link to="/user/cookbook">Cookbook</nuxt-link>
+		  <nuxt-link to="/user/profile">Profile</nuxt-link>
+		  <nuxt-link to="/login">Login</nuxt-link>
 	  </nav>
   </header>
 </template>
