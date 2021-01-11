@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
       <h1>Add Recipe / Favorites</h1>
   </div>
 </template>

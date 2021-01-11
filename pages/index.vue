@@ -1,4 +1,6 @@
 <template>
+<div class="container">
+
   <div class="home-page">
     <h2>Popular Recipes</h2>
       <!-- <div class="articles"> -->
@@ -20,6 +22,7 @@
         </div>
       <!-- </div> -->
   </div>
+</div>
 </template>
 
 <script>
@@ -49,7 +52,8 @@ h2 {
 }
 .articles {
   margin: 0 auto;
-  max-width: 360px;
+  width: 360px;
+  /* min-width: 360px; */
 }
 .article {
   margin-bottom: 15px;
@@ -64,6 +68,7 @@ h2 {
   align-content: center;
   justify-content: center;
   max-width: 360px;
+  /* margin: 20px; */
 }
 .article-inner img {
   display: block;
@@ -91,7 +96,7 @@ h2 {
   background-color: #f1f1f1;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  max-width: 360px;
+  min-width: 360px;
 }
 
 .column {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
       <h1>Scan Barcode</h1>
   </div>
 </template>

@@ -16,6 +16,14 @@
 body {
   background-color: #F4F2EE;
 }
+.container {
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  /* flex-wrap: wrap; */
+  align-content: center;
+  justify-content: center;
+}
 a {
   text-decoration: none;
 }
