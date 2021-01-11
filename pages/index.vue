@@ -97,6 +97,7 @@ h2 {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   min-width: 360px;
+  max-width: 360px;
 }
 
 .column {
