@@ -23,21 +23,6 @@ export default {};
 </script>
 
 <style>
-.form-card {
-  position: relative;
-  /* justify-content: center; */
-  /* align-content: center; */
-  /* align-items: center; */
-  align-self: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-  padding: 20px;
-  text-align: center;
-  background-color: #f4f2ee;
-  border-radius: 8px;
-  min-width: 360px;
-  max-width: 360px;
-  max-height: 300px;
-}
 form {
   position: relative;
   justify-content: space-evenly;
