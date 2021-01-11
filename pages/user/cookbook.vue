@@ -1,18 +1,45 @@
 <template>
-  <div class="container">
+  <div class="container wrapper">
     <div class="toggle-btns">
-      <button class="inactive-btn">My Recipes</button>
-      <button class="active-btn">Favorites</button>
+      <div v-if="myRecipes">
+        <button class="active-btn">My Recipes</button>
+        <button class="inactive-btn" @click.prevent="toggleView">
+          Favorites
+        </button>
+      </div>
+      <div v-if="favorites">
+        <button class="inactive-btn" @click.prevent="toggleView">
+          My Recipes
+        </button>
+        <button class="active-btn">Favorites</button>
+      </div>
     </div>
-    <My-Recipes />
-    <Favorites />
+    <div v-if="myRecipes" class="details">
+      <MyRecipes />
+    </div>
+    <div v-if="favorites" class="details">
+      <Favorites />
+    </div>
   </div>
 </template>
 
 <script>
-import MyRecipes from '../../components/MyRecipes.vue';
+import MyRecipes from "../../components/MyRecipes.vue";
+
 export default {
-  components: { MyRecipes },};
+  data() {
+    return {
+      myRecipes: false,
+      favorites: true,
+    };
+  },
+  methods: {
+    toggleView() {
+      this.myRecipes = !this.myRecipes;
+      this.favorites = !this.favorites;
+    },
+  },
+};
 </script>
 
 <style>
@@ -40,5 +67,13 @@ export default {
   width: 150px;
   height: 30px;
   font-size: 16px;
+}
+.wrapper {
+  display: inline-block;
+}
+.details {
+  display: flex;
+  position: relative;
+  justify-content: center;
 }
 </style>
