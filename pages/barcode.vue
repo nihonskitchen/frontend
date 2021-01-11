@@ -6,7 +6,6 @@
           <div class="imageBuffer"></div>
           <img v-if="code.length > 0" src="" alt="result" class="resultImg" />
         </div>
-        <p>{{ code }}</p>
         <!--
         <div :class="{ invisible : code.length > 0 }" class="resultArea">
           <div>
@@ -21,8 +20,8 @@
           <p class="resultCode">{{ product }}</p>
         </div>
         -->
-        <!-- <p v-if="code.length > 0" class="getMessage">取得できました</p>
-        <p class="resultCode">{{ code }}</p> -->
+        <p v-if="code.length > 0" class="getMessage">取得できました</p>
+        <p class="resultCode">{{ code }}</p>
         <button @click="checkBarcode">checkBarcode</button>
         <p>{{ product }}</p>
         <button @click="startScan">Scan</button>
@@ -44,31 +43,12 @@ export default {
       notPresent: true,
     }
   },
-
+  watch: {
+    code: function (JAN) {
+      this.checkBarcode();
+    },
+  },
   methods: {
-    async checkBarcode() {
-      console.log("done");
-      let test = await this.$axios.$get("/jancode/4901777317567");
-      console.log(test);
-      this.product = test;
-      // te.then(res => {
-      //   console.log(res.json());
-      //   if (res.notPresent) {
-      //     this.product = {};
-      //   } else {
-      //     this.product = res.json();
-      //   }
-      // }).catch(err => err);
-    },
-    startScan() {
-      this.code = "";
-      this.initQuagga();
-    },
-    stopScan() {
-      this.Quagga.offProcessed(this.onProcessed);
-      this.Quagga.offDetected(this.onDetected);
-      this.Quagga.stop();
-    },
     initQuagga() {
       this.Quagga = require("quagga");
       this.Quagga.onProcessed(this.onProcessed);
@@ -169,6 +149,23 @@ export default {
         }
       }
     },
+    startScan() {
+      this.code = "";
+      this.initQuagga();
+    },
+    stopScan() {
+      this.Quagga.offProcessed(this.onProcessed);
+      this.Quagga.offDetected(this.onDetected);
+      this.Quagga.stop();
+    },
+    async checkBarcode() {
+      console.log("done");
+      // console.log(this.code);
+      let test = await this.$axios.$get(`/jancode/${this.code}`);
+      // console.log(test);
+      this.product = test;
+    },
+
   },
 };
 </script>
