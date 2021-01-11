@@ -33,4 +33,14 @@ p {
 p:last-of-type {
   margin-bottom: 0px;
 }
+button {
+  padding: 5px;
+  width: 100%;
+  margin: 5px;
+  background-color: #e76c73;
+  border: 0px;
+  font-size: 15px;
+  border-radius: 0px;
+
+}
 </style>

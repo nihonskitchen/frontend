@@ -44,5 +44,6 @@ nav a {
 .login-btn {
 	width: 80px;
 	font-size: 15px;
+	border-radius: 8px;
 }
 </style>
