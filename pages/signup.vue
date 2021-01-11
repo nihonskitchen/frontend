@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card">
+    <div class="form-card">
       <form action="submit">
           <h2>
         Sign up
@@ -12,7 +12,7 @@
         <br />
         <input type="password" placeholder="confirm password" />
         <br />
-        <button>Login</button>
+        <button>Sign up</button>
         <br />
         Already have an account? <nuxt-link to="/login">Log in!</nuxt-link>
       </form>
@@ -26,7 +26,7 @@ export default {};
 </script>
 
 <style>
-.card {
+.form-card {
     position: relative;
     /* justify-content: center; */
     /* align-content: center; */
