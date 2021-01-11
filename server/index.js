@@ -13,15 +13,20 @@ const setupExpressServer = () => {
   server.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
   server.use(cors());
 
-  server.get("/barcode/:jan", (req, res) => {
+  server.get("/jancode/", (req, res) => {
+    res.send("test");
+  })
+  server.get("/jancode/:jan", (req, res) => {
+
     const jan = req.params.jan;
+    console.log(jan);
     for (const i of barcode) {
       if (jan === i.jancode) {
         res.send(i);
         return;
       }
     }
-    res.send({barcode: jan, isExist: false});
+    res.send({ barcode: jan, notPresent: true });
   });
   return server;
 };

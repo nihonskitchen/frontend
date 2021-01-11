@@ -37,13 +37,19 @@ export default {
   modules: [
     '@nuxt/content',
     '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   env: envSet,
   axios: {
     proxy: true
   },
   proxy: {
-    "/barcode": envSet.apiBaseUrl
+    "/jancode": {
+      target: envSet.apiBaseUrl,
+      pathRewrite: {
+        '^/jancode': '/jancode'
+      }
+    }
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

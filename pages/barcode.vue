@@ -1,29 +1,65 @@
 <template>
-  <div class="container">
+  <div class="scan-container">
       <h1>Scan Barcode</h1>
-      <div id="cameraArea">
-        <div class="imageBuffer"></div>
-        <img v-if="code.length > 0" src="" alt="result" class="resultImg" />
-      </div>
-    <!-- <p v-if="code.length > 0" class="getMessage">取得できました</p>
-    <p class="resultCode">{{ code }}</p> -->
-    <button @click="startScan">Scan</button>
-    <button @click.prevent.stop="stopScan" aria-label="close">Stop</button>
+      <no-ssr>
+        <div id="cameraArea">
+          <div class="imageBuffer"></div>
+          <img v-if="code.length > 0" src="" alt="result" class="resultImg" />
+        </div>
+        <p>{{ code }}</p>
+        <!--
+        <div :class="{ invisible : code.length > 0 }" class="resultArea">
+          <div>
+            <p v-if="code.length > 0" class="getMessage">No information has been registered yet.</p>
+            <p class="resultCode">{{ code }}</p>
+            <button>Register Product</button>
+          </div>
+        </div>
+        <div :class="{ invisible : !(code.length > 0) }">
+          <p v-if="code.length > 0" class="getMessage">Do you want to info the following products?</p>
+          <p class="resultCode">{{ code }}</p>
+          <p class="resultCode">{{ product }}</p>
+        </div>
+        -->
+        <!-- <p v-if="code.length > 0" class="getMessage">取得できました</p>
+        <p class="resultCode">{{ code }}</p> -->
+        <button @click="checkBarcode">checkBarcode</button>
+        <p>{{ product }}</p>
+        <button @click="startScan">Scan</button>
+        <button @click.prevent.stop="stopScan" aria-label="close">Stop</button>
+      </no-ssr>
   </div>
 </template>
 
 <script>
 import Quagga from 'quagga';
+// const api = "/barcode";
 
 export default {
   data: function() {
     return {
       Quagga: null,
       code: "",
+      product: {},
+      notPresent: true,
     }
   },
 
   methods: {
+    async checkBarcode() {
+      console.log("done");
+      let test = await this.$axios.$get("/jancode/4901777317567");
+      console.log(test);
+      this.product = test;
+      // te.then(res => {
+      //   console.log(res.json());
+      //   if (res.notPresent) {
+      //     this.product = {};
+      //   } else {
+      //     this.product = res.json();
+      //   }
+      // }).catch(err => err);
+    },
     startScan() {
       this.code = "";
       this.initQuagga();
@@ -76,8 +112,6 @@ export default {
       this.Quagga.start();
     },
     onDetected(success) {
-      // console.log(success);
-      console.log("success");
       this.code = success.codeResult.code;
       const $resultImg = document.querySelector('.resultImg');
       $resultImg.setAttribute('src', this.Quagga.canvas.dom.image.toDataURL());
@@ -141,6 +175,38 @@ export default {
 
 
 <style>
+#cameraArea {
+  overflow: hidden;
+  width: 320px;
+  height: 240px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+#cameraArea video,
+#cameraArea canvas {
+  width: 320px;
+  height: 240px;
+}
+button {
+  width: 100px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #333;
+  margin-top: 30px;
+}
+.resultImg {
+  width: 100%;
+}
+.resultCode {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+.getMessage {
+  color: red;
+}
 .imageBuffer {
     position: absolute;
     top: 30%;
@@ -156,5 +222,8 @@ export default {
 .drawingBuffer {
   position: absolute;
   left: 0;
+}
+.invisible {
+  display: none;
 }
 </style>
