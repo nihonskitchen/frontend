@@ -57,5 +57,6 @@ width: 100%;
 margin: 5px;
 background-color: #E76C73;
 border: 0px;
+font-size: 15px;
 }
 </style>

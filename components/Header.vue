@@ -4,7 +4,7 @@
 	  <nav>
 		  <nuxt-link to="/user/cookbook">Cookbook</nuxt-link>
 		  <nuxt-link to="/user/profile">Profile</nuxt-link>
-		  <nuxt-link to="/login">Login</nuxt-link>
+		  <nuxt-link to="/login"><button class="login-btn">Login</button></nuxt-link>
 	  </nav>
   </header>
 </template>
@@ -40,5 +40,9 @@ nav {
 nav a {
 	display: block;
 	margin: 0 15px;
+}
+.login-btn {
+	width: 80px;
+	font-size: 15px;
 }
 </style>
