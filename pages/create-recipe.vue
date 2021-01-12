@@ -181,6 +181,7 @@ export default {
   height: 30px;
   margin: 0px;
   border-radius: 8px;
+  color: white;
 }
 .amount {
   width: 50px;

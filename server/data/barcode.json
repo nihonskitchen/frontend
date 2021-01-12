@@ -23,6 +23,14 @@
       "front_pic": "",
       "back_pic": "",
       "description": "Bottled chewing gums"
+    },
+    {
+      "id": 4, 
+      "jancode": "4901408603700",
+      "product_name": "Sweet Potato Pie",
+      "front_pic": "",
+      "back_pic": "",
+      "description": "Sweet Potato Pie"
     }
   ]
 }
