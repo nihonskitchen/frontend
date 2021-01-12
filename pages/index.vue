@@ -1,10 +1,9 @@
 <template>
-<div class="container">
-
-  <div class="home-page">
-    <h2>Popular Recipes</h2>
+  <div class="container center-div">
+    <div class="home-page">
+      <h2>Popular Recipes</h2>
       <!-- <div class="articles"> -->
-        <div class="card column" v-for="article of articles" :key="article">
+      <!-- <div class="card column" v-for="article of articles" :key="article">
           <nuxt-link :to="{ name: 'recipes-slug', params: {slug: article.slug }}">
             <div class="article-inner">
               <img :src="require(`~/assets/resources/${article.img}`)" alt="" />
@@ -19,10 +18,32 @@
                 </div>
             </div>
           </nuxt-link>
-        </div>
+        </div> -->
       <!-- </div> -->
+      <div
+        class="card column"
+        v-for="recipe in this.$store.state.recipes.recipes"
+        :key="recipe.recipe_id"
+      >
+      <nuxt-link to="/recipe-details">
+        <div class="article-inner" @click="this.$store.commit('recipes/showRecipeDetails', recipe.recipe_id)">
+          <img
+            :src="require(`~/assets/resources/${recipe.picture_url}`)"
+            alt=""
+          />
+        </div>
+        <div class="detail">
+          <h3>
+            {{ recipe.recipe_name }}
+          </h3>
+          <p>
+            {{ recipe.owner_comment }}
+          </p>
+        </div>
+      </nuxt-link>
+      </div>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -34,6 +55,9 @@ export default {
       .fetch();
 
     return { articles };
+  },
+  mounted() {
+    this.$store.commit("recipes/getCardDetails");
   },
 };
 </script>
@@ -49,6 +73,13 @@ export default {
 h2 {
   margin-bottom: 30px;
   text-align: center;
+}
+h3 {
+  /* margin-bottom: 10px; */
+  text-align: center;
+  color: #212121;
+  font-size: 20px;
+  text-decoration: none;
 }
 .articles {
   margin: 0 auto;
@@ -79,6 +110,7 @@ h2 {
   object-fit: cover;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  margin-bottom: 10px;
 }
 .article-inner .detail {
   padding-top: 15px;
@@ -87,7 +119,7 @@ h2 {
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-
+  
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
@@ -107,7 +139,9 @@ h2 {
   margin: 20px;
 }
 
-.row {margin: 0 -5px;}
+.row {
+  margin: 0 -5px;
+}
 
 .row:after {
   content: "";
@@ -119,13 +153,9 @@ h2 {
   padding-bottom: 15px;
 }
 
-h3 {
-  color: #212121;
-  font-size: 20px;
-  text-decoration: none;
-}
+
 h4 {
-  color: #E76C73;
+  color: #e76c73;
   font-size: 14px;
   text-decoration: none;
 }
@@ -133,6 +163,7 @@ p {
   color: #888;
   font-size: 18px;
   text-decoration: none;
+  padding: 10px;
 }
 
 @media screen and (max-width: 992px) {
@@ -151,6 +182,4 @@ p {
     padding-bottom: 20px;
   }
 }
-
-
 </style>
