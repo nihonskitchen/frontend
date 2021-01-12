@@ -1,32 +1,42 @@
 <template>
   <div class="scan-container">
-      <h1>Scan Barcode</h1>
-      <no-ssr>
-        <div id="cameraArea">
-          <div class="imageBuffer"></div>
-          <img v-if="code.length > 0" src="" alt="result" class="resultImg" />
-        </div>
-        <!--
-        <div :class="{ invisible : code.length > 0 }" class="resultArea">
-          <div>
-            <p v-if="code.length > 0" class="getMessage">No information has been registered yet.</p>
-            <p class="resultCode">{{ code }}</p>
-            <button>Register Product</button>
+    <div class="center-div">
+      <div class="form-card">
+        <no-ssr>
+          <div id="cameraArea">
+            <div class="imageBuffer"></div>
+            <img v-if="code.length > 0" src="" alt="result" class="resultImg" />
           </div>
-        </div>
-        <div :class="{ invisible : !(code.length > 0) }">
-          <p v-if="code.length > 0" class="getMessage">Do you want to info the following products?</p>
-          <p class="resultCode">{{ code }}</p>
-          <p class="resultCode">{{ product }}</p>
-        </div>
-        -->
-        <p v-if="code.length > 0" class="getMessage">取得できました</p>
-        <p class="resultCode">{{ code }}</p>
-        <button @click="checkBarcode">checkBarcode</button>
-        <p>{{ this.$store.state.barcode.details }}</p>
-        <button @click="startScan">Scan</button>
-        <button @click.prevent.stop="stopScan" aria-label="close">Stop</button>
-      </no-ssr>
+          <button v-if="!showInfomation" @click="startScan">Scan</button>
+          <button v-if="!showInfomation" @click.prevent.stop="stopScan" aria-label="close">Stop</button>
+          <div v-if="code.length > 0">
+            <h3>Get barcode data.</h3>
+          </div>
+          <div v-if="showInfomation">
+            <h2>This barcode data.</h2>
+            <div class="barcode-img">
+              <img
+                v-if="this.$store.state.barcode.details.front_pic != ''"
+                :src="this.$store.state.barcode.details.front_pic"
+              />
+              <img
+                v-if="this.$store.state.barcode.details.back_pic != ''"
+                :src="this.$store.state.barcode.details.back_pic"
+              />
+            </div>
+            <dl>
+              <dt>Barcode</dt>
+              <dd>{{ this.$store.state.barcode.details.jancode }}</dd>
+              <dt>Name</dt>
+              <dd>{{ this.$store.state.barcode.details.product_name }}</dd>
+              <dt>Description</dt>
+              <dd>{{ this.$store.state.barcode.details.description }}</dd>
+            </dl>
+            <button @click="loadAgain">load it again?</button>
+          </div>
+        </no-ssr>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,8 +49,7 @@ export default {
     return {
       Quagga: null,
       code: "",
-      product: {},
-      notPresent: true,
+      showInfomation: false
     }
   },
   watch: {
@@ -49,6 +58,27 @@ export default {
     },
   },
   methods: {
+    loadAgain() {
+      this.code = "";
+      this.showInfomation = false;
+      this.$store.commit('barcode/removeJancode');
+      // this.$router.push('/barcode');
+    },
+    async checkBarcode() {
+      let product = await this.$axios.$get(`/jancode/${this.code}`);
+      // console.log(this.$store.state.barcode.details)
+      this.$store.commit('barcode/showDetails', product);
+      this.showInfomation = true;
+
+      if (this.$store.state.barcode.details.notPresent === true) {
+        this.$store.commit('barcode/addJancode', { jancode: this.code , product_name: "" });
+        this.$store.commit('barcode/resetBarcode');
+        setTimeout(() => {
+          this.code = "";
+          this.$router.push('/barcode-create');
+        }, 2500);
+      }
+    },
     initQuagga() {
       this.Quagga = require("quagga");
       this.Quagga.onProcessed(this.onProcessed);
@@ -68,18 +98,14 @@ export default {
         frequency: 10,
         decoder: {
           readers: [
-            'ean_reader', 'ean_8_reader'
+            'ean_reader' //, 'ean_8_reader'
           ],
-          // debug: {
-          //   drawBoundingBox: true,
-          // },
           multiple: false
         },
         locator: {
           halfSample: true,
           patchSize: 'medium',
         },
-        // src: null,
       };
       this.Quagga.init(config, this.onInit);
     },
@@ -93,8 +119,8 @@ export default {
     },
     onDetected(success) {
       this.code = success.codeResult.code;
-      // const $resultImg = document.querySelector('.resultImg');
-      // $resultImg.setAttribute('src', this.Quagga.canvas.dom.image.toDataURL());
+      const $resultImg = document.querySelector('.resultImg');
+      $resultImg.setAttribute('src', this.Quagga.canvas.dom.image.toDataURL());
       this.Quagga.stop();
     },
     onProcessed(result) {
@@ -110,13 +136,7 @@ export default {
           const hasNotRead = (box) => box !== result.box;
           result.boxes.filter(hasNotRead).forEach((box) => {
             this.Quagga.ImageDebug.drawPath(
-              box,
-              { x: 0, y: 1 },
-              drawingCtx,
-              {
-                color: "green",
-                lineWidth: 2
-              }
+              box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 }
             );
           });
         }
@@ -125,26 +145,14 @@ export default {
         if (result.box) {
           console.log(result);
           this.Quagga.ImageDebug.drawPath(
-            result.box,
-            { x: 0, y: 1 },
-            drawingCtx,
-            {
-              color: "blue",
-              lineWidth: 2
-            }
+            result.box, { x: 0, y: 1 }, drawingCtx, { color: "blue", lineWidth: 2 }
           );
         }
 
         // horizontal line on success: red
         if (result.codeResult && result.codeResult.code) {
           this.Quagga.ImageDebug.drawPath(
-            result.line,
-            { x: "x", y: "y" },
-            drawingCtx,
-            {
-              color: "red",
-              lineWidth: 3
-            }
+            result.line, { x: "x", y: "y" }, drawingCtx,  { color: "red", lineWidth: 3 }
           );
         }
       }
@@ -158,23 +166,7 @@ export default {
       this.Quagga.offDetected(this.onDetected);
       this.Quagga.stop();
     },
-    async checkBarcode() {
-      console.log("done");
-      // console.log(this.code);
-      let product = await this.$axios.$get(`/jancode/${this.code}`);
-      // console.log(test);
-      console.log(this.$store.state.barcode.details)
-      this.$store.commit('barcode/showDetails', product);
 
-      if (this.$store.state.barcode.details.notPresent === true) {
-        console.log("page send");
-        // this.$store.commit('barcode/addBarcode', `{ jancode: ${this.code} }`);
-        // this.$store.commit('barcode/addJancode', this.code)
-        this.$store.commit('barcode/addJancode', { jancode: this.code })
-        this.$store.commit('barcode/resetBarcode')
-        this.$router.push('/barcode-create')
-      }
-    },
 
   },
 };
@@ -196,23 +188,8 @@ export default {
   width: 320px;
   height: 240px;
 }
-button {
-  width: 100px;
-  height: 40px;
-  background-color: #fff;
-  border: 1px solid #333;
-  margin-top: 30px;
-}
 .resultImg {
   width: 100%;
-}
-.resultCode {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-}
-.getMessage {
-  color: red;
 }
 .imageBuffer {
     position: absolute;
@@ -230,7 +207,46 @@ button {
   position: absolute;
   left: 0;
 }
+.barcode-img img {
+  width: 100%;
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+  border: 2px solid #737A7B;
+}
+
+dl {
+  text-align: left;
+  width: 75%;
+}
+dt {
+  font-weight: bold;
+}
+dd {
+  padding-left: 10%;
+  padding-bottom: 10px;
+}
+button {
+  max-width: 200px;
+}
+/*
+button {
+  width: 100px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #333;
+  margin-top: 30px;
+}
+.resultCode {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+.getMessage {
+  color: red;
+}
 .invisible {
   display: none;
 }
+*/
 </style>

@@ -29,9 +29,17 @@ export const mutations = {
     state.newSubmission = barcode;
     // state.newSubmission.jancode = barcode;
   },
-  remove(state, { todo: barcode }) {
+  removeJancode(state) {
     // change to barcode mutations
-    state.details.splice(state.details.indexOf(barcode), 1);
+    state.details = Object.assign({}, state.details, {
+      jancode: "",
+      product_name: "",
+      id: 0,
+      front_pic: "",
+      back_pic: "",
+      description: ""
+    });
+    return state.details;
   },
   resetBarcode(state) {
     state.details = {};

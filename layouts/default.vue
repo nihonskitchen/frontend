@@ -15,6 +15,7 @@
 }
 body {
   background-color: #f4f2ee;
+  color: #142C28;
   /* min-height: 100vh; */
   /* padding-bottom: 100px; */
 }
