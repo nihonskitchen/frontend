@@ -26,7 +26,7 @@
         :key="recipe.recipe_id"
       >
       <nuxt-link to="/recipe-details">
-        <div class="article-inner" @click="this.$store.commit('recipes/showRecipeDetails', recipe.recipe_id)">
+        <div class="article-inner" @click="passRecipeData(recipe.recipe_id)">
           <img
             :src="require(`~/assets/resources/${recipe.picture_url}`)"
             alt=""
@@ -59,6 +59,12 @@ export default {
   mounted() {
     this.$store.commit("recipes/getCardDetails");
   },
+  methods: {
+    passRecipeData(id) {
+      this.$store.commit('recipes/showRecipeDetails', id)
+      console.log(id)
+    }
+  }
 };
 </script>
 

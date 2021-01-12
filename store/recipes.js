@@ -14,6 +14,12 @@ export const mutations = {
     state.recipes = recipes["allRecipes"];
   },
   showRecipeDetails(state, id) {
-    state.selectedRecipe = id;
+
+    for (let i = 0; i < state.recipes.length; i++) {
+      if (state.recipes[i].recipe_id === id) {
+        state.selectedRecipe = state.recipes[i];
+      }
+    }
+   
   }
 };
