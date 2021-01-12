@@ -75,7 +75,7 @@
         </div>
         <div>
           <input type="file" id="foodPic" />
-          <input type="submit" />
+          <button class="upload-btn">Upload Picture</button>
         </div>
       </div>
     </div>
@@ -140,6 +140,7 @@ export default {
   border: 0px;
   height: 30px;
   margin: 0px;
+  border-radius: 8px;
 }
 .amount {
   width: 50px;
@@ -190,5 +191,14 @@ export default {
 .subheader {
   margin-top: 20px;
   margin-bottom: -10px;
+}
+.upload-btn {
+  width: 150px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #e76c73;
+  border: 0px;
+  margin: 0px;
 }
 </style>
