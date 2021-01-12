@@ -1,9 +1,9 @@
 {
-    "recipes": [
+    "allRecipes": [
         {
             "recipe_id": "1001",
             "recipe_name": "Gyoza",
-            "picture_url": "../assets/resources/1001.jpg",
+            "picture_url": "1001.jpg",
             "time": "60",
             "likes": "102",
             "dislikes": "15",
@@ -79,7 +79,7 @@
         {
             "recipe_id": "1002",
             "recipe_name": "Easy Chicken Yakitori",
-            "picture_url": "../assets/resources/1002.jpg",
+            "picture_url": "1002.jpg",
             "time": "40",
             "likes": "99",
             "dislikes": "3",
@@ -150,7 +150,7 @@
         {
             "recipe_id": "1003",
             "recipe_name": "Pumpkin Mochi",
-            "picture_url": "../assets/resources/1003.jpg",
+            "picture_url": "1003.jpg",
             "time": "70",
             "likes": "34",
             "dislikes": "10",
@@ -216,7 +216,7 @@
         {
             "recipe_id": "1004",
             "recipe_name": "Japanese Curry",
-            "picture_url": "../assets/resources/1004.jpg",
+            "picture_url": "1004.jpg",
             "time": "75",
             "likes": "453",
             "dislikes": "146",
@@ -287,7 +287,7 @@
         {
             "recipe_id": "1005",
             "recipe_name": "Japanese Rolled Omelette",
-            "picture_url": "../assets/resources/1005.jpg",
+            "picture_url": "1005.jpg",
             "time": "25",
             "likes": "253",
             "dislikes": "12",
