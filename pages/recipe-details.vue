@@ -6,7 +6,7 @@
       <img class="recipe-img" :src="require(`~/assets/resources/${this.$store.state.recipes.selectedRecipe.picture_url}`)" alt="">
       <div><h2>Ingredients</h2></div>
       <div
-        class="grid-item"
+        class="grid-item grid-padding"
         v-for="ingredient in this.$store.state.recipes.selectedRecipe
           .ingredients"
         :key="ingredient.ingredient_id"
@@ -21,7 +21,7 @@
 
       <div><h2>Steps</h2></div>
       <div
-        class="grid-item"
+        class="grid-item grid-padding"
         v-for="step in this.$store.state.recipes.selectedRecipe.steps"
         :key="step.step_num"
       >
@@ -55,8 +55,11 @@ h1 {
   justify-content: center;
   /* margin-bottom: 10px; */
   margin: 0px;
-  padding: 10px;
+  /* padding: 10px; */
   /* left: 50%; */
+}
+.grid-padding {
+    padding: 10px;
 }
 .recipe-img {
   display: block;
