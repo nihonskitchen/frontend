@@ -41,11 +41,11 @@
 </template>
 
 <script>
-import Quagga from 'quagga';
+import Quagga from "quagga";
 // const api = "/barcode";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       Quagga: null,
       code: "",
@@ -88,11 +88,11 @@ export default {
         locate: true,
         numOfWorkers: navigator.hardwareConcurrency || 4,
         inputStream: {
-          name: 'Live',
-          type: 'LiveStream',
-          target: '#cameraArea',
+          name: "Live",
+          type: "LiveStream",
+          target: "#cameraArea",
           constraints: {
-            facingMode: 'environment',
+            facingMode: "environment",
           },
         },
         frequency: 10,
@@ -104,7 +104,7 @@ export default {
         },
         locator: {
           halfSample: true,
-          patchSize: 'medium',
+          patchSize: "medium",
         },
       };
       this.Quagga.init(config, this.onInit);
@@ -124,12 +124,10 @@ export default {
       this.Quagga.stop();
     },
     onProcessed(result) {
-
       const drawingCtx = this.Quagga.canvas.ctx.overlay;
       const drawingCanvas = this.Quagga.canvas.dom.overlay;
 
       if (result) {
-
         // detect: green
         if (result.boxes) {
           drawingCtx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
@@ -192,15 +190,11 @@ export default {
   width: 100%;
 }
 .imageBuffer {
-    position: absolute;
-    top: 30%;
-    bottom: 30%;
-    left: 10%;
-    right: 10%;
-    /* border: 2px solid #0000ff; */
-    /* position: absolute;
-    top: 0;
-    left: 0; */
+  position: absolute;
+  top: 30%;
+  bottom: 30%;
+  left: 10%;
+  right: 10%;
 }
 /* オーバーレイ */
 .drawingBuffer {

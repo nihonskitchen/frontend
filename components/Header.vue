@@ -52,5 +52,6 @@ nav a {
   background-color: #e76c73;
   border: 0px;
   margin: 0px;
+  color: white;
 }
 </style>

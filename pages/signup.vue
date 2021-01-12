@@ -38,5 +38,6 @@ input {
   border: 0px;
   font-size: 15px;
   border-radius: 8px;
+  color: white;
 }
 </style>
