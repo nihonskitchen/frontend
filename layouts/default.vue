@@ -15,14 +15,18 @@
 }
 body {
   background-color: #F4F2EE;
+  min-height: 100vh;
+  margin-bottom: 100px;
+  clear: both;
 }
 .container {
-  height: 90vh;
-  width: 100vw;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
   display: flex;
-  /* flex-wrap: wrap; */
   align-content: center;
   justify-content: center;
+  margin-bottom: 100px;
 }
 a {
   text-decoration: none;
@@ -45,17 +49,13 @@ button {
 }
 .form-card {
   position: relative;
-  /* justify-content: center; */
-  /* align-content: center; */
-  /* align-items: center; */
   align-self: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 20px;
   text-align: center;
   background-color: #f4f2ee;
   border-radius: 8px;
   min-width: 360px;
   max-width: 360px;
-  /* max-height: 300px; */
 }
 </style>
