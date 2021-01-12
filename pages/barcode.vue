@@ -23,7 +23,7 @@
         <p v-if="code.length > 0" class="getMessage">取得できました</p>
         <p class="resultCode">{{ code }}</p>
         <button @click="checkBarcode">checkBarcode</button>
-        <p>{{ product }}</p>
+        <p>{{ this.$store.state.barcode.details }}</p>
         <button @click="startScan">Scan</button>
         <button @click.prevent.stop="stopScan" aria-label="close">Stop</button>
       </no-ssr>
@@ -93,8 +93,8 @@ export default {
     },
     onDetected(success) {
       this.code = success.codeResult.code;
-      const $resultImg = document.querySelector('.resultImg');
-      $resultImg.setAttribute('src', this.Quagga.canvas.dom.image.toDataURL());
+      // const $resultImg = document.querySelector('.resultImg');
+      // $resultImg.setAttribute('src', this.Quagga.canvas.dom.image.toDataURL());
       this.Quagga.stop();
     },
     onProcessed(result) {
@@ -161,9 +161,19 @@ export default {
     async checkBarcode() {
       console.log("done");
       // console.log(this.code);
-      let test = await this.$axios.$get(`/jancode/${this.code}`);
+      let product = await this.$axios.$get(`/jancode/${this.code}`);
       // console.log(test);
-      this.product = test;
+      console.log(this.$store.state.barcode.details)
+      this.$store.commit('barcode/showDetails', product);
+
+      if (this.$store.state.barcode.details.notPresent === true) {
+        console.log("page send");
+        // this.$store.commit('barcode/addBarcode', `{ jancode: ${this.code} }`);
+        // this.$store.commit('barcode/addJancode', this.code)
+        this.$store.commit('barcode/addJancode', { jancode: this.code })
+        this.$store.commit('barcode/resetBarcode')
+        this.$router.push('/barcode-create')
+      }
     },
 
   },

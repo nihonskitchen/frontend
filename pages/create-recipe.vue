@@ -75,6 +75,10 @@
           <input type="file" id="foodPic" />
           <button class="upload-btn">Upload Picture</button>
         </div>
+        <div>
+          <!-- <input type="submit" id="submit-recipe" /> -->
+          <button class="submit-btn">Submit Recipe</button>
+        </div>
       </div>
     </div>
   </div>
@@ -235,6 +239,19 @@ export default {
   padding: 5px;
   background-color: #e76c73;
   border: 0px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  color: white;
+
+}
+.submit-btn {
+  width: 150px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #e76c73;
+  border: 0px;
   margin: 0px;
+  color: white;
 }
 </style>
