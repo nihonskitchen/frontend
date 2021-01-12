@@ -58,6 +58,7 @@ export default {
   width: 150px;
   height: 30px;
   font-size: 16px;
+  border: 0px;
 }
 .active-btn {
   float: left;
@@ -67,6 +68,7 @@ export default {
   width: 150px;
   height: 30px;
   font-size: 16px;
+  border: 0px;
 }
 .wrapper {
   display: inline-block;

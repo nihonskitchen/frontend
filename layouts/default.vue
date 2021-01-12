@@ -16,17 +16,14 @@
 body {
   background-color: #F4F2EE;
   min-height: 100vh;
-  margin-bottom: 100px;
-  clear: both;
 }
 .container {
   position: relative;
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100%;
   display: flex;
   align-content: center;
   justify-content: center;
-  margin-bottom: 100px;
 }
 a {
   text-decoration: none;
