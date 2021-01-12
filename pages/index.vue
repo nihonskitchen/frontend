@@ -26,7 +26,7 @@
         :key="recipe.recipe_id"
       >
       <nuxt-link to="/recipe-details">
-        <div class="article-inner" @click.prevent="this.$store.commit('recipes/showRecipeDetails', recipe.recipe_id)">
+        <div class="article-inner" @click="this.$store.commit('recipes/showRecipeDetails', recipe.recipe_id)">
           <img
             :src="require(`~/assets/resources/${recipe.picture_url}`)"
             alt=""
