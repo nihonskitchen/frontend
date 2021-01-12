@@ -1,8 +1,7 @@
 <template>
-  <div class="scan-container">
-    <div class="center-div">
+  <div class="scan-container center-div">
       <div class="form-card">
-        <no-ssr>
+        <client-only>
           <div id="cameraArea">
             <div class="imageBuffer"></div>
             <img v-if="code.length > 0" src="" alt="result" class="resultImg" />
@@ -34,9 +33,8 @@
             </dl>
             <button @click="loadAgain">load it again?</button>
           </div>
-        </no-ssr>
+        </client-only>
       </div>
-    </div>
   </div>
 </template>
 
