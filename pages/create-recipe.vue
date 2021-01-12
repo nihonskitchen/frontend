@@ -47,16 +47,14 @@
         </div>
 
         <div class="grid-item">
-          <button class="add-btn" @click.prevent="addIngredientFields">
-            +
-          </button>
+          <button class="add-btn" @click.prevent="addIngredientField">+</button>
         </div>
       </div>
       <div>
         <div class="subheader">
           <h2>Steps</h2>
         </div>
-        <div class="steps-container">
+        <div class="steps-container" id="steps-container">
           <div class="grid-item">
             <input
               class="steps-input"
@@ -65,7 +63,7 @@
             />
           </div>
           <div class="grid-item">
-            <button class="add-btn">+</button>
+            <button class="add-btn" @click.prevent="addStepsField">+</button>
           </div>
         </div>
       </div>
@@ -90,7 +88,7 @@ export default {
     };
   },
   methods: {
-    addIngredientFields() {
+    addIngredientField() {
       let id = 1;
 
       let container = document.getElementById("ingredients-container");
@@ -99,7 +97,7 @@ export default {
       let col2 = document.createElement("div");
       let col3 = document.createElement("div");
       let col4 = document.createElement("div");
-      let emptyDiv = document.createElement("div")
+      let emptyDiv = document.createElement("div");
 
       col1.class = "grid-item";
       col2.class = "grid-item";
@@ -112,12 +110,12 @@ export default {
 
       let inputAmount = document.createElement("input");
       inputAmount.type = "text";
-      inputAmount.className = "amount"
+      inputAmount.className = "amount";
 
       let inputUnit = document.createElement("input");
       inputUnit.type = "select";
       inputUnit.option = "grams";
-      inputUnit.className = "units"
+      inputUnit.className = "units";
 
       col1.appendChild(inputName);
       col2.appendChild(inputAmount);
@@ -128,6 +126,24 @@ export default {
       container.appendChild(col2);
       container.appendChild(col3);
       container.appendChild(col4);
+    },
+    addStepsField() {
+      let container = document.getElementById("steps-container");
+
+      let col1 = document.createElement("div");
+      let emptyDiv = document.createElement("div");
+
+      col1.class = "grid-item";
+      emptyDiv.class = "grid-item";
+
+      let inputStep = document.createElement("input");
+      inputStep.type = "text";
+      inputStep.className = "steps-input";
+
+      col1.appendChild(inputStep);
+
+      container.appendChild(col1);
+      container.appendChild(emptyDiv);
     },
   },
 };
@@ -176,14 +192,10 @@ export default {
   border-radius: 8px;
   min-width: 360px;
   max-width: 360px;
-  /* bottom: -80%; */
-  /* margin-bottom: 80px; */
-
 }
 .steps-container {
   display: grid;
   grid-template-columns: auto auto;
-  /* padding: 0px; */
 }
 .steps-input {
   width: 255px;
