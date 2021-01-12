@@ -136,6 +136,10 @@ export default {
 <style>
 .add-btn {
   width: 30px;
+  background-color: #e76c73;
+  border: 0px;
+  height: 30px;
+  margin: 0px;
 }
 .amount {
   width: 50px;
