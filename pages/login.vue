@@ -22,11 +22,6 @@ export default {};
 </script>
 
 <style>
-.center-div {
-  min-height: 90vh;
-  display: flex;
-  justify-content: center;
-}
 
 input {
   width: 100%;
