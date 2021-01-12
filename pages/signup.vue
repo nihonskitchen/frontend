@@ -1,19 +1,21 @@
 <template>
   <div class="container">
-    <div class="form-card">
-      <form action="submit">
-        <h2>Sign up</h2>
-        <br />
-        <input type="email" placeholder="email address" />
-        <br />
-        <input type="password" placeholder="password" />
-        <br />
-        <input type="password" placeholder="confirm password" />
-        <br />
-        <button class="large-btn">Sign up</button>
-        <br />
-        Already have an account? <nuxt-link to="/login">Log in!</nuxt-link>
-      </form>
+    <div class="center-div">
+      <div class="form-card">
+        <form action="submit">
+          <h2>Sign up</h2>
+          <br />
+          <input type="email" placeholder="email address" />
+          <br />
+          <input type="password" placeholder="password" />
+          <br />
+          <input type="password" placeholder="confirm password" />
+          <br />
+          <button class="large-btn">Sign up</button>
+          <br />
+          Already have an account? <nuxt-link to="/login">Log in!</nuxt-link>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -23,11 +25,6 @@ export default {};
 </script>
 
 <style>
-form {
-  position: relative;
-  justify-content: space-evenly;
-  align-content: center;
-}
 input {
   width: 100%;
   padding: 5px;

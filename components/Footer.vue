@@ -11,6 +11,7 @@
 <style>
 footer {
     position: fixed;
+	/* position: sticky; */
 	bottom: 0px;
     left: 0px;
     width: 100%;

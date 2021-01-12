@@ -112,9 +112,29 @@ export default {
       inputAmount.type = "text";
       inputAmount.className = "amount";
 
-      let inputUnit = document.createElement("input");
-      inputUnit.type = "select";
-      inputUnit.option = "grams";
+      let inputUnit = document.createElement("select");
+      // inputUnit.type = "select";
+      let opt1 = document.createElement("option");
+      opt1.value = "grams";
+      opt1.innerText = "grams";
+      inputUnit.appendChild(opt1);
+
+      let opt2 = document.createElement("option");
+      opt2.value = "ml";
+      opt2.innerText = "ml";
+      inputUnit.appendChild(opt2);
+      
+      let opt3 = document.createElement("option");
+      opt3.value = "slice";
+      opt3.innerText = "slice";
+      inputUnit.appendChild(opt3);
+ 
+      let opt4 = document.createElement("option");
+      opt4.value = "pinch";
+      opt4.innerText = "pinch";
+      inputUnit.appendChild(opt4);
+
+      // inputUnit.option = "grams";
       inputUnit.className = "units";
 
       col1.appendChild(inputName);
@@ -182,8 +202,12 @@ export default {
   grid-template-columns: auto auto auto auto;
 }
 .recipe-card {
-  position: absolute;
+  position: relative;
   top: 80px;
+  /* bottom: 100px; */
+  /* margin-top: 80px; */
+  /* margin-bottom: 100px; */
+  margin: 0 auto 100px;
   align-self: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 20px;
