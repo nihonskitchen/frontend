@@ -27,12 +27,12 @@ nav {
 	display: flex;
 	align-items: center;
 	margin: 0 -15px;
-	color: white;
+	/* color: white; */
 }
 nav a {
 	display: block;
 	margin: 0 15px;
-	color: #fff;
+	color: #000;
 	
 }
 </style>
