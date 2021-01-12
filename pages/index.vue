@@ -23,9 +23,10 @@
       <div
         class="card column"
         v-for="recipe in this.$store.state.recipes.recipes"
-        :key="recipe.recipe_name"
+        :key="recipe.recipe_id"
       >
-        <div class="article-inner">
+      <nuxt-link to="/recipe-details">
+        <div class="article-inner" @click.prevent="this.$store.commit('recipes/showRecipeDetails', recipe.recipe_id)">
           <img
             :src="require(`~/assets/resources/${recipe.picture_url}`)"
             alt=""
@@ -39,6 +40,7 @@
             {{ recipe.owner_comment }}
           </p>
         </div>
+      </nuxt-link>
       </div>
     </div>
   </div>
@@ -55,7 +57,7 @@ export default {
     return { articles };
   },
   mounted() {
-    this.$store.commit("recipes/showDetails");
+    this.$store.commit("recipes/getCardDetails");
   },
 };
 </script>
