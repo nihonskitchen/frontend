@@ -31,6 +31,14 @@
       "front_pic": "",
       "back_pic": "",
       "description": "Sweet Potato Pie"
+    },
+    {
+      "id": 5, 
+      "jancode": "4902402653036",
+      "product_name": "Grated ginger",
+      "front_pic": "~/assets/resources/4902402653036.jpg",
+      "back_pic": "",
+      "description": "Grated ginger. You can use it as is to make a secret ingredient."
     }
   ]
 }
