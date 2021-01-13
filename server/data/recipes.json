@@ -10,7 +10,7 @@
             "prices": "1600",
             "is_favorite": true,
             "is_visible": true,
-            "owner_comment": "Gyoza are pan-fried Japanese dumplings which make perfect starters or nibbles. Filled with a savory mixture of ground pork and Japanese flavors. ",
+            "owner_comment": "Gyoza are pan-fried Japanese dumplings which make perfect starters. Filled with a savory mixture of ground pork.",
             "ingredients": [
                 {
                     "ingredient_id": "001",
