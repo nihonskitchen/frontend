@@ -42,7 +42,11 @@ export const mutations = {
     return state.details;
   },
   resetBarcode(state) {
-    state.details = {};
+    state.details = Object.assign({}, state.details, {
+      jancode: "",
+      front_pic: "",
+      back_pic: "",
+    });
   },
   toggle(state, barcode) {
     barcode.done = !barcode.done;
