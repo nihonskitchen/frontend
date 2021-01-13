@@ -9,10 +9,10 @@
           <button class="barcode-btn" v-if="!showInfomation" @click="startScan">Scan</button>
           <button class="barcode-btn" v-if="!showInfomation" @click.prevent.stop="stopScan" aria-label="close">Stop</button>
           <div v-if="code.length > 0">
-            <h3>Get barcode data.</h3>
+            <h3>Getting the barcode data.</h3>
           </div>
           <div v-if="showInfomation">
-            <h2>This barcode data.</h2>
+            <h2>Here is the barcode data.</h2>
             <div class="barcode-img">
               <img
                 v-if="this.$store.state.barcode.details.front_pic != ''"
@@ -31,7 +31,7 @@
               <dt>Description</dt>
               <dd>{{ this.$store.state.barcode.details.description }}</dd>
             </dl>
-            <button @click="loadAgain">load it again?</button>
+            <button @click="loadAgain">Scan a new barcode</button>
           </div>
         </client-only>
       </div>
