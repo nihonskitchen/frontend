@@ -359,6 +359,67 @@
                     "details": "Unwrap the omelette and slice into 6 pieces. Serve warm or cold."
                 }
             ]
+        },
+        {
+            "recipe_id": "1006",
+            "recipe_name": "Matcha Pancakes",
+            "picture_url": "1006.jpg",
+            "time": "12",
+            "likes": "32",
+            "dislikes": "1",
+            "prices": "480",
+            "is_favorite": true,
+            "is_visible": true,
+            "owner_comment": "There's just something about stacks of fluffy, buttery breakfast cakes that makes us feel like we're starting the morning off with dessert.",
+            "ingredients": [
+                {
+                    "ingredient_id": "001",
+                    "ingredient_name": "flour",
+                    "amount": "1",
+                    "units": "cups",
+                    "barcode_data": ""
+                },
+                {
+                    "ingredient_id": "002",
+                    "ingredient_name": "matcha",
+                    "amount": "1",
+                    "units": "tbsp",
+                    "barcode_data": ""
+                },
+                {
+                    "ingredient_id": "003",
+                    "ingredient_name": "baking powder",
+                    "amount": "2",
+                    "units": "tsp",
+                    "barcode_data": ""
+                },
+                {
+                    "ingredient_id": "004",
+                    "ingredient_name": "salt",
+                    "amount": "0.25",
+                    "units": "tsp",
+                    "barcode_data": ""
+                },
+                {
+                    "ingredient_id": "005",
+                    "ingredient_name": "cashew milk",
+                    "amount": "1",
+                    "units": "cup",
+                    "barcode_data": ""
+                }
+            ],
+            "steps": [
+                {
+                    "step_num": "001",
+                    "step_pic_url": "",
+                    "details": "Whisk flour, matcha, baking powder, and salt together in a bowl. Make a well in the center of the mixture; add 1 cup plus 1 tablespoon cashew milk, egg, olive oil, and vanilla extract. Whisk batter briefly until just combined with some small clumps of flour remaining. Add chocolate chips; stir again briefly."
+                },
+                {
+                    "step_num": "002",
+                    "step_pic_url": "",
+                    "details": "Grease a small saucepan lightly; heat over medium-low heat. Transfer 2 to 3 spoonfuls of batter onto the center of the pan, spreading batter with the back of the spoon. Cook until small bubbles start to rise to the surface and burst, about 1 minute. Flip and cook until edges are lightly golden brown, about 1 minute more."
+                }
+            ]
         }
     ]
 }
