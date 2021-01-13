@@ -10,7 +10,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "server": "nodemon server/index.js"
+    "server": "nodemon server/index.js",
+    "deploy": "nuxt generate && firebase deploy"
   },
   "dependencies": {
     "@nuxt/content": "^1.11.1",
