@@ -10,7 +10,7 @@
         :key="recipe.recipe_id"
       >
         <nuxt-link to="/recipe-details">
-          <div class="article-inner" @click="passRecipeData(recipe.recipe_id)">
+          <div class="recipe-inner" @click="passRecipeData(recipe.recipe_id)">
             <img
               :src="require(`~/assets/resources/${recipe.picture_url}`)"
               alt=""
@@ -53,7 +53,6 @@ export default {
   margin-top: 20px;
 }
 .home-page {
-  /* padding: 50px 50px; */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -63,33 +62,24 @@ h2 {
   text-align: center;
 }
 h3 {
-  /* margin-bottom: 10px; */
   text-align: center;
   color: #212121;
-  font-size: 20px;
+  font-size: 22px;
+  text-decoration: none;
+  padding-top: 10px;
+}
+h4 {
+  color: #e76c73;
+  font-size: 14px;
   text-decoration: none;
 }
-.articles {
-  margin: 0 auto;
-  width: 360px;
-  /* min-width: 360px; */
+p {
+  color: #888;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 20px;
 }
-.article {
-  margin-bottom: 15px;
-}
-.article-inner {
-  /* padding: 15px; */
-  /* background: #FFF; */
-  /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; */
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  max-width: 360px;
-  /* margin: 20px; */
-}
-.article-inner img {
+.recipe-inner img {
   display: block;
   position: relative;
   width: 100%;
@@ -100,14 +90,6 @@ h3 {
   border-top-right-radius: 8px;
   margin-bottom: 10px;
 }
-.article-inner .detail {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-}
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
   padding: 0px;
@@ -117,41 +99,18 @@ h3 {
   border-top-right-radius: 8px;
   min-width: 360px;
   max-width: 360px;
+  transition: transform 0.2s;
 }
-
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px 0 rgba(179, 119, 24, 0.616);
+}
 .column {
   float: left;
   width: 25%;
   padding: 0px;
   margin: 20px;
 }
-
-.row {
-  margin: 0 -5px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.timer {
-  padding-bottom: 15px;
-}
-
-h4 {
-  color: #e76c73;
-  font-size: 14px;
-  text-decoration: none;
-}
-p {
-  color: #888;
-  font-size: 18px;
-  text-decoration: none;
-  padding: 10px;
-}
-
 @media screen and (max-width: 992px) {
   .column {
     width: 50%;
