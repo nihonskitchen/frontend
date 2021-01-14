@@ -1,38 +1,35 @@
 export const state = () => ({
   details: {
-    jancode: "",
+    barcode: "",
     product_name: "",
     front_pic: "",
     back_pic: "",
     description: ""
   },
-  newSubmission: {}
+  scanImage: "",
+  newSubmit: {},
+  // isData: false,
 });
 
 export const getters = () => ({
-  //
+  details: (state) => state.details
 });
 
 export const mutations = {
-  // this.$store.state.barcode.details
-  showDetails(state, text) {
-    state.details = text;
-
-    return state.details;
+  // 読み取ったバーコードをsave
+  addCode(state, code) {
+    state.code = code;
   },
-  addBarcode(state, barcode) {
-    //
+  addImg(state, src) {
+    state.scanImage = src;
   },
-  addJancode(state, barcode) {
-    console.log("JANCODE =", barcode);
-    // this.set(state.newSubmission, jancode, barcode);
-    state.newSubmission = barcode;
-    // state.newSubmission.jancode = barcode;
+  changeDetails(state, code) {
+    state.details = code;
   },
-  removeJancode(state) {
+  removeCode(state) {
     // change to barcode mutations
     state.details = Object.assign({}, state.details, {
-      jancode: "",
+      barcode: "",
       product_name: "",
       id: 0,
       front_pic: "",
@@ -41,12 +38,41 @@ export const mutations = {
     });
     return state.details;
   },
-  resetBarcode(state) {
-    state.details = {};
+  removeImg(state) {
+    state.scanImage = "";
   },
-  toggle(state, barcode) {
-    barcode.done = !barcode.done;
-  }
+  putNewData(state, data) {
+    state.newSubmit = data;
+  },
+
+
+  // isDataToggle(state, bool) {
+  //   state.isData = bool;
+  // },
+  // this.$store.state.barcode.details
+  // showDetails(state, text) {
+  //   state.details = text;
+
+  //   return state.details;
+  // },
+
+  // addJancode(state, barcode) {
+  //   console.log("JANCODE =", barcode);
+  //   // this.set(state.newSubmission, jancode, barcode);
+  //   state.newSubmission = barcode;
+  //   // state.newSubmission.jancode = barcode;
+  // },
+
+  // resetBarcode(state) {
+  //   state.details = Object.assign({}, state.details, {
+  //     jancode: "",
+  //     front_pic: "",
+  //     back_pic: "",
+  //   });
+  // },
+  // toggle(state, barcode) {
+  //   barcode.done = !barcode.done;
+  // }
 };
 
 // need add() and update()

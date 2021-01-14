@@ -51,17 +51,20 @@ export default {
           auth: true // Just as example. Can be any other service.
         }
       }
-    ]
+    ],
+    '@nuxt/content'
+    // '@nuxtjs/axios',
+    // '@nuxtjs/proxy'
   ],
   // env: envSet,
   // axios: {
   //   proxy: true
   // },
   // proxy: {
-  //   "/jancode": {
-  //     target: envSet.apiBaseUrl,
+  //   "/barcode": {
+  //     // target: envSet.apiBaseUrl,
   //     pathRewrite: {
-  //       "^/jancode": "/jancode"
+  //       "^/barcode": "/barcode"
   //     }
   //   }
   // },

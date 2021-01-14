@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div class="barcode-card">
-      <h2>You found a new barcode!</h2>
+      <h2>You correct the barcode data</h2>
       <client-only>
-        <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" />
+        <p>Please submit it to the database:</p>
         <form action="">
           <label for="barcode">Barcode</label>
-          <input type="text" readonly :value="this.$store.state.barcode.details.barcode" />
+          <input type="text" readonly v-model="barcode" />
           <label for="product_name">Product Name</label>
           <input type="text" v-model="product_name" />
           <label for="description">Product description</label>
@@ -14,29 +14,19 @@
           <textarea rows="4" cols="40" type="text" v-model="description" />
         </form>
       </client-only>
-      <div>
-        <!-- <input type="submit" id="submit-recipe" /> -->
-        <button class="submit-btn" @click="submit">Submit Barcode</button>
-        <nuxt-link to="/barcode">
-          <button class="submit-btn">new scan</button>
-        </nuxt-link>
-      </div>
+      <button class="submit-btn" @click="submit">Submit</button>
     </div>
   </div>
 </template>
 
 <script>
-import BarcodeImg from "../components/BarcodeImg.vue"
 
 export default {
-  components: {
-    BarcodeImg
-  },
   data: function() {
     return {
       barcode: this.$store.state.barcode.details.barcode,
-      product_name: "",
-      description: ""
+      product_name: this.$store.state.barcode.details.product_name,
+      description: this.$store.state.barcode.details.description
     }
   },
   methods: {
@@ -45,11 +35,10 @@ export default {
         barcode: this.barcode,
         product_name: this.product_name,
         description: this.description
-      }
+      };
       this.$store.commit("barcode/putNewData", newProduct);
       this.$router.push("/barcode-submit");
     },
-
   }
 };
 </script>
@@ -57,7 +46,7 @@ export default {
 <style>
 .barcode-card {
   position: relative;
-  top: 30px;
+  top: 80px;
   /* bottom: 100px; */
   /* margin-top: 80px; */
   /* margin-bottom: 100px; */
