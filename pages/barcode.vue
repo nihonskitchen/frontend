@@ -6,7 +6,7 @@
             <div class="imageBuffer"></div>
             <img v-if="code.length > 0" src="" alt="result" class="resultImg" />
           </div>
-          <button class="barcode-btn" v-if="!showInfomation" @click="startScan">Scan</button>
+          <button class="barcode-btn" v-if="!showInfomation" @click="startScan">Start scanner</button>
           <button class="barcode-btn" v-if="!showInfomation" @click.prevent.stop="stopScan" aria-label="close">Stop</button>
           <div v-if="code.length > 0">
             <h3>Getting the barcode data.</h3>

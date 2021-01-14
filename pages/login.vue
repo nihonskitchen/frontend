@@ -6,17 +6,19 @@
           <h2>Login</h2>
           <br />
           <input
+            id="user-id"
             type="email"
             placeholder="email address"
-            v-model="email"
+            v-model="account.email"
             required
           />
           <br />
           <input
+            id="user-password"
             type="password"
             placeholder="password"
             required
-            v-model="password"
+            v-model="account.password"
           />
           <br />
           <button type="submit" class="large-btn">Login</button>
@@ -34,9 +36,10 @@ import "firebase/auth";
 export default {
   data() {
     return {
-      email: "",
-      password: "",
-      errors: "",
+      account: {
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
@@ -44,11 +47,11 @@ export default {
       alert("Logged in");
       firebase
         .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
+        .signInWithEmailAndPassword(this.account.email, this.account.password)
         .then((user) => {
           console.log(user);
-          
-          this.$router.push("/");
+
+          this.$router.push("/user");
         })
         .catch((error) => {
           this.errors = error;
