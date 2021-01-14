@@ -2,16 +2,16 @@
   <div class="container wrapper">
     <div class="toggle-btns">
       <div v-if="myRecipes">
-        <button class="active-btn">My Recipes</button>
-        <button class="inactive-btn" @click.prevent="toggleView">
+        <button class="active-btn my-recipes">My Recipes</button>
+        <button class="inactive-btn favorites" @click.prevent="toggleView">
           Favorites
         </button>
       </div>
       <div v-if="favorites">
-        <button class="inactive-btn" @click.prevent="toggleView">
+        <button class="inactive-btn my-recipes" @click.prevent="toggleView">
           My Recipes
         </button>
-        <button class="active-btn">Favorites</button>
+        <button class="active-btn favorites">Favorites</button>
       </div>
     </div>
     <div v-if="myRecipes" class="details">
@@ -77,5 +77,13 @@ export default {
   display: flex;
   position: relative;
   justify-content: center;
+}
+.my-recipes {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.favorites {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 </style>
