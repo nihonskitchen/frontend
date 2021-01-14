@@ -24,7 +24,7 @@
             <input type="checkbox" id="password-checkbox" @click="showPassword">
             <label for="password-checkbox">Show Password</label>
           <br />
-          <button @click="login" type="submit" class="large-btn">Login</button>
+          <button @click="login" type="submit" class="login-large-btn">Login</button>
         </form>
         Don't have an account? <nuxt-link to="/signup">Sign up!</nuxt-link>
       </div>
@@ -84,7 +84,7 @@ input {
   padding: 5px;
   margin: 5px;
 }
-.large-btn {
+.login-large-btn {
   padding: 5px;
   width: 100%;
   margin: 5px;
@@ -94,4 +94,16 @@ input {
   border-radius: 8px;
   color: white;
 }
+.login-large-btn:hover {
+  padding: 5px;
+  width: 100%;
+  margin: 5px;
+  background-color: #E5536A;
+  border: 0px;
+  font-size: 15px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
 </style>
+

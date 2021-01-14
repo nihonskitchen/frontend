@@ -222,6 +222,24 @@ dd {
   max-width: 200px;
   border-radius: 8px;
   color: white;
+  padding: 5px;
+  width: 100%;
+  margin: 5px;
+  background-color: #e76c73;
+  border: 0px;
+  font-size: 15px;
+}
+.barcode-btn:hover {
+  max-width: 200px;
+  border-radius: 8px;
+  color: white;
+  padding: 5px;
+  width: 100%;
+  margin: 5px;
+  background-color: #E5536A;
+  border: 0px;
+  font-size: 15px;
+  cursor: pointer;
 }
 /*
 button {

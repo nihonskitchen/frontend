@@ -70,6 +70,16 @@ nav a {
   margin: 0px;
   color: white;
 }
+.login-btn:hover {
+  width: 80px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #E5536A;
+  border: 0px;
+  margin: 0px;
+  color: white;
+}
 .logout-btn {
   width: 80px;
   font-size: 15px;
@@ -79,6 +89,17 @@ nav a {
   border: 0px;
   margin: 0px;
   color: white;
+}
+.logout-btn:hover {
+  width: 80px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #ffa95d;
+  border: 0px;
+  margin: 0px;
+  color: white;
+  cursor: pointer;
 }
 </style>
 

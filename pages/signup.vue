@@ -81,11 +81,22 @@ input {
   padding: 5px;
   width: 100%;
   margin: 5px;
-  background-color: #e76c73;
+  background-color: #F7B981;
   border: 0px;
   font-size: 15px;
   border-radius: 8px;
   color: white;
+}
+.large-btn:hover {
+  padding: 5px;
+  width: 100%;
+  margin: 5px;
+  background-color: #ffa95d;
+  border: 0px;
+  font-size: 15px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
 }
 label {
   font-size: 12px;
