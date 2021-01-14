@@ -8,7 +8,7 @@
       <nuxt-link to="/user/profile">Profile</nuxt-link>
       <div v-if="this.$store.state.users.user === null"><nuxt-link to="/login"><button class="login-btn">Login</button></nuxt-link> </div>
 
-      <div v-if="this.$store.state.users.user !== null"><button @click="logout" class="login-btn">Logout</button></div>
+      <div v-if="this.$store.state.users.user !== null"><button @click="logout" class="logout-btn">Logout</button></div>
       
     </nav>
   </header>
@@ -70,4 +70,15 @@ nav a {
   margin: 0px;
   color: white;
 }
+.logout-btn {
+  width: 80px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #F7B981;
+  border: 0px;
+  margin: 0px;
+  color: white;
+}
 </style>
+
