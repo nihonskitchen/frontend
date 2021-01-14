@@ -2,7 +2,7 @@
   <div class="container center-div">
       <div class="form-card">
         <div v-if="showInfomation">
-          <h2>This barcode data was registared!</h2>
+          <h2>Here are the product details:</h2>
           <div class="barcode-img">
             <img
               v-if="this.$store.state.barcode.details.front_pic != ''"

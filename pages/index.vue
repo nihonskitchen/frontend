@@ -48,14 +48,14 @@
 
 <script>
 export default {
-  async asyncData({ $content, params }) {
-    const articles = await $content("recipes", params.slug)
-      .only(["title", "description", "img", "slug"])
-      .sortBy("createdAt", "asc")
-      .fetch();
+  // async asyncData({ $content, params }) {
+  //   const articles = await $content("recipes", params.slug)
+  //     .only(["title", "description", "img", "slug"])
+  //     .sortBy("createdAt", "asc")
+  //     .fetch();
 
-    return { articles };
-  },
+  //   return { articles };
+  // },
   mounted() {
     this.$store.commit("recipes/getCardDetails");
   },

@@ -82,24 +82,5 @@ dd {
   border-radius: 8px;
   color: white;
 }
-/*
-button {
-  width: 100px;
-  height: 40px;
-  background-color: #fff;
-  border: 1px solid #333;
-  margin-top: 30px;
-}
-.resultCode {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-}
-.getMessage {
-  color: red;
-}
-.invisible {
-  display: none;
-}
-*/
+
 </style>

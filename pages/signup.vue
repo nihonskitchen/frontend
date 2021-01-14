@@ -2,16 +2,14 @@
   <div class="container">
     <div class="center-div">
       <div class="form-card">
-        <form action="submit">
+        <form action="submit" method="POST" @submit.prevent="pressed">
           <h2>Sign up</h2>
           <br />
-          <input type="email" placeholder="email address" />
+          <input type="email" placeholder="email address" required v-model="email" />
           <br />
-          <input type="password" placeholder="password" />
+          <input type="password" placeholder="password" required v-model="password" />
           <br />
-          <input type="password" placeholder="confirm password" />
-          <br />
-          <button class="large-btn">Sign up</button>
+          <button type="submit" class="large-btn">Sign up</button>
           <br />
           Already have an account? <nuxt-link to="/login">Log in!</nuxt-link>
         </form>
@@ -21,7 +19,29 @@
 </template>
 
 <script>
-export default {};
+import firebase from 'firebase/app';
+import "firebase/auth";
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      errors: ''
+    }
+  },
+  methods: {
+    pressed(){
+      alert('Signed up!')
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(user => {
+        console.log(user);
+        this.$router.push('/')
+      }).catch(error => {
+        this.errors = error;
+      })
+    }
+  }
+};
 </script>
 
 <style>
