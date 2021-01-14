@@ -1,28 +1,30 @@
 <template>
-  <div class="container center-div">
+  <div class="container">
+    <div class="headline">
+      <h2>Welcome to the latest recipes in Japan!</h2>
+    </div>
     <div class="home-page">
-      <h2>Popular Recipes</h2>
       <div
         class="card column"
         v-for="recipe in this.$store.state.recipes.recipes"
         :key="recipe.recipe_id"
       >
-      <nuxt-link to="/recipe-details">
-        <div class="article-inner" @click="passRecipeData(recipe.recipe_id)">
-          <img
-            :src="require(`~/assets/resources/${recipe.picture_url}`)"
-            alt=""
-          />
-        </div>
-        <div class="detail">
-          <h3>
-            {{ recipe.recipe_name }}
-          </h3>
-          <p>
-            {{ recipe.owner_comment }}
-          </p>
-        </div>
-      </nuxt-link>
+        <nuxt-link to="/recipe-details">
+          <div class="article-inner" @click="passRecipeData(recipe.recipe_id)">
+            <img
+              :src="require(`~/assets/resources/${recipe.picture_url}`)"
+              alt=""
+            />
+          </div>
+          <div class="detail">
+            <h3>
+              {{ recipe.recipe_name }}
+            </h3>
+            <p>
+              {{ recipe.owner_comment }}
+            </p>
+          </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -35,10 +37,10 @@ export default {
   },
   methods: {
     passRecipeData(id) {
-      this.$store.commit('recipes/showRecipeDetails', id)
-      console.log(id)
-    }
-  }
+      this.$store.commit("recipes/showRecipeDetails", id);
+      console.log(id);
+    },
+  },
 };
 </script>
 
@@ -46,9 +48,15 @@ export default {
 * {
   box-sizing: border-box;
 }
-
+.headline {
+  padding: 20px;
+  margin-top: 20px;
+}
 .home-page {
-  padding: 50px 30px;
+  /* padding: 50px 50px; */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 h2 {
   margin-bottom: 30px;
@@ -99,7 +107,6 @@ h3 {
   flex-wrap: wrap;
   align-content: center;
   justify-content: center;
-  
 }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
@@ -132,7 +139,6 @@ h3 {
 .timer {
   padding-bottom: 15px;
 }
-
 
 h4 {
   color: #e76c73;
