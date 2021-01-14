@@ -62,7 +62,7 @@ export default {
         }, 5000);
       });
 
-      this.$router.push("/user");
+      this.$router.push("/");
     },
   },
 };

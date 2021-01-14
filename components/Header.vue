@@ -6,12 +6,28 @@
     <nav>
       <nuxt-link to="/user/cookbook">Cookbook</nuxt-link>
       <nuxt-link to="/user/profile">Profile</nuxt-link>
-      <nuxt-link to="/login"
-        ><button class="login-btn">Login</button></nuxt-link
-      >
+      <div v-if="this.$store.state.users.user === null"><nuxt-link to="/login"><button class="login-btn">Login</button></nuxt-link> </div>
+
+      <div v-if="this.$store.state.users.user !== null"><button @click="logout" class="login-btn">Logout</button></div>
+      
     </nav>
   </header>
 </template>
+<script>
+import Cookie from 'js-cookie'
+import firebase from "firebase/app";
+import "firebase/auth";
+
+export default {
+  methods: {
+    async logout() {
+      await firebase.auth().signOut();
+      await Cookie.remove('access_token');
+      location.href = '/'
+    }
+  }
+}
+</script>
 
 <style>
 header {
