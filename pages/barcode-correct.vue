@@ -1,17 +1,11 @@
 <template>
   <div class="container">
     <div class="barcode-card">
-      <h2>You found a new barcode!</h2>
+      <h2>You correct the barcode data</h2>
       <client-only>
         <BarcodeInput :mode="create" :data="newData" />
       </client-only>
-      <div>
-        <!-- <input type="submit" id="submit-recipe" /> -->
-        <button class="submit-btn" @click="submit">Submit Barcode</button>
-        <nuxt-link to="/barcode">
-          <button class="submit-btn">new scan</button>
-        </nuxt-link>
-      </div>
+      <button class="submit-btn" @click="pass">Submit</button>
     </div>
   </div>
 </template>
@@ -33,6 +27,9 @@ export default {
     }
   },
   methods: {
+    pass() {
+      this.$router.push('/barcode-submitted');
+    },
     submit() {
       const newProduct = {
         barcode: "",
@@ -50,7 +47,7 @@ export default {
 <style>
 .barcode-card {
   position: relative;
-  top: 30px;
+  top: 80px;
   /* bottom: 100px; */
   /* margin-top: 80px; */
   /* margin-bottom: 100px; */

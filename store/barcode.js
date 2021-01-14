@@ -1,17 +1,18 @@
 export const state = () => ({
   details: {
-    jancode: "",
+    barcode: "",
     product_name: "",
     front_pic: "",
     back_pic: "",
     description: ""
   },
-  newSubmission: {},
-  scanImage: ""
+  scanImage: "",
+  isData: false,
+  newSubmit: {},
 });
 
 export const getters = () => ({
-  //
+  details: (state) => state.details
 });
 
 export const mutations = {
@@ -25,10 +26,29 @@ export const mutations = {
   changeDetails(state, code) {
     state.details = code;
   },
+  removeCode(state) {
+    // change to barcode mutations
+    state.details = Object.assign({}, state.details, {
+      barcode: "",
+      product_name: "",
+      id: 0,
+      front_pic: "",
+      back_pic: "",
+      description: ""
+    });
+    return state.details;
+  },
+  removeImg(state) {
+    state.scanImage = "";
+  },
+  putNewData(state, data) {
+    state.newSubmit = data;
+  },
 
 
-
-
+  // isDataToggle(state, bool) {
+  //   state.isData = bool;
+  // },
   // this.$store.state.barcode.details
   showDetails(state, text) {
     state.details = text;
@@ -42,18 +62,7 @@ export const mutations = {
     state.newSubmission = barcode;
     // state.newSubmission.jancode = barcode;
   },
-  removeJancode(state) {
-    // change to barcode mutations
-    state.details = Object.assign({}, state.details, {
-      jancode: "",
-      product_name: "",
-      id: 0,
-      front_pic: "",
-      back_pic: "",
-      description: ""
-    });
-    return state.details;
-  },
+
   resetBarcode(state) {
     state.details = Object.assign({}, state.details, {
       jancode: "",
