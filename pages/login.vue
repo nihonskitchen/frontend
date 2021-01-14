@@ -1,8 +1,13 @@
 <template>
   <div class="container">
+    
     <div class="center-div">
+      
       <div class="form-card">
-        <form action="submit" method="POST" @submit.prevent="pressed">
+        <div v-if="isError" class="alert">
+        Wrong email address or password!
+      </div>
+        <form action="submit" method="POST" @submit.prevent>
           <h2>Login</h2>
           <br />
           <input
@@ -21,11 +26,13 @@
             v-model="account.password"
           />
           <br />
-          <button type="submit" class="large-btn">Login</button>
+          <button @click="login" type="submit" class="large-btn">Login</button>
         </form>
         Don't have an account? <nuxt-link to="/signup">Sign up!</nuxt-link>
       </div>
+      
     </div>
+    
   </div>
 </template>
 
@@ -34,34 +41,41 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
-  data() {
-    return {
+  data:() => ({
       account: {
         email: "",
-        password: "",
+        password: ""
       },
-    };
-  },
+      isError: false,
+      errMsg: "",
+  }),
   methods: {
-    pressed() {
-      alert("Logged in");
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.account.email, this.account.password)
-        .then((user) => {
-          console.log(user);
+    login() {
+      this.$store.dispatch("users/login", this.account).catch((error) => {
+        console.log(error)
+        this.isError = true;
+        this.errMsg = error.code;
 
-          this.$router.push("/user");
-        })
-        .catch((error) => {
-          this.errors = error;
-        });
+        setTimeout(() => {
+          this.isError = false;
+          
+        }, 5000);
+      });
+
+      this.$router.push("/user");
     },
   },
 };
 </script>
 
 <style>
+/* p {
+  color: black;
+} */
+.alert {
+  background-color: red;
+  width: 300px;
+}
 input {
   width: 100%;
   padding: 5px;

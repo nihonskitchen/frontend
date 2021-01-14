@@ -2,24 +2,6 @@
   <div class="container center-div">
     <div class="home-page">
       <h2>Popular Recipes</h2>
-      <!-- <div class="articles"> -->
-      <!-- <div class="card column" v-for="article of articles" :key="article">
-          <nuxt-link :to="{ name: 'recipes-slug', params: {slug: article.slug }}">
-            <div class="article-inner">
-              <img :src="require(`~/assets/resources/${article.img}`)" alt="" />
-              <div class="detail">
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.description }}</p>
-                  
-              </div>
-                <div class="timer">
-                  <img :src="require('~/assets/resources/food-timer.png')" alt="" />
-                  <h4>{{ article.timer }}</h4>
-                </div>
-            </div>
-          </nuxt-link>
-        </div> -->
-      <!-- </div> -->
       <div
         class="card column"
         v-for="recipe in this.$store.state.recipes.recipes"
@@ -48,14 +30,6 @@
 
 <script>
 export default {
-  // async asyncData({ $content, params }) {
-  //   const articles = await $content("recipes", params.slug)
-  //     .only(["title", "description", "img", "slug"])
-  //     .sortBy("createdAt", "asc")
-  //     .fetch();
-
-  //   return { articles };
-  // },
   mounted() {
     this.$store.commit("recipes/getCardDetails");
   },
