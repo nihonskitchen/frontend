@@ -1,23 +1,13 @@
 <template>
   <div>
-    <!-- <div class="barcode-img" v-if="this.showInfomation">
-      <img
-        v-if="this.showInfomation"
-        :src="`/images/${this.$store.state.barcode.details.front_pic}`"
-      />
-      <img
-        v-if="this.$store.state.barcode.details.back_pic != ''"
-        :src="this.$store.state.barcode.details.back_pic"
-      />
-    </div> -->
     <dl>
       <dt>Barcode</dt>
-      <dd>{{ this.$store.state.barcode.details.barcode }}</dd>
+      <dd>{{ this.barcode }}</dd>
       <dt>Name</dt>
-      <dd v-if="(this.$store.state.barcode.details.product_name).length > 0">{{ this.$store.state.barcode.details.product_name }}</dd>
+      <dd v-if="(this.product_name).length > 0">{{ this.product_name }}</dd>
       <dd v-else> - </dd>
       <dt>Description</dt>
-      <dd v-if="(this.$store.state.barcode.details.description).length > 0">{{ this.$store.state.barcode.details.description }}</dd>
+      <dd v-if="(this.description).length > 0">{{ this.description }}</dd>
       <dd v-else> - </dd>
     </dl>
   </div>
@@ -25,9 +15,25 @@
 
 <script>
 export default {
+  props: [
+    "mode"
+  ],
   data: function() {
     return{
-      //
+      barcode: "",
+      product_name: "",
+      description: ""
+    }
+  },
+  mounted: function() {
+    if (this.mode === "show") {
+      this.barcode = this.$store.state.barcode.details.barcode;
+      this.product_name = this.$store.state.barcode.details.product_name;
+      this.description = this.$store.state.barcode.details.description;
+    } else {
+      this.barcode = this.$store.state.barcode.newSubmit.barcode;
+      this.product_name = this.$store.state.barcode.newSubmit.product_name;
+      this.description = this.$store.state.barcode.newSubmit.description;
     }
   },
   methods: {
@@ -37,13 +43,6 @@ export default {
 </script>
 
 <style>
-/* .barcode-img img {
-  width: 100%;
-  max-width: 100px;
-  max-height: 100px;
-  object-fit: cover;
-  border: 2px solid #737A7B;
-} */
 dl {
   text-align: left;
   width: 75%;

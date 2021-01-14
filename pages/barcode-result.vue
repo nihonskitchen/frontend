@@ -1,58 +1,53 @@
 <template>
-  <div class="container center-div">
-      <div class="form-card">
-        <div v-if="showInfomation">
-          <h2>Here are the product details:</h2>
-          <div class="barcode-img">
-            <img
-              v-if="this.$store.state.barcode.details.front_pic != ''"
-              :src="this.$store.state.barcode.details.front_pic"
-            />
-            <img
-              v-if="this.$store.state.barcode.details.back_pic != ''"
-              :src="this.$store.state.barcode.details.back_pic"
-            />
-          </div>
-          <dl>
-            <dt>Barcode</dt>
-            <dd>{{ this.$store.state.barcode.details.jancode }}</dd>
-            <dt>Name</dt>
-            <dd>{{ this.$store.state.barcode.details.product_name }}</dd>
-            <dt>Description</dt>
-            <dd>{{ this.$store.state.barcode.details.description }}</dd>
-          </dl>
-        </div>
+  <div class="scan-container center-div">
+    <div class="form-card">
+      <h2>Here is the barcode data.</h2>
+      <client-only>
+        <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" />
+        <BarcodeData mode="show" />
+      </client-only>
+      <button @click="newScan">Scan a new barcode</button>
+      <button @click="correctionData">Correct the barcode data</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+import BarcodeImg from "../components/BarcodeImg.vue"
+import BarcodeData from "../components/BarcodeData.vue"
 
-}
+export default {
+  components: {
+    BarcodeImg,
+    BarcodeData
+  },
+  data: function () {
+    return {
+      //
+    }
+  },
+  methods: {
+    newScan: function() {
+      this.$store.commit("barcode/removeCode");
+      this.$router.push("/barcode")
+    },
+    correctionData: function() {
+      this.$store.commit('barcode/removeImg');
+      this.$router.push("/barcode-correct")
+    },
+  },
+};
 </script>
 
-<style>
-.barcode-img img {
-  width: 100%;
-  max-width: 100px;
-  max-height: 100px;
-  object-fit: cover;
-  border: 2px solid #737A7B;
-}
 
-dl {
-  text-align: left;
-  width: 75%;
+<style>
+h2 {
+  font-size: 20px;
+  color: #E76C73;
 }
-dt {
-  font-weight: bold;
-}
-dd {
-  padding-left: 10%;
-  padding-bottom: 10px;
-}
-button {
+.barcode-btn {
   max-width: 200px;
+  border-radius: 8px;
+  color: white;
 }
 </style>

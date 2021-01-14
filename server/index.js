@@ -21,7 +21,7 @@ const setupExpressServer = () => {
     const jan = req.params.jan;
     console.log(jan);
     for (const i of barcode) {
-      if (jan === i.jancode) {
+      if (jan === i.barcode) {
         res.send(i);
         return;
       }
@@ -31,7 +31,7 @@ const setupExpressServer = () => {
   return server;
 };
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8000;
 const app = setupExpressServer();
 app.listen(PORT, () => {
   console.log("Server running on:", PORT);

@@ -7,8 +7,8 @@ export const state = () => ({
     description: ""
   },
   scanImage: "",
-  isData: false,
   newSubmit: {},
+  // isData: false,
 });
 
 export const getters = () => ({
@@ -50,29 +50,29 @@ export const mutations = {
   //   state.isData = bool;
   // },
   // this.$store.state.barcode.details
-  showDetails(state, text) {
-    state.details = text;
+  // showDetails(state, text) {
+  //   state.details = text;
 
-    return state.details;
-  },
+  //   return state.details;
+  // },
 
-  addJancode(state, barcode) {
-    console.log("JANCODE =", barcode);
-    // this.set(state.newSubmission, jancode, barcode);
-    state.newSubmission = barcode;
-    // state.newSubmission.jancode = barcode;
-  },
+  // addJancode(state, barcode) {
+  //   console.log("JANCODE =", barcode);
+  //   // this.set(state.newSubmission, jancode, barcode);
+  //   state.newSubmission = barcode;
+  //   // state.newSubmission.jancode = barcode;
+  // },
 
-  resetBarcode(state) {
-    state.details = Object.assign({}, state.details, {
-      jancode: "",
-      front_pic: "",
-      back_pic: "",
-    });
-  },
-  toggle(state, barcode) {
-    barcode.done = !barcode.done;
-  }
+  // resetBarcode(state) {
+  //   state.details = Object.assign({}, state.details, {
+  //     jancode: "",
+  //     front_pic: "",
+  //     back_pic: "",
+  //   });
+  // },
+  // toggle(state, barcode) {
+  //   barcode.done = !barcode.done;
+  // }
 };
 
 // need add() and update()

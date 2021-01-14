@@ -2,7 +2,7 @@
   "barcode": [
     {
       "id": 1,
-      "jancode": "4901777317567",
+      "barcode": "4901777317567",
       "product_name": "南アルプス天然水 Sparkling",
       "front_pic": "",
       "back_pic": "",
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,  
-      "jancode": "4547894155004",
+      "barcode": "4547894155004",
       "product_name": "Clorets Original mints",
       "front_pic": "",
       "back_pic": "",
@@ -18,7 +18,7 @@
     },
     {
       "id": 3,  
-      "jancode": "4547894198841",
+      "barcode": "4547894198841",
       "product_name": "RECALDENT ビタミン+",
       "front_pic": "",
       "back_pic": "",
@@ -26,7 +26,7 @@
     },
     {
       "id": 4, 
-      "jancode": "4901408603700",
+      "barcode": "4901408603700",
       "product_name": "Sweet Potato Pie",
       "front_pic": "",
       "back_pic": "",
@@ -34,7 +34,7 @@
     },
     {
       "id": 5, 
-      "jancode": "4901002066581",
+      "barcode": "4901002066581",
       "product_name": "Grated ginger",
       "front_pic": "4902402653036.jpg",
       "back_pic": "",

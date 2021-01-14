@@ -3,7 +3,16 @@
     <div class="barcode-card">
       <h2>You found a new barcode!</h2>
       <client-only>
-        <BarcodeInput :mode="create" :data="newData" />
+        <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" />
+        <form action="">
+          <label for="barcode">Barcode</label>
+          <input type="text" readonly :value="this.$store.state.barcode.details.barcode" />
+          <label for="product_name">Product Name</label>
+          <input type="text" v-model="product_name" />
+          <label for="description">Product description</label>
+          <br />
+          <textarea rows="4" cols="40" type="text" v-model="description" />
+        </form>
       </client-only>
       <div>
         <!-- <input type="submit" id="submit-recipe" /> -->
@@ -17,30 +26,28 @@
 </template>
 
 <script>
-import BarcodeInput from "../components/BarcodeInput.vue";
+import BarcodeImg from "../components/BarcodeImg.vue"
 
 export default {
   components: {
-    BarcodeInput
+    BarcodeImg
   },
   data: function() {
     return {
-      newData: {
-        barcode: "",
-        product_name: "",
-        description: ""
-      }
+      barcode: this.$store.state.barcode.details.barcode,
+      product_name: "",
+      description: ""
     }
   },
   methods: {
     submit() {
       const newProduct = {
-        barcode: "",
-        product_name: "",
-        description: ""
+        barcode: this.barcode,
+        product_name: this.product_name,
+        description: this.description
       }
-      this.$store.commit('barcode/putNewData', newProduct);
-      this.$router.push('/barcode-submitted');
+      this.$store.commit("barcode/putNewData", newProduct);
+      this.$router.push("/barcode-submit");
     },
 
   }

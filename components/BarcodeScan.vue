@@ -5,7 +5,6 @@
       <img v-if="code.length > 0" src="" alt="result" class="resultImg" />
     </div>
   </div>
-
 </template>
 
 <script>
@@ -38,10 +37,10 @@ export default {
         // ない場合
         // this.$store.commit('barcode/isDataToggle', false);
         // this.$emit("chStatus");
-        this.$router.push("barcode-create");
+        this.$router.push("/barcode-create");
       } else {
         // this.$store.commit('barcode/isDataToggle', true);
-        this.$router.push("barcode-result");
+        this.$router.push("/barcode-result");
       }
       // this.$emit("chActive");
     },

@@ -3,43 +3,42 @@
     <div class="barcode-card">
       <h2>You correct the barcode data</h2>
       <client-only>
-        <BarcodeInput :mode="create" :data="newData" />
+        <p>Please submit it to the database:</p>
+        <form action="">
+          <label for="barcode">Barcode</label>
+          <input type="text" readonly v-model="barcode" />
+          <label for="product_name">Product Name</label>
+          <input type="text" v-model="product_name" />
+          <label for="description">Product description</label>
+          <br />
+          <textarea rows="4" cols="40" type="text" v-model="description" />
+        </form>
       </client-only>
-      <button class="submit-btn" @click="pass">Submit</button>
+      <button class="submit-btn" @click="submit">Submit</button>
     </div>
   </div>
 </template>
 
 <script>
-import BarcodeInput from "../components/BarcodeInput.vue";
 
 export default {
-  components: {
-    BarcodeInput
-  },
   data: function() {
     return {
-      newData: {
-        barcode: "",
-        product_name: "",
-        description: ""
-      }
+      barcode: this.$store.state.barcode.details.barcode,
+      product_name: this.$store.state.barcode.details.product_name,
+      description: this.$store.state.barcode.details.description
     }
   },
   methods: {
-    pass() {
-      this.$router.push('/barcode-submitted');
-    },
     submit() {
       const newProduct = {
-        barcode: "",
-        product_name: "",
-        description: ""
-      }
-      this.$store.commit('barcode/putNewData', newProduct);
-      this.$router.push('/barcode-submitted');
+        barcode: this.barcode,
+        product_name: this.product_name,
+        description: this.description
+      };
+      this.$store.commit("barcode/putNewData", newProduct);
+      this.$router.push("/barcode-submit");
     },
-
   }
 };
 </script>
