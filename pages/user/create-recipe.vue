@@ -175,14 +175,27 @@ export default {
 
 <style>
 .add-btn {
-  width: 30px;
+  width: 26px;
   background-color: #e76c73;
   border: 0px;
-  height: 30px;
-  margin: 0px;
+  height: 26px;
+  margin-top: 5px;
+  margin-left: 0px;
   border-radius: 8px;
   color: white;
 }
+.add-btn:hover {
+  width: 26px;
+  background-color: #E5536A;
+  border: 0px;
+  height: 26px;
+  margin-top: 5px;
+  margin-left: 0px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
 .amount {
   width: 50px;
 }
@@ -238,12 +251,22 @@ export default {
   font-size: 15px;
   border-radius: 8px;
   padding: 5px;
-  background-color: #e76c73;
+  background-color: #F7B981;
   border: 0px;
   margin-bottom: 20px;
   margin-top: 0px;
   color: white;
-
+}
+.upload-btn:hover {
+  width: 150px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #ffa95d;
+  border: 0px;
+  margin-bottom: 20px;
+  margin-top: 0px;
+  color: white;
 }
 .submit-btn {
   width: 150px;

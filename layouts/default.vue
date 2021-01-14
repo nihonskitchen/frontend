@@ -47,6 +47,16 @@ button {
   font-size: 15px;
   border-radius: 0px;
 }
+button:hover {
+  padding: 5px;
+  width: 100%;
+  margin: 5px;
+  background-color: #E5536A;
+  border: 0px;
+  font-size: 15px;
+  border-radius: 0px;
+  cursor: pointer;
+}
 form {
   position: relative;
   justify-content: space-evenly;

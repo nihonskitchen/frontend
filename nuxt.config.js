@@ -22,6 +22,11 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [],
 
+  // Router settings
+  router: {
+    middleware: ['authenticated']
+  },
+
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 
@@ -46,17 +51,20 @@ export default {
           auth: true // Just as example. Can be any other service.
         }
       }
-    ]
+    ],
+    '@nuxt/content'
+    // '@nuxtjs/axios',
+    // '@nuxtjs/proxy'
   ],
   // env: envSet,
   // axios: {
   //   proxy: true
   // },
   // proxy: {
-  //   "/jancode": {
-  //     target: envSet.apiBaseUrl,
+  //   "/barcode": {
+  //     // target: envSet.apiBaseUrl,
   //     pathRewrite: {
-  //       "^/jancode": "/jancode"
+  //       "^/barcode": "/barcode"
   //     }
   //   }
   // },

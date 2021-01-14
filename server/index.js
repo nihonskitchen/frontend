@@ -17,7 +17,7 @@ const setupExpressServer = () => {
   //   res.send("test");
   // });
 
-  server.get("/jancode/:jan", (req, res) => {
+  server.get("/barcode/:jan", (req, res) => {
     const jan = req.params.jan;
     console.log(jan);
     for (const i of barcode) {

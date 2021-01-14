@@ -1,46 +1,30 @@
 <template>
-  <div class="container center-div">
+  <div class="container">
+    <div class="headline">
+      <h2>Welcome to the latest recipes in Japan!</h2>
+    </div>
     <div class="home-page">
-      <h2>Popular Recipes</h2>
-      <!-- <div class="articles"> -->
-      <!-- <div class="card column" v-for="article of articles" :key="article">
-          <nuxt-link :to="{ name: 'recipes-slug', params: {slug: article.slug }}">
-            <div class="article-inner">
-              <img :src="require(`~/assets/resources/${article.img}`)" alt="" />
-              <div class="detail">
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.description }}</p>
-                  
-              </div>
-                <div class="timer">
-                  <img :src="require('~/assets/resources/food-timer.png')" alt="" />
-                  <h4>{{ article.timer }}</h4>
-                </div>
-            </div>
-          </nuxt-link>
-        </div> -->
-      <!-- </div> -->
       <div
         class="card column"
         v-for="recipe in this.$store.state.recipes.recipes"
         :key="recipe.recipe_id"
       >
-      <nuxt-link to="/recipe-details">
-        <div class="article-inner" @click="passRecipeData(recipe.recipe_id)">
-          <img
-            :src="require(`~/assets/resources/${recipe.picture_url}`)"
-            alt=""
-          />
-        </div>
-        <div class="detail">
-          <h3>
-            {{ recipe.recipe_name }}
-          </h3>
-          <p>
-            {{ recipe.owner_comment }}
-          </p>
-        </div>
-      </nuxt-link>
+        <nuxt-link to="/recipe-details">
+          <div class="recipe-inner" @click="passRecipeData(recipe.recipe_id)">
+            <img
+              :src="require(`~/assets/resources/${recipe.picture_url}`)"
+              alt=""
+            />
+          </div>
+          <div class="detail">
+            <h3>
+              {{ recipe.recipe_name }}
+            </h3>
+            <p>
+              {{ recipe.owner_comment }}
+            </p>
+          </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
@@ -48,23 +32,15 @@
 
 <script>
 export default {
-  // async asyncData({ $content, params }) {
-  //   const articles = await $content("recipes", params.slug)
-  //     .only(["title", "description", "img", "slug"])
-  //     .sortBy("createdAt", "asc")
-  //     .fetch();
-
-  //   return { articles };
-  // },
   mounted() {
     this.$store.commit("recipes/getCardDetails");
   },
   methods: {
     passRecipeData(id) {
-      this.$store.commit('recipes/showRecipeDetails', id)
-      console.log(id)
-    }
-  }
+      this.$store.commit("recipes/showRecipeDetails", id);
+      console.log(id);
+    },
+  },
 };
 </script>
 
@@ -72,42 +48,38 @@ export default {
 * {
   box-sizing: border-box;
 }
-
+.headline {
+  padding: 20px;
+  margin-top: 20px;
+}
 .home-page {
-  padding: 50px 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 h2 {
   margin-bottom: 30px;
   text-align: center;
 }
 h3 {
-  /* margin-bottom: 10px; */
   text-align: center;
   color: #212121;
-  font-size: 20px;
+  font-size: 22px;
+  text-decoration: none;
+  padding-top: 10px;
+}
+h4 {
+  color: #e76c73;
+  font-size: 14px;
   text-decoration: none;
 }
-.articles {
-  margin: 0 auto;
-  width: 360px;
-  /* min-width: 360px; */
+p {
+  color: #888;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 20px;
 }
-.article {
-  margin-bottom: 15px;
-}
-.article-inner {
-  /* padding: 15px; */
-  /* background: #FFF; */
-  /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px; */
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  max-width: 360px;
-  /* margin: 20px; */
-}
-.article-inner img {
+.recipe-inner img {
   display: block;
   position: relative;
   width: 100%;
@@ -118,15 +90,6 @@ h3 {
   border-top-right-radius: 8px;
   margin-bottom: 10px;
 }
-.article-inner .detail {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  
-}
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
   padding: 0px;
@@ -136,42 +99,18 @@ h3 {
   border-top-right-radius: 8px;
   min-width: 360px;
   max-width: 360px;
+  transition: transform 0.2s;
 }
-
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px 0 rgba(179, 119, 24, 0.616);
+}
 .column {
   float: left;
   width: 25%;
   padding: 0px;
   margin: 20px;
 }
-
-.row {
-  margin: 0 -5px;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.timer {
-  padding-bottom: 15px;
-}
-
-
-h4 {
-  color: #e76c73;
-  font-size: 14px;
-  text-decoration: none;
-}
-p {
-  color: #888;
-  font-size: 18px;
-  text-decoration: none;
-  padding: 10px;
-}
-
 @media screen and (max-width: 992px) {
   .column {
     width: 50%;
