@@ -20,6 +20,9 @@
             required
             v-model="account.password"
           />
+          <label for="create-password">Password must be at least 6 characters</label>
+          <input type="checkbox" id="password-checkbox" @click="showPassword">
+            <label for="password-checkbox">Show Password</label>
           <br />
           <button type="submit" class="large-btn">Sign up</button>
           <br />
@@ -57,6 +60,14 @@ export default {
           this.errors = error;
         });
     },
+    showPassword() {
+      const togglePassword = document.getElementById("create-password");
+      if (togglePassword.type === "password") {
+        togglePassword.type = "text";
+      } else {
+        togglePassword.type = "password";
+      }
+    },
   },
 };
 </script>
@@ -76,5 +87,8 @@ input {
   font-size: 15px;
   border-radius: 8px;
   color: white;
+}
+label {
+  font-size: 12px;
 }
 </style>

@@ -1,12 +1,8 @@
 <template>
   <div class="container">
-    
     <div class="center-div">
-      
       <div class="form-card">
-        <div v-if="isError" class="alert">
-        Wrong email address or password!
-      </div>
+        <div v-if="isError" class="alert">Wrong email address or password!</div>
         <form action="submit" method="POST" @submit.prevent>
           <h2>Login</h2>
           <br />
@@ -25,14 +21,14 @@
             required
             v-model="account.password"
           />
+            <input type="checkbox" id="password-checkbox" @click="showPassword">
+            <label for="password-checkbox">Show Password</label>
           <br />
           <button @click="login" type="submit" class="large-btn">Login</button>
         </form>
         Don't have an account? <nuxt-link to="/signup">Sign up!</nuxt-link>
       </div>
-      
     </div>
-    
   </div>
 </template>
 
@@ -41,28 +37,35 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
-  data:() => ({
-      account: {
-        email: "",
-        password: ""
-      },
-      isError: false,
-      errMsg: "",
+  data: () => ({
+    account: {
+      email: "",
+      password: "",
+    },
+    isError: false,
+    errMsg: "",
   }),
   methods: {
     login() {
       this.$store.dispatch("users/login", this.account).catch((error) => {
-        console.log(error)
+        console.log(error);
         this.isError = true;
         this.errMsg = error.code;
 
         setTimeout(() => {
           this.isError = false;
-          
         }, 5000);
       });
 
       this.$router.push("/");
+    },
+    showPassword() {
+      const togglePassword = document.getElementById("user-password");
+      if (togglePassword.type === "password") {
+        togglePassword.type = "text";
+      } else {
+        togglePassword.type = "password";
+      }
     },
   },
 };
