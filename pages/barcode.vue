@@ -2,16 +2,25 @@
   <div class="scan-container center-div">
       <div class="form-card">
         <client-only>
-          <BarcodeScan />
-        </client-only>
+          <BarcodeScan v-if="this.active" @chActive="changeActive" @chStatus="changeStatus" />
+          <BarcodeData />
+        </client-only>        
       </div>
   </div>
 </template>
 
 <script>
+import BarcodeScan from "../components/BarcodeScan.vue"
 export default {
+  components: {
+    BarcodeScan
+  },
   data: function () {
     return {
+      //必須
+      active: true,
+      status: true,
+      //見極め
       Quagga: null,
       code: "",
       showInfomation: false
@@ -23,7 +32,14 @@ export default {
     },
   },
   methods: {
-
+    changeActive: function() {
+      console.log("changeActive");
+      this.active = !this.active;
+    },
+    changeStatus: function() {
+      console.log("changeStatus");
+      this.result = !this.result;
+    },
   },
 };
 </script>

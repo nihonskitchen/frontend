@@ -6,7 +6,8 @@ export const state = () => ({
     back_pic: "",
     description: ""
   },
-  newSubmission: {}
+  newSubmission: {},
+  scanImage: ""
 });
 
 export const getters = () => ({
@@ -14,15 +15,27 @@ export const getters = () => ({
 });
 
 export const mutations = {
+  // 読み取ったバーコードをsave
+  addCode(state, code) {
+    state.code = code;
+  },
+  addImg(state, src) {
+    state.scanImage = src;
+  },
+  changeDetails(state, code) {
+    state.details = code;
+  },
+
+
+
+
   // this.$store.state.barcode.details
   showDetails(state, text) {
     state.details = text;
 
     return state.details;
   },
-  addBarcode(state, barcode) {
-    //
-  },
+
   addJancode(state, barcode) {
     console.log("JANCODE =", barcode);
     // this.set(state.newSubmission, jancode, barcode);
