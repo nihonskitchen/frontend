@@ -175,11 +175,12 @@ export default {
 
 <style>
 .add-btn {
-  width: 30px;
+  width: 26px;
   background-color: #e76c73;
   border: 0px;
-  height: 30px;
-  margin: 0px;
+  height: 26px;
+  margin-top: 5px;
+  margin-left: 0px;
   border-radius: 8px;
   color: white;
 }
@@ -238,7 +239,7 @@ export default {
   font-size: 15px;
   border-radius: 8px;
   padding: 5px;
-  background-color: #e76c73;
+  background-color: #F7B981;
   border: 0px;
   margin-bottom: 20px;
   margin-top: 0px;
