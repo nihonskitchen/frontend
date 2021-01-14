@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     pressed() {
-      alert("Signed up!");
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.account.email, this.account.password)
