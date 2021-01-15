@@ -31,7 +31,7 @@
     "nuxt": "^2.14.6",
     "quagga": "^0.12.1",
     "uuidv4": "^6.2.6",
-    "vue-tour": "^1.5.0"
+    "vue-js-modal": "^2.0.0-rc.6"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^0.1.2",
