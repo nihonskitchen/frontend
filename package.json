@@ -19,6 +19,7 @@
     "@nuxtjs/firebase": "^7.3.0",
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/pwa": "^3.3.4",
+    "compressorjs": "^1.0.7",
     "cookieparser": "^0.1.0",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
@@ -28,7 +29,9 @@
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.2",
     "nuxt": "^2.14.6",
-    "quagga": "^0.12.1"
+    "quagga": "^0.12.1",
+    "uuidv4": "^6.2.6",
+    "vue-tour": "^1.5.0"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^0.1.2",
