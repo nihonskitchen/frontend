@@ -28,19 +28,17 @@ export default {
   methods: {
     async checkBarcode() {
       // DB問合せ
-      const product = await this.$axios.$get(`/jancode/${this.code}`);
+      const product = await this.$axios.$get(`/barcode/${this.code}`);
       this.$store.commit('barcode/changeDetails', product);
 
       // DBにある場合とない場合、判定に何を使うか要確認
-      // 現状はこれ→ product.notPresent === true
-      if (product.notPresent === true) {
-        // ない場合
-        // this.$store.commit('barcode/isDataToggle', false);
-        // this.$emit("chStatus");
-        this.$router.push("/barcode-create");
-      } else {
-        // this.$store.commit('barcode/isDataToggle', true);
+      if (product.product_name !== '' || product.description !== '') {
+        this.$store.commit("barcode/setRequest", "PUT");
         this.$router.push("/barcode-result");
+      } else {
+        // ない場合
+        this.$store.commit("barcode/setRequest", "POST");
+        this.$router.push("/barcode-create");
       }
       // this.$emit("chActive");
     },
@@ -108,12 +106,10 @@ export default {
       }
     },
 
-    // initQuaggaだけでも良い？？
     startScan() {
       this.code = "";
       this.initQuagga();
     },
-    // これは必要？？
     stopScan() {
       this.Quagga.offProcessed(this.onProcessed);
       this.Quagga.offDetected(this.onDetected);
