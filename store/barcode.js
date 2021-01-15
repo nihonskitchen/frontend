@@ -2,12 +2,11 @@ export const state = () => ({
   details: {
     barcode: "",
     product_name: "",
-    front_pic: "",
-    back_pic: "",
     description: ""
   },
   scanImage: "",
   newSubmit: {},
+  reqType: ""
   // isData: false,
 });
 
@@ -32,8 +31,6 @@ export const mutations = {
       barcode: "",
       product_name: "",
       id: 0,
-      front_pic: "",
-      back_pic: "",
       description: ""
     });
     return state.details;
@@ -44,7 +41,9 @@ export const mutations = {
   putNewData(state, data) {
     state.newSubmit = data;
   },
-
+  setRequest(state, req) {
+    state.reqType = req;
+  },
 
   // isDataToggle(state, bool) {
   //   state.isData = bool;

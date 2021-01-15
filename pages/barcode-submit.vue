@@ -9,7 +9,7 @@
         <button @click="resister">Register</button>
         <button @click="correct">Correct</button>
       </div>
-      <div v-else>
+      <div v-if="success">
         <p>This data has resistered!</p>
       </div>
     </div>
@@ -20,13 +20,27 @@
 export default {
   data: function() {
     return{
-      confirm: true
+      confirm: true,
+      success: false,
+      reqType: this.$store.state.barcode.reqType
     }
   },
   methods: {
-    resister() {
+    async resister() {
       this.confirm = false;
       // サーバへ送信
+      if (this.reqType === "POST") {
+        await this.$axios.$post(`/barcode/${this.$store.state.barcode.newSubmit.barcode}`);
+        //登録確認作業が入る
+        this.success = true;
+      } else {
+        // PUTの場合
+        await this.$axios.$put(`/barcode/${this.$store.state.barcode.newSubmit.barcode}`);
+        //登録確認作業が入る
+        this.success = true;
+      }
+
+ 
       // this.$store.state.barcode.newSubmit
     },
     correct() {
