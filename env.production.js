@@ -1,3 +1,3 @@
 module.exports = {
-    apiBaseUrl: "/"
+    apiBaseUrl: "https://nihons-kitchen-server.herokuapp.com/"
   }

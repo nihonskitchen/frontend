@@ -29,6 +29,11 @@
 import BarcodeImg from "../components/BarcodeImg.vue"
 
 export default {
+  middleware({ store, redirect }) {
+    if (!store.state.users.user) {
+      return redirect('/login')
+    }
+  },
   components: {
     BarcodeImg
   },

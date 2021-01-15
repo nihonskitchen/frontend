@@ -18,6 +18,11 @@
 
 <script>
 export default {
+  middleware({ store, redirect }) {
+    if (!store.state.users.user) {
+      return redirect('/login')
+    }
+  },
   data: function() {
     return{
       confirm: true,

@@ -1,5 +1,5 @@
-// const environment = process.env.NODE_ENV || development;
-// const envSet = require(`./env.${environment}.js`);
+const environment = process.env.NODE_ENV || development;
+const envSet = require(`./env.${environment}.js`);
 
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
@@ -53,22 +53,22 @@ export default {
         }
       }
     ],
-    '@nuxt/content'
-    // '@nuxtjs/axios',
-    // '@nuxtjs/proxy'
+    '@nuxt/content',
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
-  // env: envSet,
-  // axios: {
-  //   proxy: true
-  // },
-  // proxy: {
-  //   "/barcode": {
-  //     // target: envSet.apiBaseUrl,
-  //     pathRewrite: {
-  //       "^/barcode": "/barcode"
-  //     }
-  //   }
-  // },
+  env: envSet,
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    "/barcode": {
+      target: envSet.apiBaseUrl,
+      pathRewrite: {
+        "^/barcode": "/api/barcode"
+      }
+    }
+  },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {}
 };
