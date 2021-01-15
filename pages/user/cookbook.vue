@@ -29,8 +29,8 @@ import MyRecipes from "../../components/MyRecipes.vue";
 export default {
   data() {
     return {
-      myRecipes: false,
-      favorites: true,
+      myRecipes: true,
+      favorites: false,
     };
   },
   methods: {
@@ -46,10 +46,12 @@ export default {
 .toggle-btns {
   /* position: relative; */
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: center;
   align-content: center;
-  margin: 20px;
+  margin: 0px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 .inactive-btn {
   background-color: #c5c7ce;
@@ -81,9 +83,11 @@ export default {
 .my-recipes {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
+  width: 150px;
 }
 .favorites {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+  width: 150px;
 }
 </style>

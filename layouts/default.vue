@@ -38,7 +38,7 @@ p {
 p:last-of-type {
   margin-bottom: 0px;
 }
-button {
+/* button {
   padding: 5px;
   width: 100%;
   margin: 5px;
@@ -56,7 +56,7 @@ button:hover {
   font-size: 15px;
   border-radius: 0px;
   cursor: pointer;
-}
+} */
 form {
   position: relative;
   justify-content: space-evenly;

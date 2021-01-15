@@ -82,7 +82,8 @@
         </div>
         <div>
           <!-- <input type="submit" id="submit-recipe" /> -->
-          <button class="submit-btn">Submit Recipe</button>
+          <nuxt-link to="/user/cookbook"><button class="submit-btn">Submit Recipe</button></nuxt-link>
+          
         </div>
       </div>
     </div>
@@ -111,7 +112,7 @@ export default {
         .put(this.selectedFile)
         .then(
           function () {
-            console.log("successfully uploaded");
+            alert("successfully uploaded");
           },
           (error) => {
             console.log(error.message);
@@ -300,6 +301,16 @@ export default {
   border-radius: 8px;
   padding: 5px;
   background-color: #e76c73;
+  border: 0px;
+  margin: 0px;
+  color: white;
+}
+.submit-btn:hover {
+  width: 150px;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #E5536A;
   border: 0px;
   margin: 0px;
   color: white;
