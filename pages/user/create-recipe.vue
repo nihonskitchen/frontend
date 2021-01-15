@@ -72,8 +72,13 @@
           <h2>Upload Picture</h2>
         </div>
         <div>
-          <input type="file" id="foodPic" />
-          <button class="upload-btn">Upload Picture</button>
+          <input
+            type="file"
+            id="foodPic"
+            @change="onFileSelected"
+            accept="image/*"
+          />
+          <button class="upload-btn" @click="onUpload">Upload Picture</button>
         </div>
         <div>
           <!-- <input type="submit" id="submit-recipe" /> -->
@@ -85,13 +90,34 @@
 </template>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/auth";
+
 export default {
   data() {
     return {
       dish_name: "",
+      selectedFile: null,
     };
   },
   methods: {
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0];
+    },
+    onUpload() {
+      firebase
+        .storage()
+        .ref("recipes/" + this.$store.state.users.user.uid + "/recipe-pic.jpg")
+        .put(this.selectedFile)
+        .then(
+          function () {
+            console.log("successfully uploaded");
+          },
+          (error) => {
+            console.log(error.message);
+          }
+        );
+    },
     addIngredientField() {
       let id = 1;
 
@@ -127,12 +153,12 @@ export default {
       opt2.value = "ml";
       opt2.innerText = "ml";
       inputUnit.appendChild(opt2);
-      
+
       let opt3 = document.createElement("option");
       opt3.value = "slice";
       opt3.innerText = "slice";
       inputUnit.appendChild(opt3);
- 
+
       let opt4 = document.createElement("option");
       opt4.value = "pinch";
       opt4.innerText = "pinch";
@@ -186,7 +212,7 @@ export default {
 }
 .add-btn:hover {
   width: 26px;
-  background-color: #E5536A;
+  background-color: #e5536a;
   border: 0px;
   height: 26px;
   margin-top: 5px;
@@ -251,7 +277,7 @@ export default {
   font-size: 15px;
   border-radius: 8px;
   padding: 5px;
-  background-color: #F7B981;
+  background-color: #f7b981;
   border: 0px;
   margin-bottom: 20px;
   margin-top: 0px;

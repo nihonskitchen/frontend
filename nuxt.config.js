@@ -48,7 +48,8 @@ export default {
           appId: "1:408975535078:web:680cb14be919ead4e6c427"
         },
         services: {
-          auth: true // Just as example. Can be any other service.
+          auth: true,
+          storage: true // Just as example. Can be any other service.
         }
       }
     ],
