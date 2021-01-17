@@ -1,7 +1,7 @@
 <template>
  <div>
-   <h2>Toutorial Tour</h2>
-   <button @click="show">START</button>
+   <h2 class="visible">Toutorial Tour</h2>
+   <button @click="show" class="visible">START</button>
 
     <modal name="modal-content" width="50%" height="300px">
       <p>Welcome to Nihon's Kitchen!<br />Let you show how to use here!</p>

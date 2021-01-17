@@ -3,26 +3,87 @@
     <div class="headline">
       <h2>Welcome to the latest recipes in Japan!</h2>
     </div>
-    <div class="home-page">
+    <div class="tour">
         <FirstTour />
     </div>
+    <input type="file" id="file" accept="image/*" ref="preview" @change="compressor" />
+    <br />
+      <img :src="outputURL" id="output" />
+    <!-- <div v-if="outputURL">
+    </div> -->
+    <div v-if="inputURL">
+      <img :src="inputURL" />
+    </div>
+
   </div>
 </template>
 
 <script>
-import FirstTour from "../components/FirstTour.vue"
+import FirstTour from "../components/FirstTour.vue";
+import Compressor from 'compressorjs';
+
 export default {
   components:[
     "FirstTour"
   ],
-  mounted() {
-    this.$store.commit("recipes/getCardDetails");
+  data() {
+    return{
+      src: "",
+      inputURL: "",
+      outputURL: ""
+    }
   },
   methods: {
-    passRecipeData(id) {
-      this.$store.commit("recipes/showRecipeDetails", id);
-      console.log(id);
+    // check() {
+    //   console.log("input ref");
+    //   console.log(this.$refs.preview.files[0]);
+    //   const file = this.$refs.preview.files[0];
+    //   this.inputURL = URL.createObjectURL(file)
+    //   console.log("createObjectURL");
+    //   console.log(this.inputURL);
+    // },
+    compressor () {
+      const file = this.$refs.preview.files[0];
+      // console.log(file);
+
+      if (!file) {
+        return;
+      };
+      this.inputURL = URL.createObjectURL(file);
+
+      new Compressor(file, {
+        quality: 0.6, width: 500,
+        success(result) {
+          // console.log(result);
+
+          const reader = new FileReader();
+          const img = document.getElementById("output");
+          reader.addEventListener("load", function () {
+            img.src = reader.result;
+          }, false);
+
+          if (result) {
+            reader.readAsDataURL(result);
+          }
+
+          this.outputURL = URL.createObjectURL(result);
+          console.log(outputURL);
+          // const formData = new FormData();
+
+          // // The third parameter is required for server
+          // formData.append('file', result, result.name);
+
+          // // Send the compressed image file to server with XMLHttpRequest.
+          // axios.post('/path/to/upload', formData).then(() => {
+          //   console.log('Upload success');
+          // });
+        },
+        error(err) {
+          console.log(err.message);
+        },
+      });
     },
+
   },
 };
 </script>
