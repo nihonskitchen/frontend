@@ -3,26 +3,71 @@
     <div class="headline">
       <h2>Welcome to the latest recipes in Japan!</h2>
     </div>
-    <div class="home-page">
+    <div class="tour">
         <FirstTour />
     </div>
+    <input type="file" id="file" accept="image/*" ref="preview" @change="compressor" />
+    <br />
+      <img :src="outputURL" id="output" />
   </div>
 </template>
 
 <script>
-import FirstTour from "../components/FirstTour.vue"
+import FirstTour from "../components/FirstTour.vue";
+import Compressor from 'compressorjs';
+
 export default {
-  components:[
-    "FirstTour"
-  ],
-  mounted() {
-    this.$store.commit("recipes/getCardDetails");
+  components:{
+    FirstTour: FirstTour
+  },
+  data() {
+    return{
+      src: "",
+      inputURL: "",
+      outputURL: ""
+    }
   },
   methods: {
-    passRecipeData(id) {
-      this.$store.commit("recipes/showRecipeDetails", id);
-      console.log(id);
+    compressor () {
+      const file = this.$refs.preview.files[0];
+
+      if (!file) {
+        return;
+      };
+      this.inputURL = URL.createObjectURL(file);
+
+      new Compressor(file, {
+        quality: 0.8, width: 350,
+        success(result) {
+          const reader = new FileReader();
+          const img = document.getElementById("output");
+          reader.addEventListener("load", function () {
+            img.src = reader.result;
+          }, false);
+
+          if (result) {
+            reader.readAsDataURL(result);
+          }
+
+          this.outputURL = URL.createObjectURL(result);
+          console.log(result);
+
+          // const formData = new FormData();
+
+          // // The third parameter is required for server
+          // formData.append('file', result, result.name);
+
+          // // Send the compressed image file to server with XMLHttpRequest.
+          // axios.post('/path/to/upload', formData).then(() => {
+          //   console.log('Upload success');
+          // });
+        },
+        // error(err) {
+        //   console.log(err.message);
+        // },
+      });
     },
+
   },
 };
 </script>
