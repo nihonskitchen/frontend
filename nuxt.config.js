@@ -69,6 +69,10 @@ export default {
       pathRewrite: {
         "^/barcode": "/api/barcode"
       }
+    },
+    "/Amazon": {
+      target: "https://www.amazon.co.jp",
+      pathRewrite: {"^/Amazon": "/afx/ingredients/verify"}
     }
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)

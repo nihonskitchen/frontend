@@ -9,12 +9,6 @@
     <input type="file" id="file" accept="image/*" ref="preview" @change="compressor" />
     <br />
       <img :src="outputURL" id="output" />
-    <!-- <div v-if="outputURL">
-    </div> -->
-    <div v-if="inputURL">
-      <img :src="inputURL" />
-    </div>
-
   </div>
 </template>
 
@@ -23,9 +17,9 @@ import FirstTour from "../components/FirstTour.vue";
 import Compressor from 'compressorjs';
 
 export default {
-  components:[
-    "FirstTour"
-  ],
+  components:{
+    FirstTour: FirstTour
+  },
   data() {
     return{
       src: "",
@@ -34,17 +28,8 @@ export default {
     }
   },
   methods: {
-    // check() {
-    //   console.log("input ref");
-    //   console.log(this.$refs.preview.files[0]);
-    //   const file = this.$refs.preview.files[0];
-    //   this.inputURL = URL.createObjectURL(file)
-    //   console.log("createObjectURL");
-    //   console.log(this.inputURL);
-    // },
     compressor () {
       const file = this.$refs.preview.files[0];
-      // console.log(file);
 
       if (!file) {
         return;
@@ -52,10 +37,8 @@ export default {
       this.inputURL = URL.createObjectURL(file);
 
       new Compressor(file, {
-        quality: 0.6, width: 500,
+        quality: 0.8, width: 350,
         success(result) {
-          // console.log(result);
-
           const reader = new FileReader();
           const img = document.getElementById("output");
           reader.addEventListener("load", function () {
@@ -67,7 +50,8 @@ export default {
           }
 
           this.outputURL = URL.createObjectURL(result);
-          console.log(outputURL);
+          console.log(result);
+
           // const formData = new FormData();
 
           // // The third parameter is required for server
@@ -78,9 +62,9 @@ export default {
           //   console.log('Upload success');
           // });
         },
-        error(err) {
-          console.log(err.message);
-        },
+        // error(err) {
+        //   console.log(err.message);
+        // },
       });
     },
 
