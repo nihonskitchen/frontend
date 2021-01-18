@@ -1,4 +1,4 @@
-const shoppingList = require("~/server/data/shoppinglist.json");
+// const shoppingList = require("~/server/data/shoppinglist.json");
 
 export const state = () => ({
   shoppingList: [
