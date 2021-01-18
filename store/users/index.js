@@ -3,12 +3,16 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export const state = () => ({
-  user: null
+  user: null,
+  lastURL: ""
 });
 
 export const mutations = {
   SET_USER: (state, account) => {
     state.user = account;
+  },
+  setLastURL: (state, path) => {
+    state.lastURL = path;
   }
 };
 

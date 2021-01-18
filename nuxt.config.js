@@ -70,6 +70,12 @@ export default {
         "^/barcode": "/api/barcode"
       }
     },
+    "/recipes": {
+      target: envSet.apiBaseUrl,
+      pathRewrite: {
+        "^/recipes": "/api/recipes"
+      }
+    },
     "/Amazon": {
       target: "https://www.amazon.co.jp",
       pathRewrite: {"^/Amazon": "/afx/ingredients/verify"}

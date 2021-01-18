@@ -57,7 +57,9 @@ export default {
         }, 5000);
       });
 
-      this.$router.push("/");
+      // this.$router.push("/");
+      const path = this.$store.state.users.lastURL === "" ? "/" : this.$store.state.users.lastURL;
+      this.$router.push(path);
     },
     showPassword() {
       const togglePassword = document.getElementById("user-password");
