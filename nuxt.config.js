@@ -67,13 +67,19 @@ export default {
     "/barcode": {
       target: envSet.apiBaseUrl,
       pathRewrite: {
-        "^/barcode": "/api/barcode"
+        "^/barcode": "/barcode"
       }
     },
     "/recipes": {
       target: envSet.apiBaseUrl,
       pathRewrite: {
-        "^/recipes": "/api/recipes"
+        "^/recipes": "/recipes"
+      }
+    },
+    "/users": {
+      target: envSet.apiBaseUrl,
+      pathRewrite: {
+        "^/users": "/users"
       }
     },
     "/Amazon": {

@@ -46,8 +46,8 @@ export default {
     errMsg: "",
   }),
   methods: {
-    login() {
-      this.$store.dispatch("users/login", this.account).catch((error) => {
+    async login() {
+      await this.$store.dispatch("users/login", this.account).catch((error) => {
         console.log(error);
         this.isError = true;
         this.errMsg = error.code;
@@ -55,10 +55,20 @@ export default {
         setTimeout(() => {
           this.isError = false;
         }, 5000);
+        return
+      });
+
+      console.log(this.$store.state.users.user);
+      await this.$store.dispatch("users/userDatas", this.$store.state.users.user.uid).catch((error) => {
+        console.log(error);
+        this.isError = true;
+        this.errMsg = error.code;
+
       });
 
       // this.$router.push("/");
       const path = this.$store.state.users.lastURL === "" ? "/" : this.$store.state.users.lastURL;
+      console.log(`Path: ${path}`);
       this.$router.push(path);
     },
     showPassword() {
