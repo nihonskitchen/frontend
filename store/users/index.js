@@ -4,6 +4,7 @@ import "firebase/auth";
 
 export const state = () => ({
   user: null,
+  profile: null,
   lastURL: ""
 });
 
@@ -13,6 +14,9 @@ export const mutations = {
   },
   setLastURL: (state, path) => {
     state.lastURL = path;
+  },
+  setProfile: (state, data) => {
+    state.profile = data;
   }
 };
 
@@ -31,6 +35,17 @@ export const actions = {
 
       // Set the user locally
       commit("SET_USER", { email, uid });
+
+    } catch (error) {
+      throw error;
+    }
+  },
+  async userDatas({ commit }, uid) {
+    try {
+      const profile = await this.$axios.$get(`/users/${uid}`);
+      // console.log("profile");
+      // console.log(profile);
+      commit("setProfile", profile.data.users);
     } catch (error) {
       throw error;
     }

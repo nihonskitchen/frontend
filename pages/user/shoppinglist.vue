@@ -48,7 +48,13 @@ export default {
       // いまいち何を修正したらいいか不明
       // 参考：http://limedaley.com/post/amazon-fresh-api
       // formデータ作って送信する挙動をかますとうまくいく？かも？
-      console.log(await this.$axios.$post("/Amazon", JSON.stringify(amazonFreshJson)));
+      await this.$axios.$post(
+        "https://www.amazon.co.jp/afx/ingredients/verify",
+        JSON.stringify(amazonFreshJson),
+        { 
+          header : { 'Content-Type': 'application/json;charset=UTF-8' }
+        }
+      );
 
     },
   }

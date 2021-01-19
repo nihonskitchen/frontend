@@ -1,3 +1,3 @@
 module.exports = {
-  apiBaseUrl: "http://localhost:8000"
+  apiBaseUrl: "https://nihons-kitchen-server.an.r.appspot.com/api"
 }

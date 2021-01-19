@@ -28,6 +28,17 @@ const setupExpressServer = () => {
     }
     res.send({ barcode: jan, notPresent: true });
   });
+  server.get("/recipes/:id", (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    for (const i of recipes) {
+      if (id === i.recipe_id) {
+        res.send(i);
+        return;
+      }
+    }
+    // res.send({ barcode: jan, notPresent: true });
+  });
   return server;
 };
 
