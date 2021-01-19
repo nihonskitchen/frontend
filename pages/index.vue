@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="headline">
-      <h2 v-if="this.$store.state.users.user !== null">
+      <!-- <h2 v-if="this.$store.state.users.user !== null"> -->
         <!-- Welcome to {{this.$store.state.users.profile.name}} the latest recipes in Japan! -->
-      </h2>
-      <h2 v-else>Welcome to the latest recipes in Japan!</h2>
+      <!-- </h2> -->
+      <h2>Welcome to the latest recipes in Japan!</h2>
     </div>
     <div class="home-page">
       <div
