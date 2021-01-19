@@ -59,17 +59,17 @@ export default {
       });
 
       console.log(this.$store.state.users.user);
-      await this.$store.dispatch("users/userDatas", this.$store.state.users.user.uid).catch((error) => {
-        console.log(error);
-        this.isError = true;
-        this.errMsg = error.code;
+      // await this.$store.dispatch("users/userDatas", this.$store.state.users.user.uid).catch((error) => {
+      //   console.log(error);
+      //   this.isError = true;
+      //   this.errMsg = error.code;
 
-      });
+      // });
 
-      // this.$router.push("/");
-      const path = this.$store.state.users.lastURL === "" ? "/" : this.$store.state.users.lastURL;
-      console.log(`Path: ${path}`);
-      this.$router.push(path);
+      this.$router.push("/");
+      // const path = this.$store.state.users.lastURL === "" ? "/" : this.$store.state.users.lastURL;
+      // console.log(`Path: ${path}`);
+      // this.$router.push(path);
     },
     showPassword() {
       const togglePassword = document.getElementById("user-password");
