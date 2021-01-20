@@ -30,7 +30,8 @@
       <h2 class="margins">Ingredients</h2>
       <!-- <div>{{ recipe.ingredients }}</div> -->
       <div v-for="(ingredient, index) in recipe.ingredients" :key="ingredient">
-        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }} <button id="remove-btn" @click="removeIngredient(index)">X</button>
+        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+        <button id="remove-btn" @click="removeIngredient(index)">X</button>
       </div>
       <div>
         <input
@@ -57,8 +58,9 @@
       </div>
       <h2 class="margins">Steps</h2>
       <!-- <div>{{ recipe.steps }}</div> -->
-      <div v-for="step in recipe.steps" :key="step">
+      <div v-for="(step, index) in recipe.steps" :key="step">
         {{ step }}
+        <button id="remove-btn" @click="removeStep(index)">X</button>
       </div>
       <div>
         <input
@@ -121,10 +123,9 @@ export default {
   },
   methods: {
     async addNewRecipe() {
-
-      console.log("POST req sent")
-      await this.$axios.$post(("/recipes"), this.recipe)
-      console.log("POST req completed")
+      console.log("POST req sent");
+      await this.$axios.$post("/recipes", this.recipe);
+      console.log("POST req completed");
       // const db = firebase.firestore();
       // db.settings = { timestampsInSnapshops: true };
 
@@ -144,29 +145,30 @@ export default {
     },
     removeIngredient(index) {
       console.log("remove ingredient");
-      this.recipe.ingredients.splice(index, 1)
+      this.recipe.ingredients.splice(index, 1);
     },
     addNewStep() {
       this.recipe.steps.push(this.newStep);
       this.newStep = "";
     },
-    removeStep() {
-      console.log("remove step");
+    removeStep(index) {
+      console.log("remove step", index);
+      this.recipe.steps.splice(index, 1);
     },
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
     onUpload() {
-        console.log(this.selectedFile)
-        let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`
+      console.log(this.selectedFile);
+      let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`;
       firebase
         .storage()
         .ref(refPath)
         .put(this.selectedFile)
         .then(
-           () => {
+          () => {
             this.recipe.picture_url = refPath;
-            console.log("RECIPE =", this.recipe)
+            console.log("RECIPE =", this.recipe);
             alert("successfully uploaded");
           },
           (error) => {
@@ -207,7 +209,7 @@ export default {
   width: 20px;
   height: 20px;
   padding: 0px;
-  margin: 5px;
+  margin: 0px;
   border-radius: 4px;
 }
 .submit-btn {
