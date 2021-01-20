@@ -29,7 +29,7 @@ export default {
     async checkBarcode() {
       // DB問合せ
       const product = await this.$axios.$get(`/barcode/${this.code}`);
-      this.$store.commit('barcode/changeDetails', product);
+      this.$store.commit('barcode/changeDetails', product.data.ingredient);
 
       // DBにある場合とない場合、判定に何を使うか要確認
       if (product.product_name !== '' || product.description !== '') {

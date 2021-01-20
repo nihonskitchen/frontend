@@ -144,6 +144,7 @@ export default {
     },
     removeIngredient(index) {
       console.log("remove ingredient");
+      this.recipe.ingredients.splice(index, 1)
     },
     addNewStep() {
       this.recipe.steps.push(this.newStep);

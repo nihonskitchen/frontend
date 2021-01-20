@@ -7,7 +7,7 @@
         <BarcodeData mode="show" />
       </client-only>
       <button @click="newScan">Scan a new barcode</button>
-      <button v-if="this.$store.state.users.user !== null" @click="correctionData">Correct the barcode data</button>
+      <!-- <button v-if="this.$store.state.users.user !== null" @click="correctionData">Correct the barcode data</button> -->
     </div>
   </div>
 </template>
