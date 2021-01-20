@@ -29,8 +29,8 @@
       </div>
       <h2 class="margins">Ingredients</h2>
       <!-- <div>{{ recipe.ingredients }}</div> -->
-      <div v-for="ingredient in recipe.ingredients" :key="ingredient">
-        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+      <div v-for="(ingredient, index) in recipe.ingredients" :key="ingredient">
+        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }} <button id="remove-btn" @click="removeIngredient(index)">x</button>
       </div>
       <div>
         <input
@@ -138,8 +138,8 @@ export default {
       this.recipe.ingredients.push(this.newIngredient);
       this.newIngredient = {};
     },
-    removeIngredient() {
-      console.log("remove ingredient");
+    removeIngredient(index) {
+      console.log("remove ingredient", index);
     },
     addNewStep() {
       this.recipe.steps.push(this.newStep);
@@ -205,5 +205,12 @@ export default {
 .margins {
   margin-top: 20px;
   margin-bottom: 10px;
+}
+#remove-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  padding: 0px;
+  margin: 5px;
 }
 </style>
