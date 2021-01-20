@@ -4,28 +4,25 @@ import "firebase/auth";
 
 export const state = () => ({
   user: null,
-  // profile: null,
-  // lastURL: ""
+  profile: null,
+  lastURL: ""
 });
 
 export const mutations = {
   SET_USER: (state, account) => {
     state.user = account;
   },
-  // setLastURL: (state, path) => {
-  //   state.lastURL = path;
-  // },
-  // setProfile: (state, data) => {
-  //   state.profile = data;
-  // }
+  setLastURL: (state, path) => {
+    state.lastURL = path;
+  },
+  setProfile: (state, data) => {
+    state.profile = data;
+  }
 };
 
 export const actions = {
   async login({ commit }, account) {
     try {
-      // このコードで確認する
-      console.log("↓このコードで確認する");
-      console.log(process.env.NODE_ENV);
       // Login the user
       await firebase.auth().signInWithEmailAndPassword(account.email, account.password);
 

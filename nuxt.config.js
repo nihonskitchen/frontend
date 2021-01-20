@@ -21,8 +21,8 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    { src: '~/plugins/routerOption.js', ssr: false },
-    { src: "~/plugins/vue-js-modal", ssr: false }
+    // { src: '~/plugins/routerOption.js', ssr: false },
+    // { src: "~/plugins/vue-js-modal", ssr: false }
   ],
 
   // Router settings
