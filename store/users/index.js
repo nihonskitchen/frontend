@@ -23,6 +23,9 @@ export const mutations = {
 export const actions = {
   async login({ commit }, account) {
     try {
+      // このコードで確認する
+      console.log("↓このコードで確認する");
+      console.log(process.env.NODE_ENV);
       // Login the user
       await firebase.auth().signInWithEmailAndPassword(account.email, account.password);
 
@@ -31,8 +34,8 @@ export const actions = {
       const { email, uid } = firebase.auth().currentUser;
 
       // Set JSON web token to the cookie
-      Cookie.set("access_token", token, { secure: true });
-
+      Cookie.set("access_token", token, { secure: true, expires: 7 });
+      
       // Set the user locally
       commit("SET_USER", { email, uid });
 
@@ -42,6 +45,7 @@ export const actions = {
   },
   async userDatas({ commit }, uid) {
     try {
+      // const profile = await this.$axios.$get(`https://nihons-kitchen-server.an.r.appspot.com/api/users/${uid}`);
       const profile = await this.$axios.$get(`/users/${uid}`);
       // console.log("profile");
       // console.log(profile);

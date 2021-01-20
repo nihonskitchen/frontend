@@ -58,7 +58,6 @@ export default {
         return
       });
 
-      console.log(this.$store.state.users.user);
       await this.$store.dispatch("users/userDatas", this.$store.state.users.user.uid).catch((error) => {
         console.log(error);
         this.isError = true;
@@ -68,7 +67,7 @@ export default {
 
       // this.$router.push("/");
       const path = this.$store.state.users.lastURL === "" ? "/" : this.$store.state.users.lastURL;
-      console.log(`Path: ${path}`);
+      // console.log(`Path: ${path}`);
       this.$router.push(path);
     },
     showPassword() {

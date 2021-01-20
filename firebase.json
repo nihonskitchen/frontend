@@ -8,7 +8,20 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "redirects": [ {
+      "source": "/users/:id",
+      "destination": "https://nihons-kitchen-server.an.r.appspot.com/api/users/:id",
+      "type": 302
+    }, {
+      "source": "/barcode/:barcode",
+      "destination": "https://nihons-kitchen-server.an.r.appspot.com/api/barcode/:barcode",
+      "type": 302
+    }, {
+      "source": "/recipes/:id",
+      "destination": "https://nihons-kitchen-server.an.r.appspot.com/api/recipes/:id",
+      "type": 302
+    } ]
   },
   "storage": {
     "rules": "storage.rules"
