@@ -8,6 +8,7 @@
           type="text"
           placeholder="Dish name"
           v-model="recipe.recipe_name"
+          maxlength="30"
           required
         />
       </div>
@@ -16,6 +17,7 @@
           type="text"
           placeholder="Prep time (in minutes)"
           v-model="recipe.time"
+          maxlength="3"
           required
         />
       </div>
@@ -24,6 +26,16 @@
           type="text"
           placeholder="Number of servings"
           v-model="recipe.servings"
+          maxlength="3"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          placeholder="Short recipe description"
+          v-model="recipe.owner_comment"
+          maxlength="100"
           required
         />
       </div>
@@ -38,11 +50,13 @@
           type="text"
           placeholder="Ingredient name (Example: mirin)"
           v-model="newIngredient.name"
+          maxlength="50"
         />
         <input
           type="text"
           placeholder="Ingredient amount (Example: 200)"
           v-model="newIngredient.amount"
+          maxlength="4"
         />
         <label for="units">Measurement:</label>
         <select name="unit" id="unit" class="unit" v-model="newIngredient.unit">
@@ -68,6 +82,7 @@
           type="text"
           placeholder="Example: Add water"
           v-model="newStep"
+          maxlength="75"
         />
       </div>
       <div>
@@ -166,9 +181,9 @@ export default {
         .put(this.selectedFile)
         .then(
           () => {
-            this.recipe.picture_url = refPath;
+            this.recipe.picture_url = refPath.substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
             console.log("RECIPE =", this.recipe);
-            alert("successfully uploaded");
+            alert("Picture uploaded successfully!");
           },
           (error) => {
             console.log("error", error.message);
