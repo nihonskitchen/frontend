@@ -99,6 +99,9 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
+  mounted() {
+    this.getUserID();
+  },
   data() {
     return {
       unit_options: ["slice", "pinch", "gram", "ml", "piece"],
@@ -107,7 +110,7 @@ export default {
       recipeID: null,
       selectedFile: null,
       recipe: {
-        userID: null,
+        user_id: null,
         recipe_name: "",
         picture_url: "",
         time: "",
@@ -124,26 +127,12 @@ export default {
   },
   methods: {
     async addNewRecipe() {
-      this.recipe.userID = firebase.auth().currentUser.uid;
       console.log("POST req sent", this.recipe);
       await this.$axios.$post("/recipes", this.recipe)
       .then((res) => {
-        this.$store.state.recipes.recipeID = res.createdRecipe.docID;
         this.$router.push("/user/cookbook")
       })
       console.log("POST req completed");
-      // const db = firebase.firestore();
-      // db.settings = { timestampsInSnapshops: true };
-
-      // const recipeCollection = db.collection("recipes");
-      // this.recipe.picture_url = this.recipe.picture_url.replace('.*', '_500x500.jpg');
-      // recipeCollection
-      //   .add(this.recipe)
-      //   .then((docRef) => {
-      //     this.recipeID = docRef.id;
-      //     console.log("Document written with ID: ", docRef.id);
-      //   })
-      //   .catch((error) => console.error("Error adding document: ", error));
     },
     addNewIngredient() {
       this.recipe.ingredients.push(this.newIngredient);
@@ -156,6 +145,10 @@ export default {
     addNewStep() {
       this.recipe.steps.push(this.newStep);
       this.newStep = "";
+    },
+    getUserID() {
+      this.recipe.user_id = firebase.auth().currentUser.uid;
+      console.log("USER ID =", this.recipe.user_id);
     },
     removeStep(index) {
       console.log("remove step", index);
