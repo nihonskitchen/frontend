@@ -4,20 +4,20 @@ import "firebase/auth";
 
 export const state = () => ({
   user: null,
-  profile: null,
-  lastURL: ""
+  // profile: null,
+  // lastURL: ""
 });
 
 export const mutations = {
   SET_USER: (state, account) => {
     state.user = account;
   },
-  setLastURL: (state, path) => {
-    state.lastURL = path;
-  },
-  setProfile: (state, data) => {
-    state.profile = data;
-  }
+  // setLastURL: (state, path) => {
+  //   state.lastURL = path;
+  // },
+  // setProfile: (state, data) => {
+  //   state.profile = data;
+  // }
 };
 
 export const actions = {

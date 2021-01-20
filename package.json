@@ -11,7 +11,8 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "server": "nodemon server/index.js",
-    "deploy": "nuxt generate && firebase deploy"
+    "deploy": "nuxt generate && firebase deploy --only hosting:nihonskitchen",
+    "deploy prod": "nuxt generate && firebase deploy --only hosting:nihonskitchen-prod"
   },
   "dependencies": {
     "@nuxt/content": "^1.11.1",

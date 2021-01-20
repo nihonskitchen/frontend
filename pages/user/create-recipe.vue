@@ -1,92 +1,88 @@
 <template>
-  <div class="container">
-    <div class="recipe-card">
+  <div>
+    <form @submit.prevent class="recipe-card">
+      <h1>Create a Recipe</h1>
+      <div>Complete this form to share your recipe with others</div>
       <div>
-        <h1>Create a Recipe</h1>
-      </div>
-      <div>
-        <label for="input">Dish name</label>
         <input
-          v-model="dish_name"
           type="text"
-          placeholder="Ex. Delicious Mochi"
+          placeholder="Dish name"
+          v-model="recipe.recipe_name"
+          required
         />
-        <label for="input">Prep time (in minutes)</label>
-        <input type="text" placeholder="Ex. 45" />
-        <label for="input">Servings</label>
-        <input type="text" placeholder="Ex. 4" />
-      </div>
-      <div class="subheader">
-        <h2>Ingredients</h2>
-      </div>
-      <div class="ingredients-container" id="ingredients-container">
-        <div class="grid-item">
-          <label for="ingredient-name">Name</label>
-        </div>
-        <div class="grid-item">
-          <label for="amount">Amount</label>
-        </div>
-        <div class="grid-item">
-          <label for="units">Units</label>
-        </div>
-        <div class="grid-item"></div>
-        <div class="grid-item">
-          <input class="ingredient-name" type="text" placeholder="Ex. tofu" />
-        </div>
-        <div class="grid-item">
-          <input class="amount" type="text" placeholder="200" />
-        </div>
-
-        <div class="grid-item">
-          <select name="units" id="units" class="units">
-            <option value="grams">grams</option>
-            <option value="ml">ml</option>
-            <option value="slice">slice</option>
-            <option value="pinch">pinch</option>
-          </select>
-        </div>
-
-        <div class="grid-item">
-          <button class="add-btn" @click.prevent="addIngredientField">+</button>
-        </div>
       </div>
       <div>
-        <div class="subheader">
-          <h2>Steps</h2>
-        </div>
-        <div class="steps-container" id="steps-container">
-          <div class="grid-item">
-            <input
-              class="steps-input"
-              type="text"
-              placeholder="Ex. Drain the tofu."
-            />
-          </div>
-          <div class="grid-item">
-            <button class="add-btn" @click.prevent="addStepsField">+</button>
-          </div>
-        </div>
+        <input
+          type="text"
+          placeholder="Prep time (in minutes)"
+          v-model="recipe.time"
+          required
+        />
       </div>
       <div>
-        <div class="subheader">
-          <h2>Upload Picture</h2>
-        </div>
-        <div>
-          <input
-            type="file"
-            id="foodPic"
-            @change="onFileSelected"
-            accept="image/*"
-          />
-          <button class="upload-btn" @click="onUpload">Upload Picture</button>
-        </div>
-        <div>
-          <!-- <input type="submit" id="submit-recipe" /> -->
-          <nuxt-link to="/user/cookbook"><button class="submit-btn">Submit Recipe</button></nuxt-link>
-          
-        </div>
+        <input
+          type="text"
+          placeholder="Number of servings"
+          v-model="recipe.servings"
+          required
+        />
       </div>
-    </div>
+      <h2 class="margins">Ingredients</h2>
+      <div>{{ recipe.ingredients }}</div>
+      <div>
+        <input
+          type="text"
+          placeholder="Ingredient name (Example: mirin)"
+          v-model="newIngredient.name"
+        />
+        <input
+          type="text"
+          placeholder="Ingredient amount (Example: 200)"
+          v-model="newIngredient.amount"
+        />
+        <label for="units">Measurement:</label>
+        <select name="unit" id="unit" class="unit" v-model="newIngredient.unit">
+          <option v-for="option in unit_options" :key="option">
+            {{ option }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <button class="add-btn" @click="addNewIngredient">
+          Add Ingredient
+        </button>
+      </div>
+      <h2 class="margins">Steps</h2>
+      <div>{{ recipe.steps }}</div>
+      <div>
+        <input
+          id="step"
+          type="text"
+          placeholder="Example: Add water"
+          v-model="newStep"
+        />
+      </div>
+      <div>
+        <button class="add-btn" @click="addNewStep">Add Step</button>
+      </div>
+      <h2 class="margins">Upload Picture</h2>
+      <div>
+        <input
+          type="file"
+          id="foodPic"
+          @change="onFileSelected"
+          accept="image/*"
+        />
+      </div>
+      <div>
+        <button class="add-btn" @click="onUpload">Upload Picture</button>
+      </div>
+      <div>
+        <button class="submit-btn margins" type="submit" @click="addNewRecipe">
+          Submit
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -97,104 +93,75 @@ import "firebase/auth";
 export default {
   data() {
     return {
-      dish_name: "",
+      unit_options: ["slice", "pinch", "gram", "ml", "piece"],
+      newIngredient: {},
+      newStep: "",
+      recipeID: null,
       selectedFile: null,
+      recipe: {
+        recipe_name: "",
+        picture_url: "",
+        time: "",
+        likes: "",
+        dislikes: "",
+        prices: "",
+        servings: "",
+        is_visible: true,
+        owner_comment: "",
+        ingredients: [],
+        steps: [],
+      },
     };
   },
   methods: {
+    addNewRecipe() {
+      const db = firebase.firestore();
+      db.settings = { timestampsInSnapshops: true };
+
+      const recipeCollection = db.collection("recipes");
+      this.recipe.picture_url = this.recipe.picture_url.replace('.*', '_500x500.jpg');
+      recipeCollection
+        .add(this.recipe)
+        .then((docRef) => {
+          this.recipeID = docRef.id;
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => console.error("Error adding document: ", error));
+    },
+    addNewIngredient() {
+      this.recipe.ingredients.push(this.newIngredient);
+      this.newIngredient = {};
+    },
+    removeIngredient() {
+      console.log("remove ingredient");
+    },
+    addNewStep() {
+      this.recipe.steps.push(this.newStep);
+      this.newStep = "";
+    },
+    removeStep() {
+      console.log("remove step");
+    },
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
     onUpload() {
+        console.log(this.selectedFile)
+        let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`
       firebase
         .storage()
-        .ref("recipes/" + this.$store.state.users.user.uid + "/recipe-pic.jpg")
+        .ref(refPath)
         .put(this.selectedFile)
         .then(
-          function () {
+           () => {
+            this.recipe.picture_url = refPath;
+            console.log("RECIPE =", this.recipe)
             alert("successfully uploaded");
           },
           (error) => {
-            console.log(error.message);
+            console.log("error", error.message);
           }
         );
-    },
-    addIngredientField() {
-      let id = 1;
-
-      let container = document.getElementById("ingredients-container");
-
-      let col1 = document.createElement("div");
-      let col2 = document.createElement("div");
-      let col3 = document.createElement("div");
-      let col4 = document.createElement("div");
-      let emptyDiv = document.createElement("div");
-
-      col1.class = "grid-item";
-      col2.class = "grid-item";
-      col3.class = "grid-item";
-      col4.class = "grid-item";
-
-      let inputName = document.createElement("input");
-      inputName.type = "text";
-      inputName.className = "ingredient-name";
-
-      let inputAmount = document.createElement("input");
-      inputAmount.type = "text";
-      inputAmount.className = "amount";
-
-      let inputUnit = document.createElement("select");
-      // inputUnit.type = "select";
-      let opt1 = document.createElement("option");
-      opt1.value = "grams";
-      opt1.innerText = "grams";
-      inputUnit.appendChild(opt1);
-
-      let opt2 = document.createElement("option");
-      opt2.value = "ml";
-      opt2.innerText = "ml";
-      inputUnit.appendChild(opt2);
-
-      let opt3 = document.createElement("option");
-      opt3.value = "slice";
-      opt3.innerText = "slice";
-      inputUnit.appendChild(opt3);
-
-      let opt4 = document.createElement("option");
-      opt4.value = "pinch";
-      opt4.innerText = "pinch";
-      inputUnit.appendChild(opt4);
-
-      // inputUnit.option = "grams";
-      inputUnit.className = "units";
-
-      col1.appendChild(inputName);
-      col2.appendChild(inputAmount);
-      col3.appendChild(inputUnit);
-      col4.appendChild(emptyDiv);
-
-      container.appendChild(col1);
-      container.appendChild(col2);
-      container.appendChild(col3);
-      container.appendChild(col4);
-    },
-    addStepsField() {
-      let container = document.getElementById("steps-container");
-
-      let col1 = document.createElement("div");
-      let emptyDiv = document.createElement("div");
-
-      col1.class = "grid-item";
-      emptyDiv.class = "grid-item";
-
-      let inputStep = document.createElement("input");
-      inputStep.type = "text";
-      inputStep.className = "steps-input";
-
-      col1.appendChild(inputStep);
-
-      container.appendChild(col1);
-      container.appendChild(emptyDiv);
     },
   },
 };
@@ -202,56 +169,19 @@ export default {
 
 <style>
 .add-btn {
-  width: 26px;
-  background-color: #e76c73;
-  border: 0px;
-  height: 26px;
-  margin-top: 5px;
-  margin-left: 0px;
+  width: 200px;
+  font-size: 15px;
   border-radius: 8px;
-  color: white;
-}
-.add-btn:hover {
-  width: 26px;
-  background-color: #e5536a;
+  padding: 5px;
+  background-color: #f7b981;
   border: 0px;
-  height: 26px;
-  margin-top: 5px;
-  margin-left: 0px;
-  border-radius: 8px;
+  margin: 0px;
   color: white;
   cursor: pointer;
-}
-
-.amount {
-  width: 50px;
-}
-.units {
-  width: 80px;
-  height: 35px;
-  margin-top: 3px;
-}
-.ingredients-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-}
-.ingredient-name {
-  width: 100px;
-}
-.grid-item {
-  justify-content: left;
-  margin-bottom: 10px;
-}
-.ingredients-container {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
 }
 .recipe-card {
   position: relative;
   top: 80px;
-  /* bottom: 100px; */
-  /* margin-top: 80px; */
-  /* margin-bottom: 100px; */
   margin: 0 auto 100px;
   align-self: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -262,57 +192,12 @@ export default {
   min-width: 360px;
   max-width: 360px;
 }
-.steps-container {
-  display: grid;
-  grid-template-columns: auto auto;
-}
-.steps-input {
-  width: 255px;
-}
-.subheader {
-  margin-top: 20px;
-  margin-bottom: -10px;
-}
-.upload-btn {
-  width: 150px;
-  font-size: 15px;
-  border-radius: 8px;
-  padding: 5px;
-  background-color: #f7b981;
-  border: 0px;
-  margin-bottom: 20px;
-  margin-top: 0px;
-  color: white;
-}
-.upload-btn:hover {
-  width: 150px;
-  font-size: 15px;
-  border-radius: 8px;
-  padding: 5px;
-  background-color: #ffa95d;
-  border: 0px;
-  margin-bottom: 20px;
-  margin-top: 0px;
-  color: white;
-}
 .submit-btn {
-  width: 150px;
-  font-size: 15px;
   border-radius: 8px;
-  padding: 5px;
-  background-color: #e76c73;
-  border: 0px;
-  margin: 0px;
-  color: white;
+  cursor: pointer;
 }
-.submit-btn:hover {
-  width: 150px;
-  font-size: 15px;
-  border-radius: 8px;
-  padding: 5px;
-  background-color: #E5536A;
-  border: 0px;
-  margin: 0px;
-  color: white;
+.margins {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 </style>
