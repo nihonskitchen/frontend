@@ -2,12 +2,12 @@
   <div>
     <dl>
       <dt>Barcode</dt>
-      <dd>{{ this.barcode }}</dd>
+      <dd>{{ this.barcode_data }}</dd>
       <dt>Name</dt>
-      <dd v-if="(this.product_name).length > 0">{{ this.product_name }}</dd>
+      <dd v-if="(this.ingredient_name) !== ''">{{ this.ingredient_name }}</dd>
       <dd v-else> - </dd>
       <dt>Description</dt>
-      <dd v-if="(this.description).length > 0">{{ this.description }}</dd>
+      <dd v-if="(this.description) !== ''">{{ this.description }}</dd>
       <dd v-else> - </dd>
     </dl>
   </div>
@@ -20,15 +20,15 @@ export default {
   ],
   data: function() {
     return{
-      barcode: "",
-      product_name: "",
+      barcode_data: "",
+      ingredient_name: "",
       description: ""
     }
   },
   mounted: function() {
     if (this.mode === "show") {
-      this.barcode = this.$store.state.barcode.details.barcode;
-      this.product_name = this.$store.state.barcode.details.product_name;
+      this.barcode_data = this.$store.state.barcode.details.barcode_data;
+      this.ingredient_name = this.$store.state.barcode.details.product_name;
       this.description = this.$store.state.barcode.details.description;
     } else {
       this.barcode = this.$store.state.barcode.newSubmit.barcode;

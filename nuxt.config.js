@@ -66,10 +66,10 @@ export default {
     proxy: true
   },
   proxy: {
-    "/barcode": {
+    "/barcode/": {
       target: envSet.apiBaseUrl,
       pathRewrite: {
-        "^/barcode": "/barcode"
+        "^/barcode/": "/barcode/"
       }
     },
     "/recipes": {

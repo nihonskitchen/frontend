@@ -15,7 +15,6 @@
         </form>
       </client-only>
       <div>
-        <!-- <input type="submit" id="submit-recipe" /> -->
         <button class="submit-btn" @click="submit">Submit Barcode</button>
         <nuxt-link to="/barcode">
           <button class="submit-btn">new scan</button>

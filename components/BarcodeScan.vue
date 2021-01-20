@@ -29,15 +29,15 @@ export default {
     async checkBarcode() {
       // DB問合せ
       const product = await this.$axios.$get(`/barcode/${this.code}`);
-      this.$store.commit('barcode/changeDetails', product);
+      this.$store.commit('barcode/changeDetails', product.data.ingredient);
 
       // DBにある場合とない場合、判定に何を使うか要確認
-      if (product.product_name !== '' || product.description !== '') {
-        this.$store.commit("barcode/setRequest", "PUT");
+      if (product.data.ingredient.ingredient_name !== '' || product.data.ingredient.description !== '') {
+        // this.$store.commit("barcode/setRequest", "PUT");
         this.$router.push("/barcode-result");
       } else {
         // ない場合
-        this.$store.commit("barcode/setRequest", "POST");
+        // this.$store.commit("barcode/setRequest", "POST");
         this.$router.push("/barcode-create");
       }
       // this.$emit("chActive");

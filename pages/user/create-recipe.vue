@@ -30,7 +30,8 @@
       <h2 class="margins">Ingredients</h2>
       <!-- <div>{{ recipe.ingredients }}</div> -->
       <div v-for="(ingredient, index) in recipe.ingredients" :key="ingredient">
-        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }} <button id="remove-btn" @click="removeIngredient(index)">x</button>
+        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+        <button id="remove-btn" @click="removeIngredient(index)">X</button>
       </div>
       <div>
         <input
@@ -57,8 +58,9 @@
       </div>
       <h2 class="margins">Steps</h2>
       <!-- <div>{{ recipe.steps }}</div> -->
-      <div v-for="step in recipe.steps" :key="step">
+      <div v-for="(step, index) in recipe.steps" :key="step">
         {{ step }}
+        <button id="remove-btn" @click="removeStep(index)">X</button>
       </div>
       <div>
         <input
@@ -105,6 +107,7 @@ export default {
       recipeID: null,
       selectedFile: null,
       recipe: {
+        userID: null,
         recipe_name: "",
         picture_url: "",
         time: "",
@@ -120,48 +123,58 @@ export default {
     };
   },
   methods: {
-    addNewRecipe() {
-      const db = firebase.firestore();
-      db.settings = { timestampsInSnapshops: true };
+    async addNewRecipe() {
+      this.recipe.userID = firebase.auth().currentUser.uid;
+      console.log("POST req sent", this.recipe);
+      await this.$axios.$post("/recipes", this.recipe)
+      .then((res) => {
+        this.$store.state.recipes.recipeID = res.createdRecipe.docID;
+        this.$router.push("/user/cookbook")
+      })
+      console.log("POST req completed");
+      // const db = firebase.firestore();
+      // db.settings = { timestampsInSnapshops: true };
 
-      const recipeCollection = db.collection("recipes");
-      this.recipe.picture_url = this.recipe.picture_url.replace('.*', '_500x500.jpg');
-      recipeCollection
-        .add(this.recipe)
-        .then((docRef) => {
-          this.recipeID = docRef.id;
-          console.log("Document written with ID: ", docRef.id);
-        })
-        .catch((error) => console.error("Error adding document: ", error));
+      // const recipeCollection = db.collection("recipes");
+      // this.recipe.picture_url = this.recipe.picture_url.replace('.*', '_500x500.jpg');
+      // recipeCollection
+      //   .add(this.recipe)
+      //   .then((docRef) => {
+      //     this.recipeID = docRef.id;
+      //     console.log("Document written with ID: ", docRef.id);
+      //   })
+      //   .catch((error) => console.error("Error adding document: ", error));
     },
     addNewIngredient() {
       this.recipe.ingredients.push(this.newIngredient);
       this.newIngredient = {};
     },
     removeIngredient(index) {
-      console.log("remove ingredient", index);
+      console.log("remove ingredient");
+      this.recipe.ingredients.splice(index, 1);
     },
     addNewStep() {
       this.recipe.steps.push(this.newStep);
       this.newStep = "";
     },
-    removeStep() {
-      console.log("remove step");
+    removeStep(index) {
+      console.log("remove step", index);
+      this.recipe.steps.splice(index, 1);
     },
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
     onUpload() {
-        console.log(this.selectedFile)
-        let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`
+      console.log(this.selectedFile);
+      let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`;
       firebase
         .storage()
         .ref(refPath)
         .put(this.selectedFile)
         .then(
-           () => {
+          () => {
             this.recipe.picture_url = refPath;
-            console.log("RECIPE =", this.recipe)
+            console.log("RECIPE =", this.recipe);
             alert("successfully uploaded");
           },
           (error) => {
@@ -198,6 +211,13 @@ export default {
   min-width: 360px;
   max-width: 360px;
 }
+#remove-btn {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 4px;
+}
 .submit-btn {
   border-radius: 8px;
   cursor: pointer;
@@ -206,11 +226,5 @@ export default {
   margin-top: 20px;
   margin-bottom: 10px;
 }
-#remove-btn {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  padding: 0px;
-  margin: 5px;
-}
 </style>
+

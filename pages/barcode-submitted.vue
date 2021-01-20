@@ -1,9 +1,9 @@
 <template>
   <div class="scan-container center-div">
     <div class="form-card">
-      <h2>Here is the barcode data.</h2>
+      <h2>The data registerd.</h2>
       <client-only>
-        <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" />
+        <!-- <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" /> -->
         <BarcodeData mode="show" />
       </client-only>
       <button @click="newScan">Scan a new barcode</button>
