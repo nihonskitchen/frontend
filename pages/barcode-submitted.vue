@@ -3,11 +3,9 @@
     <div class="form-card">
       <h2>The data registerd.</h2>
       <client-only>
-        <!-- <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" /> -->
         <BarcodeData mode="show" />
       </client-only>
       <button @click="newScan">Scan a new barcode</button>
-      <!-- <button v-if="this.$store.state.users.user !== null" @click="correctionData">Correct the barcode data</button> -->
     </div>
   </div>
 </template>
@@ -30,10 +28,6 @@ export default {
     newScan: function() {
       this.$store.commit("barcode/removeCode");
       this.$router.push("/barcode")
-    },
-    correctionData: function() {
-      this.$store.commit('barcode/removeImg');
-      this.$router.push("/barcode-correct")
     },
   },
 };

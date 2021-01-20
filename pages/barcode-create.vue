@@ -6,7 +6,7 @@
         <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" />
         <form action="">
           <label for="barcode">Barcode</label>
-          <input type="text" readonly :value="this.$store.state.barcode.details.barcode" />
+          <input type="text" readonly :value="this.$store.state.barcode.details.barcode_data" />
           <label for="product_name">Product Name</label>
           <input type="text" v-model="product_name" />
           <label for="description">Product description</label>
@@ -28,32 +28,34 @@
 import BarcodeImg from "../components/BarcodeImg.vue"
 
 export default {
-  middleware({ store, redirect }) {
-    if (!store.state.users.user) {
-      return redirect('/login')
-    }
-  },
   components: {
     BarcodeImg
   },
   data: function() {
     return {
-      barcode: this.$store.state.barcode.details.barcode,
+      barcode: this.$store.state.barcode.details.barcode_data,
       product_name: "",
       description: ""
     }
   },
   methods: {
-    submit() {
+    async submit() {
       const newProduct = {
-        barcode: this.barcode,
-        product_name: this.product_name,
-        description: this.description
+        barcode_data: this.barcode_data,
+        ingredient_name: this.ingredient_name,
+        description: this.description,
+        ingredient_id: ""
       }
+      // データをセット
       this.$store.commit("barcode/putNewData", newProduct);
-      this.$router.push("/barcode-submit");
+      // ポスト
+      const newBarcode = await this.$axios.$post(`/barcode/`, newProduct);
+      // details削除
+      this.$store.commit("barcode/removeCode");
+      // detailsをセット
+      this.$store.commit("barcode/changeDetails", newBarcode.data.ingredient);
+      this.$router.push("/barcode-submitted");
     },
-
   }
 };
 </script>
