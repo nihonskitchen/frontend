@@ -166,9 +166,9 @@ export default {
         .put(this.selectedFile)
         .then(
           () => {
-            this.recipe.picture_url = refPath;
+            this.recipe.picture_url = refPath.substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
             console.log("RECIPE =", this.recipe);
-            alert("successfully uploaded");
+            alert("Picture uploaded successfully!");
           },
           (error) => {
             console.log("error", error.message);
