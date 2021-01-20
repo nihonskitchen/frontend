@@ -114,19 +114,12 @@ export default {
     };
   },
   methods: {
-      async runboth() {
-          await function() {return this.addNewRecipe()}
-          await function() {return this.onUpload()}
-      },
     addNewRecipe() {
       const db = firebase.firestore();
       db.settings = { timestampsInSnapshops: true };
 
       const recipeCollection = db.collection("recipes");
-    //   console.log("recipe beforehand", this.recipe)
-      this.recipe.picture_url = this.recipe.picture_url.replace('.jpg', '_500x500.jpg');
-      console.log("URL", this.recipe.picture_url);
-
+      this.recipe.picture_url = this.recipe.picture_url.replace('.*', '_500x500.jpg');
       recipeCollection
         .add(this.recipe)
         .then((docRef) => {
@@ -159,11 +152,6 @@ export default {
         .storage()
         .ref(refPath)
         .put(this.selectedFile)
-        // .getDownloadURL()
-        // .then(function (url) {
-        //   //   this.recipe.picture_url = url;
-        //   console.log("URL =", url);
-        // })
         .then(
            () => {
             this.recipe.picture_url = refPath;
