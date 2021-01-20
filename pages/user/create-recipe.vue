@@ -107,6 +107,7 @@ export default {
       recipeID: null,
       selectedFile: null,
       recipe: {
+        userID: null,
         recipe_name: "",
         picture_url: "",
         time: "",
@@ -123,8 +124,13 @@ export default {
   },
   methods: {
     async addNewRecipe() {
-      console.log("POST req sent");
-      await this.$axios.$post("/recipes", this.recipe);
+      this.recipe.userID = firebase.auth().currentUser.uid;
+      console.log("POST req sent", this.recipe);
+      await this.$axios.$post("/recipes", this.recipe)
+      .then((res) => {
+        this.$store.state.recipes.recipeID = res.createdRecipe.docID;
+        this.$router.push("/user/cookbook")
+      })
       console.log("POST req completed");
       // const db = firebase.firestore();
       // db.settings = { timestampsInSnapshops: true };

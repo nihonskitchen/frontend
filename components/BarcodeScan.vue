@@ -32,7 +32,7 @@ export default {
       this.$store.commit('barcode/changeDetails', product.data.ingredient);
 
       // DBにある場合とない場合、判定に何を使うか要確認
-      if (product.product_name !== '' || product.description !== '') {
+      if (product.data.ingredient.ingredient_name !== '' || product.data.ingredient.description !== '') {
         // this.$store.commit("barcode/setRequest", "PUT");
         this.$router.push("/barcode-result");
       } else {

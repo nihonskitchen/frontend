@@ -1,7 +1,8 @@
 export const state = () => ({
   details: {
-    barcode: "",
-    product_name: "",
+    barcode_data: "",
+    ingredient_name: "",
+    ingredient_id: "",
     description: ""
   },
   scanImage: "",
