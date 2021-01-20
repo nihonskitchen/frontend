@@ -28,7 +28,10 @@
         />
       </div>
       <h2 class="margins">Ingredients</h2>
-      <div>{{ recipe.ingredients }}</div>
+      <!-- <div>{{ recipe.ingredients }}</div> -->
+      <div v-for="ingredient in recipe.ingredients" :key="ingredient">
+        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+      </div>
       <div>
         <input
           type="text"
@@ -53,7 +56,10 @@
         </button>
       </div>
       <h2 class="margins">Steps</h2>
-      <div>{{ recipe.steps }}</div>
+      <!-- <div>{{ recipe.steps }}</div> -->
+      <div v-for="step in recipe.steps" :key="step">
+        {{ step }}
+      </div>
       <div>
         <input
           id="step"
