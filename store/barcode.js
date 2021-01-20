@@ -5,8 +5,8 @@ export const state = () => ({
     description: ""
   },
   scanImage: "",
-  newSubmit: {},
-  reqType: ""
+  newSubmit: {}
+  // reqType: ""
   // isData: false,
 });
 

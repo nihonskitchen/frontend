@@ -15,6 +15,10 @@
         "destination": "https://nihons-kitchen-server.an.r.appspot.com/api/barcode/:barcode",
         "type": 302
       }, {
+        "source": "/recipes",
+        "destination": "https://nihons-kitchen-server.an.r.appspot.com/api/recipes",
+        "type": 302
+      }, {
         "source": "/recipes/:id",
         "destination": "https://nihons-kitchen-server.an.r.appspot.com/api/recipes/:id",
         "type": 302

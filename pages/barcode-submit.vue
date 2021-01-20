@@ -33,6 +33,7 @@ export default {
   methods: {
     async resister() {
       this.confirm = false;
+      await this.$axios.$post(`/barcode/${this.$store.state.barcode.newSubmit.barcode}`);
       // サーバへ送信
       if (this.reqType === "POST") {
         await this.$axios.$post(`/barcode/${this.$store.state.barcode.newSubmit.barcode}`);

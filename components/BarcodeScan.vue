@@ -33,11 +33,11 @@ export default {
 
       // DBにある場合とない場合、判定に何を使うか要確認
       if (product.product_name !== '' || product.description !== '') {
-        this.$store.commit("barcode/setRequest", "PUT");
+        // this.$store.commit("barcode/setRequest", "PUT");
         this.$router.push("/barcode-result");
       } else {
         // ない場合
-        this.$store.commit("barcode/setRequest", "POST");
+        // this.$store.commit("barcode/setRequest", "POST");
         this.$router.push("/barcode-create");
       }
       // this.$emit("chActive");

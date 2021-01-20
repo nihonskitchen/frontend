@@ -30,7 +30,7 @@
       <h2 class="margins">Ingredients</h2>
       <!-- <div>{{ recipe.ingredients }}</div> -->
       <div v-for="(ingredient, index) in recipe.ingredients" :key="ingredient">
-        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }} <button id="remove-btn" @click="removeIngredient(index)">x</button>
+        {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }} <button id="remove-btn" @click="removeIngredient(index)">X</button>
       </div>
       <div>
         <input
@@ -120,26 +120,30 @@ export default {
     };
   },
   methods: {
-    addNewRecipe() {
-      const db = firebase.firestore();
-      db.settings = { timestampsInSnapshops: true };
+    async addNewRecipe() {
 
-      const recipeCollection = db.collection("recipes");
-      this.recipe.picture_url = this.recipe.picture_url.replace('.*', '_500x500.jpg');
-      recipeCollection
-        .add(this.recipe)
-        .then((docRef) => {
-          this.recipeID = docRef.id;
-          console.log("Document written with ID: ", docRef.id);
-        })
-        .catch((error) => console.error("Error adding document: ", error));
+      console.log("POST req sent")
+      await this.$axios.$post(("/recipes"), this.recipe)
+      console.log("POST req completed")
+      // const db = firebase.firestore();
+      // db.settings = { timestampsInSnapshops: true };
+
+      // const recipeCollection = db.collection("recipes");
+      // this.recipe.picture_url = this.recipe.picture_url.replace('.*', '_500x500.jpg');
+      // recipeCollection
+      //   .add(this.recipe)
+      //   .then((docRef) => {
+      //     this.recipeID = docRef.id;
+      //     console.log("Document written with ID: ", docRef.id);
+      //   })
+      //   .catch((error) => console.error("Error adding document: ", error));
     },
     addNewIngredient() {
       this.recipe.ingredients.push(this.newIngredient);
       this.newIngredient = {};
     },
     removeIngredient(index) {
-      console.log("remove ingredient", index);
+      console.log("remove ingredient");
     },
     addNewStep() {
       this.recipe.steps.push(this.newStep);
@@ -198,6 +202,13 @@ export default {
   min-width: 360px;
   max-width: 360px;
 }
+#remove-btn {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin: 5px;
+  border-radius: 4px;
+}
 .submit-btn {
   border-radius: 8px;
   cursor: pointer;
@@ -206,11 +217,5 @@ export default {
   margin-top: 20px;
   margin-bottom: 10px;
 }
-#remove-btn {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  padding: 0px;
-  margin: 5px;
-}
 </style>
+
