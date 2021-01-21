@@ -2,15 +2,12 @@
   <div>
     <h1>My Recipes</h1>
     <div
-      v-for="recipe in this.allRecipes"
-      :key="recipe.doc_id"
+      v-for="(recipe, index) in this.allRecipes"
+      :key="index"
       class="card column"
     >
       <div class="recipe-inner">
-        <!-- <img
-              :src="getRecipePic(recipe.picture_url)"
-              alt=""
-            /> -->
+        <img :src="recipe.picture_url" alt="" />
       </div>
       <div class="detail">
         <h3>
@@ -20,6 +17,7 @@
           {{ recipe.owner_comment }}
         </p>
       </div>
+      <!-- <img :src="picture_url" alt=""> -->
     </div>
   </div>
 </template>
@@ -30,49 +28,49 @@ import "firebase/auth";
 
 export default {
   mounted() {
-    this.getUserRecipes();
-    this.getRecipePic();
+    // this.getUserRecipes();
+    // this.getRecipePic();
     // this.getUserID();
+    this.getMyRecipes();
   },
   data() {
     return {
       allRecipes: null,
-      picture_url: null,
+      picture_url: [],
       userID: null,
     };
   },
   methods: {
-    async getUserRecipes() {
-      console.log("userID =", this.userID)
-      await this.getUserID();
-      await this.$axios
-        .$get(`/recipes/uid/${this.userID}`)
-        .then(
-          (res) => {
-            this.allRecipes = res.data.recipes;
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-      console.log("allRecipes =", this.allRecipes);
+    getUserRecipes() {
+      // console.log("userID =", this.userID);
+      this.getUserID()
+      .then(this.$axios.$get(`/recipes/uid/${this.userID}`).then((res) => {
+        this.allRecipes = res.data.recipes;
+      }))
+      
     },
-    // passRecipeData(id) {
-    //   this.$store.commit("recipes/showRecipeDetails", id);
-    //   console.log(id);
-    // },
-    async getRecipePic(val) {
-      let ref = firebase.storage().ref().child(val);
-      await ref.getDownloadURL()
-      .then((url) => {
-        return url
-        // return this.picture_url
-      })
+    getMyRecipes() {
+      Promise.all([getUserRecipes, getRecipePic]).then((res) => res);
     },
     getUserID() {
       this.userID = firebase.auth().currentUser.uid;
-      console.log(this.userID)
-    }
+      console.log(this.userID);
+    },
+    getRecipePic() {
+      let ref = firebase.storage().ref();
+      console.log("GET RECIPE PIC");
+      if (this.allRecipes !== null) {
+        this.allRecipes.map((element) => {
+          // this.picture_url.push(element.picture_url)
+          // console.log("ELEMENT =", element);
+          element.picture_url = ref.child(element.picture_url).getDownloadURL();
+        });
+        // this.picture_url.map(element => {
+        //   element = ref.child(element).getDownloadURL();
+        // })
+      }
+      console.log(this.allRecipes);
+    },
   },
 };
 </script>

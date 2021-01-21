@@ -9,6 +9,25 @@
     <div class="home-page">
       <div
         class="card column"
+        v-for="recipe in this.recipes"
+        :key="recipe.doc_id"
+      >
+        <nuxt-link to="/recipe-details">
+          <div class="recipe-inner" @click="passRecipeData(recipe.doc_id)">
+              <img
+                :src="require(`${recipe.picture_url}`)"
+                alt=""
+              />
+            <p>{{ recipe.recipe_name }}</p>
+            <p>{{ recipe.owner_comment }}</p>
+            <p>TIME: {{ recipe.owner_comment }}</p>
+          </div>
+        </nuxt-link>
+      </div>
+
+
+      <!-- <div
+        class="card column"
         v-for="recipe in this.$store.state.recipes.recipes"
         :key="recipe.recipe_id"
       >
@@ -28,21 +47,65 @@
             </p>
           </div>
         </nuxt-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
+import $axios from "@nuxtjs/axios";
+
 export default {
+  asyncData(){
+    return{
+      title: "Nihon's Kitchen"
+    }
+  },
+  head(){
+    return {
+      title: this.title
+    }
+  },
+  data(){
+    return {
+      recipes: []
+    }
+  },
   mounted() {
-    this.$store.commit("recipes/getCardDetails");
+    try {
+      this.getRecipes();
+    } catch (err) {
+      console.log(err);
+      this.$store.commit("recipes/getCardDetails");
+    }
   },
   methods: {
+    async getRecipes() {
+      console.log("done"); 
+      const response = await this.$axios.get("/recipes", { responseType: "json" })
+      // this.recipes = response.data.data.recipes;
+      const recipeCards = [];      
+      for (const i of response.data.data.recipes) {
+        // console.log(i);
+        this.recipes.push(i);
+      }
+      // this.recipes = recipeCards
+      console.log(this.recipes);
+      // console.log(this.recipes);
+    },
     passRecipeData(id) {
       this.$store.commit("recipes/showRecipeDetails", id);
       console.log(id);
     },
+
+    img() {
+      var storage = firebase.storage();
+      var pathReference = storage.ref('code128_360x200.jpg');
+      var gsReference = storage.refFromURL('gs://bucket/code128_360x200.jpg');
+      // Create a reference from an HTTPS URL
+// Note that in the URL, characters are URL escaped!
+var httpsReference = storage.refFromURL('gs://nihonskitchen.appspot.com/code128_360x200.jpg');
+    }
   },
 };
 </script>
