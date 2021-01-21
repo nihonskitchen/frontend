@@ -8,6 +8,7 @@
           type="text"
           placeholder="Dish name"
           v-model="recipe.recipe_name"
+          maxlength="30"
           required
         />
       </div>
@@ -16,6 +17,7 @@
           type="text"
           placeholder="Prep time (in minutes)"
           v-model="recipe.time"
+          maxlength="3"
           required
         />
       </div>
@@ -24,6 +26,16 @@
           type="text"
           placeholder="Number of servings"
           v-model="recipe.servings"
+          maxlength="3"
+          required
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          placeholder="Short recipe description"
+          v-model="recipe.owner_comment"
+          maxlength="100"
           required
         />
       </div>
@@ -38,11 +50,13 @@
           type="text"
           placeholder="Ingredient name (Example: mirin)"
           v-model="newIngredient.name"
+          maxlength="50"
         />
         <input
           type="text"
           placeholder="Ingredient amount (Example: 200)"
           v-model="newIngredient.amount"
+          maxlength="4"
         />
         <label for="units">Measurement:</label>
         <select name="unit" id="unit" class="unit" v-model="newIngredient.unit">
@@ -68,6 +82,7 @@
           type="text"
           placeholder="Example: Add water"
           v-model="newStep"
+          maxlength="75"
         />
       </div>
       <div>
@@ -99,6 +114,9 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
+  mounted() {
+    this.getUserID();
+  },
   data() {
     return {
       unit_options: ["slice", "pinch", "gram", "ml", "piece"],
@@ -107,7 +125,7 @@ export default {
       recipeID: null,
       selectedFile: null,
       recipe: {
-        userID: null,
+        user_id: null,
         recipe_name: "",
         picture_url: "",
         time: "",
@@ -124,26 +142,12 @@ export default {
   },
   methods: {
     async addNewRecipe() {
-      this.recipe.userID = firebase.auth().currentUser.uid;
       console.log("POST req sent", this.recipe);
       await this.$axios.$post("/recipes", this.recipe)
       .then((res) => {
-        this.$store.state.recipes.recipeID = res.createdRecipe.docID;
         this.$router.push("/user/cookbook")
       })
       console.log("POST req completed");
-      // const db = firebase.firestore();
-      // db.settings = { timestampsInSnapshops: true };
-
-      // const recipeCollection = db.collection("recipes");
-      // this.recipe.picture_url = this.recipe.picture_url.replace('.*', '_500x500.jpg');
-      // recipeCollection
-      //   .add(this.recipe)
-      //   .then((docRef) => {
-      //     this.recipeID = docRef.id;
-      //     console.log("Document written with ID: ", docRef.id);
-      //   })
-      //   .catch((error) => console.error("Error adding document: ", error));
     },
     addNewIngredient() {
       this.recipe.ingredients.push(this.newIngredient);
@@ -156,6 +160,10 @@ export default {
     addNewStep() {
       this.recipe.steps.push(this.newStep);
       this.newStep = "";
+    },
+    getUserID() {
+      this.recipe.user_id = firebase.auth().currentUser.uid;
+      console.log("USER ID =", this.recipe.user_id);
     },
     removeStep(index) {
       console.log("remove step", index);
@@ -173,9 +181,9 @@ export default {
         .put(this.selectedFile)
         .then(
           () => {
-            this.recipe.picture_url = refPath;
+            this.recipe.picture_url = refPath.substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
             console.log("RECIPE =", this.recipe);
-            alert("successfully uploaded");
+            alert("Picture uploaded successfully!");
           },
           (error) => {
             console.log("error", error.message);
