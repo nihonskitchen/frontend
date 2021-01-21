@@ -6,9 +6,9 @@
       :key="recipe.doc_id"
       class="card column"
     >
-      <div class="recipe-inner">
+      <div class="recipe-inner" @click="passRecipeData(recipe.recipe_id)">
         <img
-              :src="recipe.picture_url"
+              :src="getRecipePic(recipe.picture_url)"
               alt=""
             />
       </div>
@@ -31,10 +31,12 @@ import "firebase/auth";
 export default {
   mounted() {
     this.getUserRecipes();
+    this.getRecipePic();
   },
   data() {
     return {
       allRecipes: null,
+      picture_url: null
     };
   },
   methods: {
@@ -51,6 +53,18 @@ export default {
         );
       console.log(this.allRecipes);
     },
+    passRecipeData(id) {
+      this.$store.commit("recipes/showRecipeDetails", id);
+      console.log(id);
+    },
+    async getRecipePic(val) {
+      let ref = firebase.storage().ref().child(val);
+      await ref.getDownloadURL()
+      .then((url) => {
+        return url
+        // return this.picture_url
+      })
+    }
   },
 };
 </script>
