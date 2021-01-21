@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     async getUserRecipes() {
+      console.log("userID =", this.userID)
       await this.getUserID();
       await this.$axios
         .$get(`/recipes/uid/${this.userID}`)
@@ -54,7 +55,7 @@ export default {
             console.log(err);
           }
         );
-      console.log(this.allRecipes);
+      console.log("allRecipes =", this.allRecipes);
     },
     // passRecipeData(id) {
     //   this.$store.commit("recipes/showRecipeDetails", id);
