@@ -7,10 +7,10 @@
       class="card column"
     >
       <div class="recipe-inner">
-        <img
-              :src="recipe.picture_url"
+        <!-- <img
+              :src="getRecipePic(recipe.picture_url)"
               alt=""
-            />
+            /> -->
       </div>
       <div class="detail">
         <h3>
@@ -31,16 +31,21 @@ import "firebase/auth";
 export default {
   mounted() {
     this.getUserRecipes();
+    this.getRecipePic();
+    // this.getUserID();
   },
   data() {
     return {
       allRecipes: null,
+      picture_url: null,
+      userID: null,
     };
   },
   methods: {
     async getUserRecipes() {
+      await this.getUserID();
       await this.$axios
-        .$get(`/recipes/uid/${firebase.auth().currentUser.uid}`)
+        .$get(`/recipes/uid/${this.userID}`)
         .then(
           (res) => {
             this.allRecipes = res.data.recipes;
@@ -51,6 +56,22 @@ export default {
         );
       console.log(this.allRecipes);
     },
+    // passRecipeData(id) {
+    //   this.$store.commit("recipes/showRecipeDetails", id);
+    //   console.log(id);
+    // },
+    async getRecipePic(val) {
+      let ref = firebase.storage().ref().child(val);
+      await ref.getDownloadURL()
+      .then((url) => {
+        return url
+        // return this.picture_url
+      })
+    },
+    getUserID() {
+      this.userID = firebase.auth().currentUser.uid;
+      console.log(this.userID)
+    }
   },
 };
 </script>

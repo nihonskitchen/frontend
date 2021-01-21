@@ -1,5 +1,13 @@
 # nihonskitchen-frontend
 
+## Staging Server
+
+https://nihonskitchen.web.app
+
+## Production Server 
+
+https://nihonskitchen-prod.web.app
+
 ## Build Setup
 
 ```bash

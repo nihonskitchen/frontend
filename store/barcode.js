@@ -45,34 +45,6 @@ export const mutations = {
   setRequest(state, req) {
     state.reqType = req;
   },
-
-  // isDataToggle(state, bool) {
-  //   state.isData = bool;
-  // },
-  // this.$store.state.barcode.details
-  // showDetails(state, text) {
-  //   state.details = text;
-
-  //   return state.details;
-  // },
-
-  // addJancode(state, barcode) {
-  //   console.log("JANCODE =", barcode);
-  //   // this.set(state.newSubmission, jancode, barcode);
-  //   state.newSubmission = barcode;
-  //   // state.newSubmission.jancode = barcode;
-  // },
-
-  // resetBarcode(state) {
-  //   state.details = Object.assign({}, state.details, {
-  //     jancode: "",
-  //     front_pic: "",
-  //     back_pic: "",
-  //   });
-  // },
-  // toggle(state, barcode) {
-  //   barcode.done = !barcode.done;
-  // }
 };
 
 // need add() and update()
