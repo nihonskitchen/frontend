@@ -1,12 +1,12 @@
 <template>
   <div>
     <dl>
-      <dt>Barcode</dt>
+      <dt>Barcode:</dt>
       <dd>{{ this.barcode_data }}</dd>
-      <dt>Name</dt>
+      <dt>Name:</dt>
       <dd v-if="(this.ingredient_name) !== ''">{{ this.ingredient_name }}</dd>
       <dd v-else> - </dd>
-      <dt>Description</dt>
+      <dt>Description:</dt>
       <dd v-if="(this.description) !== ''">{{ this.description }}</dd>
       <dd v-else> - </dd>
     </dl>
