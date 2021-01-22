@@ -44,10 +44,8 @@ export default {
         })
         .then((res) => res.data.recipes)
         .then((data) => {
-          // console.log(data);
           data.map((element) => {
             this.allRecipes.push(element);
-            console.log("allRecipes =", this.allRecipes);
           });
         })
         .then(async () => {
@@ -57,14 +55,9 @@ export default {
               .child(element.picture_url)
               .getDownloadURL()
               .then((url) => (element.picture_url = url));
-            // this.picture_url.push(
-            //   ref.child(element.picture_url).getDownloadURL()
-            // );
-            console.log("element", element.picture_url);
           });
           return this.allRecipes;
         });
-      // .then(this.$nuxt.refresh())
     },
   },
 };
