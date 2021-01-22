@@ -1,4 +1,4 @@
-# nihonskitchen-frontend
+# Nihon's Kitchen (Front End)
 
 ## Staging Server
 
