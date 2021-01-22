@@ -7,10 +7,10 @@
       class="card column"
     >
       <div class="recipe-inner">
-        <!-- <img
-              :src="getRecipePic(recipe.picture_url)"
+        <img
+              :src="recipe.picture_url"
               alt=""
-            /> -->
+            />
       </div>
       <div class="detail">
         <h3>
@@ -30,48 +30,40 @@ import "firebase/auth";
 
 export default {
   mounted() {
-    this.getUserRecipes();
-    this.getRecipePic();
-    // this.getUserID();
+    // this.getAllData();
   },
   data() {
     return {
-      allRecipes: null,
-      picture_url: null,
+      allRecipes: [],
+      retVal: [],
       userID: null,
     };
   },
   methods: {
-    async getUserRecipes() {
-      console.log("userID =", this.userID)
-      await this.getUserID();
-      await this.$axios
-        .$get(`/recipes/uid/${this.userID}`)
-        .then(
-          (res) => {
-            this.allRecipes = res.data.recipes;
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
-      console.log("allRecipes =", this.allRecipes);
-    },
-    // passRecipeData(id) {
-    //   this.$store.commit("recipes/showRecipeDetails", id);
-    //   console.log(id);
-    // },
-    async getRecipePic(val) {
-      let ref = firebase.storage().ref().child(val);
-      await ref.getDownloadURL()
-      .then((url) => {
-        return url
-        // return this.picture_url
+    getAllData() {
+      Promise.all(this.userID = firebase.auth().currentUser.uid)
+      .then(() => {
+         return this.$axios.$get(`/recipes/uid/${this.userID}`)
+
+        })
+      .then((res) => res.data.recipes)
+      .then((data) => {
+        // console.log(data);
+        data.map(element => {
+          this.allRecipes.push(element)
+          console.log("allRecipes =", this.allRecipes)
+        })
       })
-    },
-    getUserID() {
-      this.userID = firebase.auth().currentUser.uid;
-      console.log(this.userID)
+      .then(() => {
+        let ref = firebase.storage().ref();
+        this.allRecipes.map(element => {
+          element.picture_url = ref.child(element.picture_url).getDownloadURL()
+          // this.picture_url.push(ref.child(element.picture_url).getDownloadURL())
+          // console.log("element", element.picture_url)
+        });
+        return this.allRecipes;
+      })
+      // .then(this.$nuxt.refresh())
     }
   },
 };
