@@ -2,8 +2,8 @@
   <div>
     <h1>My Recipes</h1>
     <div
-      v-for="(recipe, index) in this.allRecipes"
-      :key="index"
+      v-for="recipe in this.allRecipes"
+      :key="recipe.doc_id"
       class="card column"
     >
       <div class="recipe-inner">
@@ -17,7 +17,6 @@
           {{ recipe.owner_comment }}
         </p>
       </div>
-      <!-- <img :src="picture_url" alt=""> -->
     </div>
   </div>
 </template>
@@ -25,51 +24,39 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
-
 export default {
   mounted() {
-    // this.getUserRecipes();
-    // this.getRecipePic();
-    // this.getUserID();
-    this.getMyRecipes();
+    this.getAllData();
   },
   data() {
     return {
-      allRecipes: null,
-      picture_url: [],
+      allRecipes: [],
+      retVal: [],
       userID: null,
     };
   },
   methods: {
-    getUserRecipes() {
-      // console.log("userID =", this.userID);
-      this.getUserID()
-      .then(this.$axios.$get(`/recipes/uid/${this.userID}`).then((res) => {
-        this.allRecipes = res.data.recipes;
-      }))
-      
-    },
-    getMyRecipes() {
-      Promise.all([getUserRecipes, getRecipePic]).then((res) => res);
-    },
-    getUserID() {
-      this.userID = firebase.auth().currentUser.uid;
-      console.log(this.userID);
-    },
-    getRecipePic() {
-      let ref = firebase.storage().ref();
-      console.log("GET RECIPE PIC");
-      if (this.allRecipes !== null) {
-        this.allRecipes.map((element) => {
-          // this.picture_url.push(element.picture_url)
-          // console.log("ELEMENT =", element);
-          element.picture_url = ref.child(element.picture_url).getDownloadURL();
+    getAllData() {
+      Promise.all((this.userID = firebase.auth().currentUser.uid))
+        .then(() => {
+          return this.$axios.$get(`/recipes/uid/${this.userID}`);
+        })
+        .then((res) => res.data.recipes)
+        .then((data) => {
+          data.map((element) => {
+            this.allRecipes.push(element);
+          });
+        })
+        .then(async () => {
+          let ref = firebase.storage().ref();
+          this.allRecipes.map((element) => {
+            ref
+              .child(element.picture_url)
+              .getDownloadURL()
+              .then((url) => (element.picture_url = url));
+          });
+          return this.allRecipes;
         });
-        // this.picture_url.map(element => {
-        //   element = ref.child(element).getDownloadURL();
-        // })
-      }
-      console.log(this.allRecipes);
     },
   },
 };
