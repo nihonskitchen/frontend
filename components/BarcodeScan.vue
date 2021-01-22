@@ -27,6 +27,15 @@ export default {
   },
   methods: {
     async checkBarcode() {
+      try {
+        const product = await this.$axios.$get(`/barcode/${this.code}`);
+        this.$store.commit('barcode/changeDetails', product.data.ingredient);
+
+      } catch (err) {
+        console.log("errorが出ました");
+        console.log(err);
+
+      }
       // DB問合せ
       const product = await this.$axios.$get(`/barcode/${this.code}`);
       this.$store.commit('barcode/changeDetails', product.data.ingredient);
