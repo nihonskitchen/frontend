@@ -7,7 +7,27 @@
       <h2>Welcome to the latest recipes in Japan!</h2>
     </div>
     <div class="home-page">
-      <button @click="img">button</button>
+      <div
+      v-for="(recipe, index) in this.recipes"
+      :key="index"
+      class="card column"
+    >
+      <div class="recipe-inner">
+        <img :src="recipe.picture_url" alt="" />
+      </div>
+      <div class="detail">
+        <h3>
+          {{ recipe.recipe_name }}
+        </h3>
+        <p>
+          {{ recipe.owner_comment }}
+        </p>
+      </div>
+    </div>
+
+
+
+      <!-- <button @click="img">button</button>
       <div
         class="card column"
         v-for="recipe in this.recipes"
@@ -16,16 +36,12 @@
         <nuxt-link to="/recipe-details">
           <div class="recipe-inner" @click="passRecipeData(recipe.doc_id)">
             
-              <!-- <img
-                :src="require(`nihonskitchen.appspot.com/${recipe.picture_url}`)"
-                alt=""
-              /> -->
             <p>{{ recipe.recipe_name }}</p>
             <p>{{ recipe.owner_comment }}</p>
             <p>TIME: {{ recipe.owner_comment }}</p>
           </div>
         </nuxt-link>
-      </div>
+      </div> -->
 
 
       <!-- <div
@@ -55,7 +71,7 @@
 </template>
 
 <script>
-import $axios from "@nuxtjs/axios";
+// import axios from "@nuxtjs/axios";
 import firebase from "firebase";
 
 export default {
@@ -69,104 +85,48 @@ export default {
       title: this.title
     }
   },
-  data(){
+  data() {
     return {
-      recipes: [],
-      imgdata: []
-      
-    }
+      recipes: []
+    };
   },
   mounted() {
     try {
       this.getRecipes();
     } catch (err) {
+      console.log("error");
       console.log(err);
-      this.$store.commit("recipes/getCardDetails");
+      // this.$store.commit("recipes/getCardDetails");
     }
   },
   methods: {
-    async getRecipes() {
-      console.log("done"); 
-      const response = await this.$axios.get("/recipes", { responseType: "json" })
-      // this.recipes = response.data.data.recipes;
-      const recipeCards = [];      
-      for (const i of response.data.data.recipes) {
-        // console.log(i);
-        this.recipes.push(i);
-      }
-      // this.recipes = recipeCards
-      console.log(this.recipes);
-      // console.log(this.recipes);
+    getRecipes() {
+      // I don't know why variable of "this" to refer is need....
+      let self = this;
+      // this.$axios.get("/recipes") -> res.data.data.recipes
+      this.$axios.$get("/recipes")
+        .then((res) => res.data.recipes)
+        .then((data) => {
+          data.map((element) => {
+            self.recipes.push(element);
+          });
+        })
+        .then(async () => {
+          let ref = firebase.storage().ref();
+          self.recipes.map((element) => {
+            ref
+              .child(element.picture_url)
+              .getDownloadURL()
+              .then((url) => (element.picture_url = url));
+          });
+          // console.log(self.recipes);
+          return self.recipes;
+        });
     },
     passRecipeData(id) {
       this.$store.commit("recipes/showRecipeDetails", id);
       console.log(id);
     },
-
-   img() {
-      let storage = firebase.storage();
-      var storageRef = storage.ref();
-      var imagesRef = storageRef.child('recipes/CmajJru8j4gtt2UunbqWvKSblwb2');
-      console.log(imagesRef);
-      imagesRef.listAll().then(res => {
-        console.log("res.items");
-        console.log(res.items);
-        res.items[0].getDownloadURL().then(url => console.log(`URL: ${url}`));
-      })
-      var imgFirestoreRef = imagesRef.child('melon_500x500.jpg');
-
-      // ファイルのURLを取得する
-      imgFirestoreRef.getDownloadURL().then(function(url){
-        console.log("url");
-        console.log(url);
-
-        // var image = document.getElementById("imageFirestore");
-        // image.style.backgroundImage = "url("+url+")";
-        // document.getElementById('filename1').innerHTML = '<a href="' + url + '">' + imgFirestoreRef.name + '</a>';
-      }).catch(function(error) {
-        // document.getElementById('filename2').innerHTML = error.message;
-        // console.log(error);
-      });
-
-      // 下記二つは同じもの
-      // let pathReference = storage.refFromURL("gs://nihonskitchen.appspot.com").child("recipes").child("CmajJru8j4gtt2UunbqWvKSblwb2");
-      // let pathReference = storage.refFromURL("gs://nihonskitchen.appspot.com").child("recipes").child("CmajJru8j4gtt2UunbqWvKSblwb2");
-      // let list = storage.ref("recipes/CmajJru8j4gtt2UunbqWvKSblwb2");
-      // // console.log(pathReference);
-      // console.log(list);
-
-      // list.listAll().then(function(res) {
-      //   console.log(res);
-      //   console.log("items");
-      //   console.log(res.items[0]);
-      //   // res.prefixes.forEach(function(folderRef) {
-      //   //   // All the prefixes under listRef.
-      //   //   // You may call listAll() recursively on them.
-      //   // });
-      //   // res.items.forEach(function(itemRef) {
-      //   //   // All the items under listRef.
-      //   // });
-      // }).catch(function(error) {
-      //   // Uh-oh, an error occurred!
-      // });
-
-      // list.once('value', (snapshot) => {
-      //   snapshot.forEach((childSnapshot) => {
-      //     var childKey = childSnapshot.key;
-      //     var childData = childSnapshot.val();
-      //     console.log(childKey);
-      //     console.log(childData);
-      //   });
-      // });
-
-
-      // var gsReference = storage.refFromURL('gs://bucket/code128_360x200.jpg');
-      //   //StorageのURLを参照
-      //   let storageref = Storage.storage().reference(forURL: "gs://nihonskitchen.appspot.com").child("Recipes");
-      //   //画像をセット
-      //   imageView.sd_setImage(with: storageref)
-   }
-
   },
 };
 </script>
