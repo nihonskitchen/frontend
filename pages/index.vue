@@ -8,6 +8,43 @@
     </div>
     <div class="home-page">
       <div
+      v-for="(recipe, index) in this.recipes"
+      :key="index"
+      class="card column"
+    >
+      <div class="recipe-inner">
+        <img :src="recipe.picture_url" alt="" />
+      </div>
+      <div class="detail">
+        <h3>
+          {{ recipe.recipe_name }}
+        </h3>
+        <p>
+          {{ recipe.owner_comment }}
+        </p>
+      </div>
+    </div>
+
+
+
+      <!-- <button @click="img">button</button>
+      <div
+        class="card column"
+        v-for="recipe in this.recipes"
+        :key="recipe.doc_id"
+      >
+        <nuxt-link to="/recipe-details">
+          <div class="recipe-inner" @click="passRecipeData(recipe.doc_id)">
+            
+            <p>{{ recipe.recipe_name }}</p>
+            <p>{{ recipe.owner_comment }}</p>
+            <p>TIME: {{ recipe.owner_comment }}</p>
+          </div>
+        </nuxt-link>
+      </div> -->
+
+
+      <!-- <div
         class="card column"
         v-for="recipe in this.$store.state.recipes.recipes"
         :key="recipe.recipe_id"
@@ -28,17 +65,64 @@
             </p>
           </div>
         </nuxt-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
+// import axios from "@nuxtjs/axios";
+import firebase from "firebase";
+
 export default {
+  asyncData(){
+    return{
+      title: "Nihon's Kitchen"
+    }
+  },
+  head(){
+    return {
+      title: this.title
+    }
+  },
+  data() {
+    return {
+      recipes: []
+    };
+  },
   mounted() {
-    this.$store.commit("recipes/getCardDetails");
+    try {
+      this.getRecipes();
+    } catch (err) {
+      console.log("error");
+      console.log(err);
+      // this.$store.commit("recipes/getCardDetails");
+    }
   },
   methods: {
+    getRecipes() {
+      // I don't know why variable of "this" to refer is need....
+      let self = this;
+      // this.$axios.get("/recipes") -> res.data.data.recipes
+      this.$axios.$get("/recipes")
+        .then((res) => res.data.recipes)
+        .then((data) => {
+          data.map((element) => {
+            self.recipes.push(element);
+          });
+        })
+        .then(async () => {
+          let ref = firebase.storage().ref();
+          self.recipes.map((element) => {
+            ref
+              .child(element.picture_url)
+              .getDownloadURL()
+              .then((url) => (element.picture_url = url));
+          });
+          // console.log(self.recipes);
+          return self.recipes;
+        });
+    },
     passRecipeData(id) {
       this.$store.commit("recipes/showRecipeDetails", id);
       console.log(id);

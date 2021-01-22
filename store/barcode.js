@@ -6,6 +6,7 @@ export const state = () => ({
     description: ""
   },
   scanImage: "",
+  barcode_data: "",
   newSubmit: {}
   // reqType: ""
   // isData: false,
@@ -18,7 +19,7 @@ export const getters = () => ({
 export const mutations = {
   // 読み取ったバーコードをsave
   addCode(state, code) {
-    state.code = code;
+    state.barcode_data = code;
   },
   addImg(state, src) {
     state.scanImage = src;

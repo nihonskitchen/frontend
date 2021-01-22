@@ -8,7 +8,8 @@ export const state = () => ({
       "amount": "12",
       "units": "ounces",
       "barcode_data": "",
-      "itemUrl": "https://item.rakuten.co.jp/premium-deli/porkbellys/"
+      "itemUrl": "https://search.rakuten.co.jp/search/mall/ground+pork/100227/?st=O"
+      // "itemUrl": "https://item.rakuten.co.jp/premium-deli/porkbellys/"
     },
     {
       "ingredient_id": "002",
@@ -16,7 +17,8 @@ export const state = () => ({
       "amount": "1",
       "units": "head",
       "barcode_data": "",
-      "itemUrl": "https://item.rakuten.co.jp/kyunan/veg-kyabetu/"
+      "itemUrl": "https://search.rakuten.co.jp/search/mall/cabbage/100227/?st=O"
+      // "itemUrl": "https://item.rakuten.co.jp/kyunan/veg-kyabetu/"
     },
     {
       "ingredient_id": "003",
@@ -24,7 +26,8 @@ export const state = () => ({
       "amount": "1",
       "units": "",
       "barcode_data": "",
-      "itemUrl": "https://item.rakuten.co.jp/ajinomoto/r4901001052400/"
+      "itemUrl": "https://search.rakuten.co.jp/search/mall/egg/100227/?st=O"
+      // "itemUrl": "https://item.rakuten.co.jp/ajinomoto/r4901001052400/"
     },
     {
       "ingredient_id": "004",
@@ -32,7 +35,8 @@ export const state = () => ({
       "amount": "2",
       "units": "sliced",
       "barcode_data": "",
-      "itemUrl": "https://item.rakuten.co.jp/e-sbfoods/89593/"
+      "itemUrl": "https://search.rakuten.co.jp/search/mall/onion/100227/?st=O"
+      // "itemUrl": "https://item.rakuten.co.jp/e-sbfoods/89593/"
     },
     {
       "ingredient_id": "005",
@@ -40,7 +44,8 @@ export const state = () => ({
       "amount": "1",
       "units": "tbsp",
       "barcode_data": "",
-      "itemUrl": "https://item.rakuten.co.jp/maruyashop/r122_4/"
+      "itemUrl": "https://search.rakuten.co.jp/search/mall/soy+sauce/100227/?st=O"
+      // "itemUrl": "https://item.rakuten.co.jp/maruyashop/r122_4/"
     }
   ]
 });

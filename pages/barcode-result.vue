@@ -4,7 +4,7 @@
       <h2>Here is the barcode data:</h2>
       <client-only>
         <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" />
-        <BarcodeData mode="show" />
+        <BarcodeData />
       </client-only>
       <button @click="newScan" class="submit-btn margins">Scan a new barcode</button>
       <!-- <button v-if="this.$store.state.users.user !== null" @click="correctionData">Correct the barcode data</button> -->
