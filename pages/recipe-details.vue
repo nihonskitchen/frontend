@@ -4,7 +4,9 @@
       <img :src="this.recipeData.picture_url" alt="" />
       <h2 class="recipe-title">{{ this.recipeData.recipe_name }}</h2>
       <p class="recipe-text">{{ this.recipeData.owner_comment }}</p>
-      <p class="recipe-text">Number of servings: {{ this.recipeData.servings }}</p>
+      <p class="recipe-text">
+        Number of servings: {{ this.recipeData.servings }}
+      </p>
       <div class="recipe-text">
         Likes: # {{ this.recipeData.likes }} Dislikes: #
         {{ this.recipeData.dislikes }}
@@ -12,21 +14,20 @@
       <div>Estimated Cost: {{ this.recipeData.prices }} yen</div>
 
       <!-- {{ this.recipeData }} -->
-
-      <div class="ingredients-list"
+      <h2 class="recipe-title">Ingredients</h2>
+      <div
+        class="ingredients-list"
         v-for="ingredient of this.recipeData.ingredients"
         :key="ingredient.name"
       >
-        <h2 class="recipe-title">Ingredients</h2>
         <ul>
           <li>
             {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
           </li>
         </ul>
       </div>
-
+      <h2 class="recipe-title">Steps</h2>
       <div v-for="step in this.recipeData.steps" :key="step">
-        <h2 class="recipe-title">Steps</h2>
         <ol>
           <li>{{ step }}</li>
         </ol>
@@ -62,7 +63,4 @@ export default {
   padding: 5px;
   margin-bottom: 5px;
 }
-
-
-
 </style>
