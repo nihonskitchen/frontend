@@ -7,6 +7,7 @@
       <h2>Welcome to the latest recipes in Japan!</h2>
     </div>
     <div class="home-page">
+      <button @click="img">button</button>
       <div
         class="card column"
         v-for="recipe in this.recipes"
@@ -14,10 +15,11 @@
       >
         <nuxt-link to="/recipe-details">
           <div class="recipe-inner" @click="passRecipeData(recipe.doc_id)">
-              <img
-                :src="require(`${recipe.picture_url}`)"
+            
+              <!-- <img
+                :src="require(`nihonskitchen.appspot.com/${recipe.picture_url}`)"
                 alt=""
-              />
+              /> -->
             <p>{{ recipe.recipe_name }}</p>
             <p>{{ recipe.owner_comment }}</p>
             <p>TIME: {{ recipe.owner_comment }}</p>
@@ -54,6 +56,7 @@
 
 <script>
 import $axios from "@nuxtjs/axios";
+import firebase from "firebase";
 
 export default {
   asyncData(){
@@ -68,7 +71,8 @@ export default {
   },
   data(){
     return {
-      recipes: []
+      recipes: [],
+      imgdata: []
     }
   },
   mounted() {
@@ -98,14 +102,70 @@ export default {
       console.log(id);
     },
 
-    img() {
-      var storage = firebase.storage();
-      var pathReference = storage.ref('code128_360x200.jpg');
-      var gsReference = storage.refFromURL('gs://bucket/code128_360x200.jpg');
-      // Create a reference from an HTTPS URL
-// Note that in the URL, characters are URL escaped!
-var httpsReference = storage.refFromURL('gs://nihonskitchen.appspot.com/code128_360x200.jpg');
-    }
+   img() {
+      let storage = firebase.storage();
+      var storageRef = storage.ref();
+      var imagesRef = storageRef.child('recipes/CmajJru8j4gtt2UunbqWvKSblwb2');
+      console.log(imagesRef);
+      imagesRef.listAll().then(res => {
+        console.log("res.items");
+        console.log(res.items);
+        res.items[0].getDownloadURL().then(url => console.log(`URL: ${url}`));
+      })
+      var imgFirestoreRef = imagesRef.child('melon_500x500.jpg');
+
+      // ファイルのURLを取得する
+      imgFirestoreRef.getDownloadURL().then(function(url){
+        console.log("url");
+        console.log(url);
+
+        // var image = document.getElementById("imageFirestore");
+        // image.style.backgroundImage = "url("+url+")";
+        // document.getElementById('filename1').innerHTML = '<a href="' + url + '">' + imgFirestoreRef.name + '</a>';
+      }).catch(function(error) {
+        // document.getElementById('filename2').innerHTML = error.message;
+        // console.log(error);
+      });
+
+      // 下記二つは同じもの
+      // let pathReference = storage.refFromURL("gs://nihonskitchen.appspot.com").child("recipes").child("CmajJru8j4gtt2UunbqWvKSblwb2");
+      // let pathReference = storage.refFromURL("gs://nihonskitchen.appspot.com").child("recipes").child("CmajJru8j4gtt2UunbqWvKSblwb2");
+      // let list = storage.ref("recipes/CmajJru8j4gtt2UunbqWvKSblwb2");
+      // // console.log(pathReference);
+      // console.log(list);
+
+      // list.listAll().then(function(res) {
+      //   console.log(res);
+      //   console.log("items");
+      //   console.log(res.items[0]);
+      //   // res.prefixes.forEach(function(folderRef) {
+      //   //   // All the prefixes under listRef.
+      //   //   // You may call listAll() recursively on them.
+      //   // });
+      //   // res.items.forEach(function(itemRef) {
+      //   //   // All the items under listRef.
+      //   // });
+      // }).catch(function(error) {
+      //   // Uh-oh, an error occurred!
+      // });
+
+      // list.once('value', (snapshot) => {
+      //   snapshot.forEach((childSnapshot) => {
+      //     var childKey = childSnapshot.key;
+      //     var childData = childSnapshot.val();
+      //     console.log(childKey);
+      //     console.log(childData);
+      //   });
+      // });
+
+
+      // var gsReference = storage.refFromURL('gs://bucket/code128_360x200.jpg');
+      //   //StorageのURLを参照
+      //   let storageref = Storage.storage().reference(forURL: "gs://nihonskitchen.appspot.com").child("Recipes");
+      //   //画像をセット
+      //   imageView.sd_setImage(with: storageref)
+   }
+
   },
 };
 </script>
