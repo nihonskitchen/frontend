@@ -73,6 +73,7 @@ export default {
     return {
       recipes: [],
       imgdata: []
+      
     }
   },
   mounted() {
