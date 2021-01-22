@@ -1,60 +1,18 @@
 <template>
   <div class="container">
     <div class="headline">
-      <!-- <h2 v-if="this.$store.state.users.user !== null"> -->
-        <!-- Welcome to {{this.$store.state.users.profile.name}} the latest recipes in Japan! -->
-      <!-- </h2> -->
       <h2>Welcome to the latest recipes in Japan!</h2>
     </div>
     <div class="home-page">
-      <div
-      v-for="(recipe, index) in this.recipes"
-      :key="index"
-      class="card column"
-    >
-      <div class="recipe-inner">
-        <img :src="recipe.picture_url" alt="" />
-      </div>
-      <div class="detail">
-        <h3>
-          {{ recipe.recipe_name }}
-        </h3>
-        <p>
-          {{ recipe.owner_comment }}
-        </p>
-      </div>
-    </div>
-
-
-
-      <!-- <button @click="img">button</button>
-      <div
-        class="card column"
-        v-for="recipe in this.recipes"
-        :key="recipe.doc_id"
-      >
-        <nuxt-link to="/recipe-details">
-          <div class="recipe-inner" @click="passRecipeData(recipe.doc_id)">
-            
-            <p>{{ recipe.recipe_name }}</p>
-            <p>{{ recipe.owner_comment }}</p>
-            <p>TIME: {{ recipe.owner_comment }}</p>
-          </div>
-        </nuxt-link>
-      </div> -->
-
-
-      <!-- <div
-        class="card column"
-        v-for="recipe in this.$store.state.recipes.recipes"
-        :key="recipe.recipe_id"
-      >
-        <nuxt-link to="/recipe-details">
-          <div class="recipe-inner" @click="passRecipeData(recipe.recipe_id)">
-            <img
-              :src="require(`~/assets/resources/${recipe.picture_url}`)"
-              alt=""
-            />
+      <nuxt-link to="recipe-details">
+        <div
+          v-for="(recipe, index) in this.recipes"
+          :key="index"
+          class="card column"
+          @click="passRecipeData(index)"
+        >
+          <div class="recipe-inner">
+            <img :src="recipe.picture_url" alt="" />
           </div>
           <div class="detail">
             <h3>
@@ -64,30 +22,29 @@
               {{ recipe.owner_comment }}
             </p>
           </div>
-        </nuxt-link>
-      </div> -->
+        </div>
+      </nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
-// import axios from "@nuxtjs/axios";
 import firebase from "firebase";
 
 export default {
-  asyncData(){
-    return{
-      title: "Nihon's Kitchen"
-    }
-  },
-  head(){
+  asyncData() {
     return {
-      title: this.title
-    }
+      title: "Nihon's Kitchen",
+    };
+  },
+  head() {
+    return {
+      title: this.title,
+    };
   },
   data() {
     return {
-      recipes: []
+      recipes: [],
     };
   },
   mounted() {
@@ -96,7 +53,6 @@ export default {
     } catch (err) {
       console.log("error");
       console.log(err);
-      // this.$store.commit("recipes/getCardDetails");
     }
   },
   methods: {
@@ -104,7 +60,8 @@ export default {
       // I don't know why variable of "this" to refer is need....
       let self = this;
       // this.$axios.get("/recipes") -> res.data.data.recipes
-      this.$axios.$get("/recipes")
+      this.$axios
+        .$get("/recipes")
         .then((res) => res.data.recipes)
         .then((data) => {
           data.map((element) => {
@@ -119,13 +76,15 @@ export default {
               .getDownloadURL()
               .then((url) => (element.picture_url = url));
           });
-          // console.log(self.recipes);
+          // console.log("self.recipes =", self.recipes);
+          this.$store.state.recipes.recipes = self.recipes;
           return self.recipes;
         });
     },
-    passRecipeData(id) {
-      this.$store.commit("recipes/showRecipeDetails", id);
-      console.log(id);
+    passRecipeData(index) {
+      // this.$store.commit("recipes/showRecipeDetails", index);
+      this.$store.state.recipes.selectedRecipe = this.recipes[index]
+      // console.log("this.recipes =", this.recipes[index]);
     },
   },
 };

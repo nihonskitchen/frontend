@@ -1,74 +1,68 @@
 <template>
-  <div class="container center-div">
-    <div class="ingredients-list">
-      <h1>{{ this.$store.state.recipes.selectedRecipe.recipe_name }}</h1>
-      <br />
-      <img class="recipe-img" :src="require(`~/assets/resources/${this.$store.state.recipes.selectedRecipe.picture_url}`)" alt="">
-      <div><h2>Ingredients</h2></div>
-      <div
-        class="grid-item grid-padding"
-        v-for="ingredient in this.$store.state.recipes.selectedRecipe
-          .ingredients"
-        :key="ingredient.ingredient_id"
+  <div class="info-card">
+    <div class="recipe-inner">
+      <img :src="this.recipeData.picture_url" alt="" />
+      <h2 class="recipe-title">{{ this.recipeData.recipe_name }}</h2>
+      <p class="recipe-text">{{ this.recipeData.owner_comment }}</p>
+      <p class="recipe-text">Number of servings: {{ this.recipeData.servings }}</p>
+      <div class="recipe-text">
+        Likes: # {{ this.recipeData.likes }} Dislikes: #
+        {{ this.recipeData.dislikes }}
+      </div>
+      <div>Estimated Cost: {{ this.recipeData.prices }} yen</div>
+
+      <!-- {{ this.recipeData }} -->
+
+      <div class="ingredients-list"
+        v-for="ingredient of this.recipeData.ingredients"
+        :key="ingredient.name"
       >
+        <h2 class="recipe-title">Ingredients</h2>
         <ul>
           <li>
-            {{ ingredient.amount }}&nbsp;{{ ingredient.units }}&nbsp;{{ ingredient.ingredient_name }}
-            
+            {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
           </li>
         </ul>
       </div>
 
-      <div><h2>Steps</h2></div>
-      <div
-        class="grid-item grid-padding"
-        v-for="step in this.$store.state.recipes.selectedRecipe.steps"
-        :key="step.step_num"
-      >
-        <ul>
-          <li>
-            {{ step.details }}
-          </li>
-        </ul>
+      <div v-for="step in this.recipeData.steps" :key="step">
+        <h2 class="recipe-title">Steps</h2>
+        <ol>
+          <li>{{ step }}</li>
+        </ol>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    console.log(this.recipeData);
+  },
+  data() {
+    return {
+      recipeData: this.$store.state.recipes.selectedRecipe,
+    };
+  },
+};
 </script>
 
 <style>
-h1 {
-    text-align: center;
-    padding: 10px;
-}
-.ingredients-list {
-  /* left: 50%; */
-  display: grid;
-  grid-template-columns: auto;
-  max-width: 360px;
-  /* justify-content: center; */
-}
-.grid-item {
-  justify-content: center;
-  /* margin-bottom: 10px; */
+.recipe-title {
+  text-align: center;
+  padding: 10px;
   margin: 0px;
-  /* padding: 10px; */
-  /* left: 50%; */
 }
-.grid-padding {
-    padding: 10px;
+/* p {
+  padding: 0px;
+  margin: 0px;
+} */
+.recipe-text {
+  padding: 5px;
+  margin-bottom: 5px;
 }
-.recipe-img {
-  display: block;
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
+
+
+
 </style>
