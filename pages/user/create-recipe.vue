@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent class="recipe-card">
+    <form @submit.prevent class="info-card">
       <h1>Create a Recipe</h1>
       <div>Complete this form to share your recipe with others</div>
       <div>
@@ -206,7 +206,7 @@ export default {
   color: white;
   cursor: pointer;
 }
-.recipe-card {
+.info-card {
   position: relative;
   top: 80px;
   margin: 0 auto 100px;
