@@ -7,10 +7,7 @@
       class="card column"
     >
       <div class="recipe-inner">
-        <img
-              :src="recipe.picture_url"
-              alt=""
-            />
+        <img :src="recipe.picture_url" alt="" />
       </div>
       <div class="detail">
         <h3>
@@ -30,7 +27,7 @@ import "firebase/auth";
 
 export default {
   mounted() {
-    // this.getAllData();
+    this.getAllData();
   },
   data() {
     return {
@@ -41,30 +38,27 @@ export default {
   },
   methods: {
     getAllData() {
-      Promise.all(this.userID = firebase.auth().currentUser.uid)
-      .then(() => {
-         return this.$axios.$get(`/recipes/uid/${this.userID}`)
-
+      Promise.all((this.userID = firebase.auth().currentUser.uid))
+        .then(() => {
+          return this.$axios.$get(`/recipes/uid/${this.userID}`);
         })
-      .then((res) => res.data.recipes)
-      .then((data) => {
-        // console.log(data);
-        data.map(element => {
-          this.allRecipes.push(element)
-          console.log("allRecipes =", this.allRecipes)
+        .then((res) => res.data.recipes)
+        .then((data) => {
+          data.map((element) => {
+            this.allRecipes.push(element);
+          });
         })
-      })
-      .then(() => {
-        let ref = firebase.storage().ref();
-        this.allRecipes.map(element => {
-          element.picture_url = ref.child(element.picture_url).getDownloadURL()
-          // this.picture_url.push(ref.child(element.picture_url).getDownloadURL())
-          // console.log("element", element.picture_url)
+        .then(async () => {
+          let ref = firebase.storage().ref();
+          this.allRecipes.map((element) => {
+            ref
+              .child(element.picture_url)
+              .getDownloadURL()
+              .then((url) => (element.picture_url = url));
+          });
+          return this.allRecipes;
         });
-        return this.allRecipes;
-      })
-      // .then(this.$nuxt.refresh())
-    }
+    },
   },
 };
 </script>
