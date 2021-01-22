@@ -8,22 +8,40 @@
     </div>
     <div class="home-page">
       <div
+      v-for="(recipe, index) in this.recipes"
+      :key="index"
+      class="card column"
+    >
+      <div class="recipe-inner">
+        <img :src="recipe.picture_url" alt="" />
+      </div>
+      <div class="detail">
+        <h3>
+          {{ recipe.recipe_name }}
+        </h3>
+        <p>
+          {{ recipe.owner_comment }}
+        </p>
+      </div>
+    </div>
+
+
+
+      <!-- <button @click="img">button</button>
+      <div
         class="card column"
         v-for="recipe in this.recipes"
         :key="recipe.doc_id"
       >
         <nuxt-link to="/recipe-details">
           <div class="recipe-inner" @click="passRecipeData(recipe.doc_id)">
-              <img
-                :src="require(`${recipe.picture_url}`)"
-                alt=""
-              />
+            
             <p>{{ recipe.recipe_name }}</p>
             <p>{{ recipe.owner_comment }}</p>
             <p>TIME: {{ recipe.owner_comment }}</p>
           </div>
         </nuxt-link>
-      </div>
+      </div> -->
 
 
       <!-- <div
@@ -53,7 +71,8 @@
 </template>
 
 <script>
-import $axios from "@nuxtjs/axios";
+// import axios from "@nuxtjs/axios";
+import firebase from "firebase";
 
 export default {
   asyncData(){
@@ -66,46 +85,48 @@ export default {
       title: this.title
     }
   },
-  data(){
+  data() {
     return {
       recipes: []
-    }
+    };
   },
   mounted() {
     try {
       this.getRecipes();
     } catch (err) {
+      console.log("error");
       console.log(err);
-      this.$store.commit("recipes/getCardDetails");
+      // this.$store.commit("recipes/getCardDetails");
     }
   },
   methods: {
-    async getRecipes() {
-      console.log("done"); 
-      const response = await this.$axios.get("/recipes", { responseType: "json" })
-      // this.recipes = response.data.data.recipes;
-      const recipeCards = [];      
-      for (const i of response.data.data.recipes) {
-        // console.log(i);
-        this.recipes.push(i);
-      }
-      // this.recipes = recipeCards
-      console.log(this.recipes);
-      // console.log(this.recipes);
+    getRecipes() {
+      // I don't know why variable of "this" to refer is need....
+      let self = this;
+      // this.$axios.get("/recipes") -> res.data.data.recipes
+      this.$axios.$get("/recipes")
+        .then((res) => res.data.recipes)
+        .then((data) => {
+          data.map((element) => {
+            self.recipes.push(element);
+          });
+        })
+        .then(async () => {
+          let ref = firebase.storage().ref();
+          self.recipes.map((element) => {
+            ref
+              .child(element.picture_url)
+              .getDownloadURL()
+              .then((url) => (element.picture_url = url));
+          });
+          // console.log(self.recipes);
+          return self.recipes;
+        });
     },
     passRecipeData(id) {
       this.$store.commit("recipes/showRecipeDetails", id);
       console.log(id);
     },
-
-    img() {
-      var storage = firebase.storage();
-      var pathReference = storage.ref('code128_360x200.jpg');
-      var gsReference = storage.refFromURL('gs://bucket/code128_360x200.jpg');
-      // Create a reference from an HTTPS URL
-// Note that in the URL, characters are URL escaped!
-var httpsReference = storage.refFromURL('gs://nihonskitchen.appspot.com/code128_360x200.jpg');
-    }
   },
 };
 </script>
