@@ -1,21 +1,33 @@
 <template>
   <div>
     <h1>My Recipes</h1>
-    <Recipe />
+    <div
+      v-for="recipe in this.allRecipes"
+      :key="recipe.doc_id"
+      class="card column"
+    >
+      <div class="recipe-inner">
+        <img :src="recipe.picture_url" alt="" />
+      </div>
+      <div class="detail">
+        <h3>
+          {{ recipe.recipe_name }}
+        </h3>
+        <p>
+          {{ recipe.owner_comment }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
-import Recipe from "./Recipe";
 
 export default {
-  components: {
-    Recipe,
-  },
   mounted() {
-    //this.getAllData();
+    this.getAllData();
   },
   data() {
     return {
@@ -38,14 +50,17 @@ export default {
             console.log("allRecipes =", this.allRecipes);
           });
         })
-        .then(() => {
+        .then(async () => {
           let ref = firebase.storage().ref();
           this.allRecipes.map((element) => {
-            element.picture_url = ref
+            ref
               .child(element.picture_url)
-              .getDownloadURL();
-            // this.picture_url.push(ref.child(element.picture_url).getDownloadURL())
-            // console.log("element", element.picture_url)
+              .getDownloadURL()
+              .then((url) => (element.picture_url = url));
+            // this.picture_url.push(
+            //   ref.child(element.picture_url).getDownloadURL()
+            // );
+            console.log("element", element.picture_url);
           });
           return this.allRecipes;
         });
