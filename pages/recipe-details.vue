@@ -19,27 +19,18 @@
       <!-- <div class="recipe-text">
         Likes: # {{ this.recipeData.likes }} Dislikes: #
         {{ this.recipeData.dislikes }}
-<<<<<<< HEAD
-      </div>
-      <div>Estimated Cost: {{ this.recipeData.prices }} yen</div>
-      <h2 class="recipe-title">Ingredients</h2>
-=======
       </div> -->
       <!-- <div>Estimated Cost: {{ this.recipeData.prices }} yen</div> -->
 
       <div class="button-area">
         <h2 class="recipe-title">Ingredients</h2>
       </div>
->>>>>>> ea01fd79c6683b87f2f4c687381eeba7d47198ed
       <div
         class="ingredients-list"
         v-for="(ingredient, index) of this.recipeData.ingredients"
         :key="index"
       >
         <div class="left">
-<<<<<<< HEAD
-           <input type="checkbox" class="add-shopping-checkbox"> {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
-=======
           <input
             type="checkbox"
             class="add-shopping-checkbox"
@@ -47,7 +38,6 @@
             @click="addOrRemoveIngredient(ingredient, index)"
           />
           {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
->>>>>>> ea01fd79c6683b87f2f4c687381eeba7d47198ed
         </div>
       </div>
       <button @click="addToShoppingList">Add to shopping list</button>
@@ -107,8 +97,6 @@ export default {
   padding: 10px;
   margin: 0px;
 }
-<<<<<<< HEAD
-=======
 .recipe-detail-img {
   border-radius: 8px;
 }
@@ -116,7 +104,6 @@ export default {
   padding: 0px;
   margin: 0px;
 } */
->>>>>>> ea01fd79c6683b87f2f4c687381eeba7d47198ed
 .recipe-text {
   padding: 3px;
   margin-bottom: 3px;
