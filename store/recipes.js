@@ -21,11 +21,6 @@ export const mutations = {
     //   if (i === index) {
     state.selectedRecipe = state.recipes[index];
   }
-  //     }
-  //     console.log("state =", state)
-  //   }
-
-  // }
 };
 
 export const getAll = callback => {
