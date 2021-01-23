@@ -50,7 +50,7 @@ export default {
       this.$store.commit("barcode/putNewData", newProduct);
       try {
         // ポスト
-        const newBarcode = await this.$axios.$post(`/barcode/`, newProduct);
+        const newBarcode = await this.$axios.$post("https://nihons-kitchen-server.an.r.appspot.com/api/barcode/", newProduct);
         console.log(newBarcode);
         // details削除
         this.$store.commit("barcode/removeCode");

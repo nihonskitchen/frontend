@@ -143,7 +143,7 @@ export default {
   methods: {
     async addNewRecipe() {
       console.log("POST req sent", this.recipe);
-      await this.$axios.$post("/recipes", this.recipe)
+      await this.$axios.$post("https://nihons-kitchen-server.an.r.appspot.com/api/recipes", this.recipe)
       .then((res) => {
         this.$router.push("/user/cookbook")
       })
