@@ -84,7 +84,6 @@ button {
   border: 0px;
   font-size: 15px;
   border-radius: 8px;
-  height: 20px
 }
 .flexbox {
   display: flex;
