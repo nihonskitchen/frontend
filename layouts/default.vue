@@ -1,5 +1,5 @@
 <template>
-  <div class="mainDiv">
+  <div id="main-div">
     <Header />
     <Nuxt />
     <Footer />
@@ -16,8 +16,6 @@
 body {
   background-color: #f4f2ee;
   color: #142C28;
-  /* min-height: 100vh; */
-  /* padding-bottom: 100px; */
 }
 .center-div {
   min-height: 90vh;
@@ -27,7 +25,6 @@ body {
 .container {
   min-height: 90vh;
   width: 100%;
-  /* margin: 0 auto; */
 }
 a {
   text-decoration: none;
@@ -38,25 +35,6 @@ p {
 p:last-of-type {
   margin-bottom: 0px;
 }
-/* button {
-  padding: 5px;
-  width: 100%;
-  margin: 5px;
-  background-color: #e76c73;
-  border: 0px;
-  font-size: 15px;
-  border-radius: 0px;
-}
-button:hover {
-  padding: 5px;
-  width: 100%;
-  margin: 5px;
-  background-color: #E5536A;
-  border: 0px;
-  font-size: 15px;
-  border-radius: 0px;
-  cursor: pointer;
-} */
 form {
   position: relative;
   justify-content: space-evenly;
@@ -72,14 +50,10 @@ form {
   border-radius: 8px;
   min-width: 360px;
   max-width: 360px;
-  /* margin-left: auto;
-  margin-right: auto; */
 }
-.mainDiv {
+#main-div {
   display: inherit;
   padding: 0 0 100px 0;
-  /* flex-direction: column;
-  flex-wrap: wrap; */
 }
 
 </style>
