@@ -91,3 +91,6 @@ sw.*
 
 src/
 server/
+
+# firebase
+.firebase

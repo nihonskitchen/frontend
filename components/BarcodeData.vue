@@ -1,12 +1,12 @@
 <template>
   <div>
     <dl>
-      <dt>Barcode</dt>
+      <dt>Barcode:</dt>
       <dd>{{ this.barcode_data }}</dd>
-      <dt>Name</dt>
+      <dt>Name:</dt>
       <dd v-if="(this.ingredient_name) !== ''">{{ this.ingredient_name }}</dd>
       <dd v-else> - </dd>
-      <dt>Description</dt>
+      <dt>Description:</dt>
       <dd v-if="(this.description) !== ''">{{ this.description }}</dd>
       <dd v-else> - </dd>
     </dl>
@@ -15,9 +15,6 @@
 
 <script>
 export default {
-  props: [
-    "mode"
-  ],
   data: function() {
     return{
       barcode_data: "",
@@ -26,15 +23,18 @@ export default {
     }
   },
   mounted: function() {
-    if (this.mode === "show") {
-      this.barcode_data = this.$store.state.barcode.details.barcode_data;
-      this.ingredient_name = this.$store.state.barcode.details.ingredient_name;
-      this.description = this.$store.state.barcode.details.description;
-    } else {
-      this.barcode = this.$store.state.barcode.newSubmit.barcode;
-      this.product_name = this.$store.state.barcode.newSubmit.ingredient_name;
-      this.description = this.$store.state.barcode.newSubmit.description;
-    }
+    this.barcode_data = this.$store.state.barcode.details.barcode_data;
+    this.ingredient_name = this.$store.state.barcode.details.ingredient_name;
+    this.description = this.$store.state.barcode.details.description;
+    // if (this.mode === "show") {
+    //   this.barcode_data = this.$store.state.barcode.details.barcode_data;
+    //   this.ingredient_name = this.$store.state.barcode.details.ingredient_name;
+    //   this.description = this.$store.state.barcode.details.description;
+    // } else {
+    //   this.barcode = this.$store.state.barcode.newSubmit.BarcodeData;
+    //   this.product_name = this.$store.state.barcode.newSubmit.IngredientName;
+    //   this.description = this.$store.state.barcode.newSubmit.Description;
+    // }
   },
   methods: {
     //

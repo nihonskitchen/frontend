@@ -6,9 +6,9 @@
         <BarcodeImg v-if="this.$store.state.barcode.scanImage !== ''" />
         <form action="">
           <label for="barcode">Barcode</label>
-          <input type="text" readonly :value="this.$store.state.barcode.details.barcode_data" />
+          <input type="text" readonly :value="this.$store.state.barcode.barcode_data" />
           <label for="product_name">Product Name</label>
-          <input type="text" v-model="product_name" />
+          <input type="text" v-model="ingredient_name" />
           <label for="description">Product description</label>
           <br />
           <textarea rows="4" cols="40" type="text" v-model="description" />
@@ -33,28 +33,35 @@ export default {
   },
   data: function() {
     return {
-      barcode: this.$store.state.barcode.details.barcode_data,
-      product_name: "",
+      barcode_data: this.$store.state.barcode.barcode_data,
+      ingredient_name: "",
       description: ""
     }
   },
   methods: {
     async submit() {
       const newProduct = {
-        barcode_data: this.barcode_data,
-        ingredient_name: this.ingredient_name,
-        description: this.description,
-        ingredient_id: ""
+        BarcodeData: this.barcode_data,
+        IngredientName: this.ingredient_name,
+        Description: this.description,
+        IngredientId: ""
       }
       // データをセット
       this.$store.commit("barcode/putNewData", newProduct);
-      // ポスト
-      const newBarcode = await this.$axios.$post(`/barcode/`, newProduct);
-      // details削除
-      this.$store.commit("barcode/removeCode");
-      // detailsをセット
-      this.$store.commit("barcode/changeDetails", newBarcode.data.ingredient);
-      this.$router.push("/barcode-submitted");
+      try {
+        // ポスト
+        const newBarcode = await this.$axios.$post(`/barcode/`, newProduct);
+        console.log(newBarcode);
+        // details削除
+        this.$store.commit("barcode/removeCode");
+        // detailsをセット
+        this.$store.commit("barcode/changeDetails", newBarcode.createdIngredient);
+        this.$router.push("/barcode-submitted");
+      } catch (err) {
+        console.log(err);
+      }
+
+
     },
   }
 };

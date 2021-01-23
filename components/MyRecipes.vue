@@ -1,37 +1,39 @@
 <template>
   <div>
     <h1>My Recipes</h1>
-    <div
-      v-for="recipe in this.allRecipes"
-      :key="recipe.doc_id"
-      class="card column"
-    >
-      <div class="recipe-inner">
-        <img :src="recipe.picture_url" alt="" />
+    <nuxt-link to="/recipe-details">
+      <div
+        v-for="(recipe, index) in this.recipes"
+        :key="recipe.doc_id"
+        class="card column"
+        @click="passRecipeData(index)"
+      >
+        <div class="recipe-inner">
+          <img :src="recipe.picture_url" alt="" />
+        </div>
+        <div class="detail">
+          <h3>
+            {{ recipe.recipe_name }}
+          </h3>
+          <p>
+            {{ recipe.owner_comment }}
+          </p>
+        </div>
       </div>
-      <div class="detail">
-        <h3>
-          {{ recipe.recipe_name }}
-        </h3>
-        <p>
-          {{ recipe.owner_comment }}
-        </p>
-      </div>
-    </div>
+    </nuxt-link>
   </div>
 </template>
 
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
-
 export default {
   mounted() {
     this.getAllData();
   },
   data() {
     return {
-      allRecipes: [],
+      recipes: [],
       retVal: [],
       userID: null,
     };
@@ -45,19 +47,22 @@ export default {
         .then((res) => res.data.recipes)
         .then((data) => {
           data.map((element) => {
-            this.allRecipes.push(element);
+            this.recipes.push(element);
           });
         })
         .then(async () => {
           let ref = firebase.storage().ref();
-          this.allRecipes.map((element) => {
+          this.recipes.map((element) => {
             ref
               .child(element.picture_url)
               .getDownloadURL()
               .then((url) => (element.picture_url = url));
           });
-          return this.allRecipes;
+          return this.recipes;
         });
+    },
+    passRecipeData(index) {
+      this.$store.state.recipes.selectedRecipe = this.recipes[index];
     },
   },
 };

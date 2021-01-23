@@ -3,7 +3,7 @@
     <div class="form-card">
       <h2>The data registerd.</h2>
       <client-only>
-        <BarcodeData mode="show" />
+        <BarcodeData />
       </client-only>
       <button @click="newScan">Scan a new barcode</button>
     </div>
@@ -11,12 +11,10 @@
 </template>
 
 <script>
-import BarcodeImg from "../components/BarcodeImg.vue"
-import BarcodeData from "../components/BarcodeData.vue"
+import BarcodeData from "../components/BarcodeData.vue";
 
 export default {
   components: {
-    BarcodeImg,
     BarcodeData
   },
   data: function () {
@@ -27,6 +25,7 @@ export default {
   methods: {
     newScan: function() {
       this.$store.commit("barcode/removeCode");
+      this.$store.commit("barcode/removeImg");
       this.$router.push("/barcode")
     },
   },

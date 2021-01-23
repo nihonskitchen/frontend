@@ -1,47 +1,84 @@
 <template>
-  <div class="container">
-    <div class="headline">
-      <!-- <h2 v-if="this.$store.state.users.user !== null"> -->
-        <!-- Welcome to {{this.$store.state.users.profile.name}} the latest recipes in Japan! -->
-      <!-- </h2> -->
-      <h2>Welcome to the latest recipes in Japan!</h2>
-    </div>
-    <div class="home-page">
+  <div class="home-page">
+    <h1>Welcome to the latest recipes in Japan!</h1>
+    <nuxt-link to="recipe-details">
       <div
+        v-for="(recipe, index) in this.recipes"
+        :key="index"
         class="card column"
-        v-for="recipe in this.$store.state.recipes.recipes"
-        :key="recipe.recipe_id"
+        @click="passRecipeData(index)"
       >
-        <nuxt-link to="/recipe-details">
-          <div class="recipe-inner" @click="passRecipeData(recipe.recipe_id)">
-            <img
-              :src="require(`~/assets/resources/${recipe.picture_url}`)"
-              alt=""
-            />
-          </div>
-          <div class="detail">
-            <h3>
-              {{ recipe.recipe_name }}
-            </h3>
-            <p>
-              {{ recipe.owner_comment }}
-            </p>
-          </div>
-        </nuxt-link>
+        <div class="recipe-inner">
+          <img :src="recipe.picture_url" alt="" />
+        </div>
+        <div class="detail">
+          <h3>
+            {{ recipe.recipe_name }}
+          </h3>
+          <p>
+            {{ recipe.owner_comment }}
+          </p>
+        </div>
       </div>
-    </div>
+    </nuxt-link>
   </div>
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
+  asyncData() {
+    return {
+      title: "Nihon's Kitchen",
+    };
+  },
+  head() {
+    return {
+      title: this.title,
+    };
+  },
+  data() {
+    return {
+      recipes: [],
+    };
+  },
   mounted() {
-    this.$store.commit("recipes/getCardDetails");
+    try {
+      this.getRecipes();
+    } catch (err) {
+      console.log("error");
+      console.log(err);
+    }
   },
   methods: {
-    passRecipeData(id) {
-      this.$store.commit("recipes/showRecipeDetails", id);
-      console.log(id);
+    getRecipes() {
+      // I don't know why variable of "this" to refer is need....
+      let self = this;
+      // this.$axios.get("/recipes") -> res.data.data.recipes
+      this.$axios
+        .$get("/recipes")
+        .then((res) => res.data.recipes)
+        .then((data) => {
+          data.map((element) => {
+            self.recipes.push(element);
+          });
+        })
+        .then(async () => {
+          let ref = firebase.storage().ref();
+          self.recipes.map((element) => {
+            ref
+              .child(element.picture_url)
+              .getDownloadURL()
+              .then((url) => (element.picture_url = url));
+          });
+          // console.log("self.recipes =", self.recipes);
+          this.$store.state.recipes.recipes = self.recipes;
+          return self.recipes;
+        });
+    },
+    passRecipeData(index) {
+      this.$store.state.recipes.selectedRecipe = this.recipes[index];
     },
   },
 };
@@ -51,11 +88,11 @@ export default {
 * {
   box-sizing: border-box;
 }
-.headline {
+/* .headline {
   padding: 20px;
   margin-top: 20px;
-}
-.home-page {
+} */
+.home-page a {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -113,6 +150,7 @@ p {
   width: 25%;
   padding: 0px;
   margin: 20px;
+  /* align-self: center; */
 }
 @media screen and (max-width: 992px) {
   .column {
