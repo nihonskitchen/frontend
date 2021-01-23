@@ -22,8 +22,7 @@
         "source": "/recipes/:id",
         "destination": "https://nihons-kitchen-server.an.r.appspot.com/api/recipes/:id",
         "type": 302
-      },
-      {
+      }, {
         "source": "/recipes/uid/:id",
         "destination": "https://nihons-kitchen-server.an.r.appspot.com/api/recipes/uid/:id",
         "type": 302

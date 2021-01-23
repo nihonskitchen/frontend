@@ -4,7 +4,7 @@
       <nuxt-link to="/" id="main-title">Nihon's Kitchen</nuxt-link>
     </div>
     <nav>
-      <nuxt-link to="/user/shoppinglist">Shopping List</nuxt-link>
+      <nuxt-link to="/shoppinglist">Shopping List</nuxt-link>
       <nuxt-link to="/user/cookbook">Cookbook</nuxt-link>
       <nuxt-link to="/user/profile">Profile</nuxt-link>
       <div v-if="this.$store.state.users.user === null"><nuxt-link to="/login"><button class="login-btn">Login</button></nuxt-link> </div>

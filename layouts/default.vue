@@ -66,7 +66,7 @@ form {
   position: relative;
   align-self: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   background-color: #f4f2ee;
   border-radius: 8px;

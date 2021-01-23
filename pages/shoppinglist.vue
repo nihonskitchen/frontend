@@ -12,12 +12,12 @@
         <ul>
           <li class="flexbox">
             <div class="item-amount">{{ list.amount }}</div>
-            <div class="item-units">{{ list.units }}</div>
-            <div class="item-name">{{ list.ingredient_name }}</div>
+            <div class="item-units">{{ list.unit }}</div>
+            <div class="item-name">{{ list.name }}</div>
             <div class="item-button">
               <!-- <object type="image/svg+xml" data="~/assets/resources/rakuten.svg" width="166" height="50"></object> -->
               <a :href="list.itemUrl" target="_blank">
-              <button @click="rakutenURL, list.itemUrl">
+              <button @click="rakutenURL(list.itemUrl)">
                 Rakuten
               </button>
               </a>
@@ -54,9 +54,8 @@ export default {
   // 
   methods: {
     rakutenURL (url) {
-      window.open(url, '_blank')
+      window.open(`https://search.rakuten.co.jp/search/mall/${url}/100227/?st=O`, '_blank')
     }
-
     // async amazonFresh () {
     //   const amazonFreshJson = {
     //     ingredients: [],
