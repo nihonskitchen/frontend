@@ -1,12 +1,36 @@
 <template>
   <footer>
 	  <nav>
-          <input type="text" placeholder="Search">
-          <nuxt-link to="/barcode">Scan Barcode</nuxt-link>
-		  <nuxt-link to="/user/create-recipe">Add Recipe</nuxt-link>
+        	<input
+				type="text"
+				placeholder="Search"
+				v-model="searchWord"
+				@change="searching" />
+			<nuxt-link to="/barcode">Scan Barcode</nuxt-link>
+			<nuxt-link to="/user/create-recipe">Add Recipe</nuxt-link>
 	  </nav>
   </footer>
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			searchWord: "",
+		}
+	},
+	methods: {
+		searching() {
+			try {
+				console.log(this.searchWord);
+				this.$axios.$get(`/recipes/name/${this.searchWord}`);
+			} catch (err) {
+				console.log(err);
+			}
+		}
+	}
+}
+</script>
 
 <style>
 footer {
