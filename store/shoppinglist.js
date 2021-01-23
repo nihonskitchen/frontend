@@ -20,7 +20,11 @@ export const mutations = {
       };
       state.shoppingList.push(listItem);
     }
-    alert("Added " + state.shoppingList.length + " items!")
+    if (state.shoppingList.length === 1) {
+      alert("Your shopping list has " + state.shoppingList.length + " item!")
+    } else {
+      alert("Your shopping list has " + state.shoppingList.length + " items!")
+    }
     console.log("addToShoppingList = ", state.shoppingList);
   },
   showRecipeDetails(state, id) {
