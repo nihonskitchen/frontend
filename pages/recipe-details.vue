@@ -12,19 +12,15 @@
         {{ this.recipeData.dislikes }}
       </div>
       <div>Estimated Cost: {{ this.recipeData.prices }} yen</div>
-
-      <!-- {{ this.recipeData }} -->
       <h2 class="recipe-title">Ingredients</h2>
       <div
         class="ingredients-list"
-        v-for="ingredient of this.recipeData.ingredients"
-        :key="ingredient.name"
+        v-for="(ingredient, index) of this.recipeData.ingredients"
+        :key="index"
       >
-        <ul>
-          <li>
-            {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
-          </li>
-        </ul>
+        <div class="left">
+           <input type="checkbox" class="add-shopping-checkbox"> {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+        </div>
       </div>
       <h2 class="recipe-title">Steps</h2>
       <div v-for="step in this.recipeData.steps" :key="step">
@@ -55,12 +51,15 @@ export default {
   padding: 10px;
   margin: 0px;
 }
-/* p {
-  padding: 0px;
-  margin: 0px;
-} */
 .recipe-text {
   padding: 5px;
   margin-bottom: 5px;
+}
+.add-shopping-checkbox {
+  display: inline-block;
+  width: 20px;
+}
+.left {
+  justify-self: left;
 }
 </style>
