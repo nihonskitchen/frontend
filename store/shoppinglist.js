@@ -20,6 +20,7 @@ export const mutations = {
       };
       state.shoppingList.push(listItem);
     }
+    alert("Added " + state.shoppingList.length + " items!")
     console.log("addToShoppingList = ", state.shoppingList);
   },
   showRecipeDetails(state, id) {
