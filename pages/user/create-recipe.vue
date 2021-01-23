@@ -40,7 +40,6 @@
         />
       </div>
       <h2 class="margins">Ingredients</h2>
-      <!-- <div>{{ recipe.ingredients }}</div> -->
       <div v-for="(ingredient, index) in recipe.ingredients" :key="ingredient">
         {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
         <button id="remove-btn" @click="removeIngredient(index)">X</button>
@@ -58,8 +57,12 @@
           v-model="newIngredient.amount"
           maxlength="4"
         />
-        <label for="units">Measurement:</label>
+        <div>
+        Measurement:
+
+        </div>
         <select name="unit" id="unit" class="unit" v-model="newIngredient.unit">
+          <option value="" hidden>Select one</option>
           <option v-for="option in unit_options" :key="option">
             {{ option }}
           </option>
@@ -71,7 +74,6 @@
         </button>
       </div>
       <h2 class="margins">Steps</h2>
-      <!-- <div>{{ recipe.steps }}</div> -->
       <div v-for="(step, index) in recipe.steps" :key="step">
         {{ step }}
         <button id="remove-btn" @click="removeStep(index)">X</button>
@@ -95,6 +97,7 @@
           id="foodPic"
           @change="onFileSelected"
           accept="image/*"
+          required
         />
       </div>
       <div>
@@ -119,7 +122,7 @@ export default {
   },
   data() {
     return {
-      unit_options: ["slice", "pinch", "gram", "ml", "piece"],
+      unit_options: ["cup", "grams", "ml", "ounce", "piece", "pinch", "pound", "slice", "tablespoon", "teaspoon"],
       newIngredient: {},
       newStep: "",
       recipeID: null,
@@ -233,6 +236,11 @@ export default {
 .margins {
   margin-top: 20px;
   margin-bottom: 10px;
+}
+.unit {
+  width: 100px;
+  margin: 10px;
+  height: 25px;
 }
 </style>
 
