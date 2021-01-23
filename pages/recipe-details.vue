@@ -34,7 +34,8 @@
           <input
             type="checkbox"
             class="add-shopping-checkbox"
-            @click="setIngredients(ingredient)"
+            :id="ingredient.name"
+            @click="addOrRemoveIngredient(ingredient, index)"
           />
           {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
         </div>
@@ -63,18 +64,22 @@ export default {
     };
   },
   methods: {
-    setIngredients(ingredient) {
-      console.log("ingredient =", ingredient)
-      // console.log("index =", index)
-      this.selectedIngredients.push(ingredient)
-      console.log("selectedIngredient =", this.selectedIngredients)
+    addOrRemoveIngredient(ingredient, index) {
+      // console.log(document.getElementById(ingredient.name).checked)
+      
+      if (document.getElementById(ingredient.name).checked) {
+        this.selectedIngredients.push(ingredient)
+      } else {
+        this.selectedIngredients.splice(index, 1)
+      }
+      // console.log("selectedIngredient =", this.selectedIngredients)
     },
     addToShoppingList() {
       this.$store.commit(
-        "shoppinglist/setShoppingList",
+        "shoppinglist/addToShoppingList",
         this.selectedIngredients
       );
-    }
+    },
   },
 };
 </script>

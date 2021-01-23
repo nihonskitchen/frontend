@@ -6,11 +6,12 @@
       <!-- <div><button @click="amazonFresh">Amazon Fresh?</button></div> -->
       <div
         class="grid-item grid-padding"
-        v-for="list in this.$store.state.shoppinglist.shoppingList"
+        v-for="(list, index) in this.$store.state.shoppinglist.shoppingList"
         :key="list.ingredient_id"
       >
         <ul>
           <li class="flexbox">
+            <button class="remove-btn" @click="removeFromShoppingList(index)">x</button>
             <div class="item-amount">{{ list.amount }}</div>
             <div class="item-units">{{ list.unit }}</div>
             <div class="item-name">{{ list.name }}</div>
@@ -33,13 +34,19 @@
 export default {
   data: function() {
     return{
-      itemList: this.$store.state.shoppinglist.shoppingList
+      itemList: this.$store.state.shoppinglist.shoppingList,
     }
   },
   methods: {
     rakutenURL (url) {
       window.open(`https://search.rakuten.co.jp/search/mall/${url}/100227/?st=O`, '_blank')
-    }
+    },
+    removeFromShoppingList(index) {
+      this.$store.commit(
+        "shoppinglist/removeFromShoppingList",
+        index
+      );
+    },
   }
 };
 </script>
@@ -108,5 +115,12 @@ button {
 }
 .item-button button {
   width: 70px;
+}
+.remove-btn {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 4px;
 }
 </style>
