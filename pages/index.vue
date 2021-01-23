@@ -1,30 +1,26 @@
 <template>
-  <div class="container">
-    <div class="headline">
-      <h2>Welcome to the latest recipes in Japan!</h2>
-    </div>
-    <div class="home-page">
-      <nuxt-link to="recipe-details">
-        <div
-          v-for="(recipe, index) in this.recipes"
-          :key="index"
-          class="card column"
-          @click="passRecipeData(index)"
-        >
-          <div class="recipe-inner">
-            <img :src="recipe.picture_url" alt="" />
-          </div>
-          <div class="detail">
-            <h3>
-              {{ recipe.recipe_name }}
-            </h3>
-            <p>
-              {{ recipe.owner_comment }}
-            </p>
-          </div>
+  <div class="home-page">
+    <h1>Welcome to the latest recipes in Japan!</h1>
+    <nuxt-link to="recipe-details">
+      <div
+        v-for="(recipe, index) in this.recipes"
+        :key="index"
+        class="card column"
+        @click="passRecipeData(index)"
+      >
+        <div class="recipe-inner">
+          <img :src="recipe.picture_url" alt="" />
         </div>
-      </nuxt-link>
-    </div>
+        <div class="detail">
+          <h3>
+            {{ recipe.recipe_name }}
+          </h3>
+          <p>
+            {{ recipe.owner_comment }}
+          </p>
+        </div>
+      </div>
+    </nuxt-link>
   </div>
 </template>
 
@@ -82,9 +78,7 @@ export default {
         });
     },
     passRecipeData(index) {
-      // this.$store.commit("recipes/showRecipeDetails", index);
-      this.$store.state.recipes.selectedRecipe = this.recipes[index]
-      // console.log("this.recipes =", this.recipes[index]);
+      this.$store.state.recipes.selectedRecipe = this.recipes[index];
     },
   },
 };
@@ -94,11 +88,11 @@ export default {
 * {
   box-sizing: border-box;
 }
-.headline {
+/* .headline {
   padding: 20px;
   margin-top: 20px;
-}
-.home-page {
+} */
+.home-page a {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -156,6 +150,7 @@ p {
   width: 25%;
   padding: 0px;
   margin: 20px;
+  /* align-self: center; */
 }
 @media screen and (max-width: 992px) {
   .column {
