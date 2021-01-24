@@ -181,6 +181,7 @@ p:last-of-type {
   padding: 0px;
   margin: 0px;
   border-radius: 4px;
+  cursor: pointer;
 }
 .strong {
   color: #142c28;

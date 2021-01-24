@@ -13,11 +13,12 @@
             <div>{{ list.unit }}</div>
             <div>{{ list.name }}</div>
             <div>
-              <a :href="list.itemUrl" target="_blank">
-              <button @click="rakutenURL(list.itemUrl)">
+              <!-- <button @click="rakutenURL(list.itemUrl)">
                 Buy on Rakuten
+              </button> -->
+              <button class="amazon-fresh" type="submit" @click="amazonURL(list.itemUrl)">
+                Amazon Fresh
               </button>
-              </a>
             </div>
           </li>
         </ul>
@@ -33,6 +34,9 @@ export default {
     }
   },
   methods: {
+    amazonURL(item) {
+      window.open(`https://www.amazon.co.jp/s?k=${item}&i=amazonfresh`) 
+    },
     rakutenURL (url) {
       window.open(`https://search.rakuten.co.jp/search/mall/${url}/100227/?st=O`, '_blank')
     },
@@ -58,6 +62,15 @@ export default {
   background-color: #f4f2ee;
   border-radius: 8px;
   min-width: 360px;
-  max-width: 360px;
+  max-width: 400px;
+}
+.amazon-fresh {
+  background-color: rgb(106, 216, 106);
+}
+.remove-btn {
+  background-color: #f7b981;
+}
+.remove-btn:hover {
+  background-color: #ffa95d;
 }
 </style>

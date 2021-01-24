@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="center-div">
     <div class="barcode-card">
       <h2>You found a new barcode!</h2>
       <client-only>
@@ -68,22 +68,13 @@ export default {
 </script>
 
 <style>
-.container {
-  display: flex; /* 子要素をflexboxで揃える */
-    flex-direction: column; /* 子要素をflexboxにより縦方向に揃える */
-    justify-content: center; /* 子要素をflexboxにより中央に配置する */
-    align-items: center;  /* 子要素をflexboxにより中央に配置する */
-    width: 100px; /* 見た目用 */
-    height: 50px; /* 見た目用 */
-    border: 1px solid; /* 見た目用 */
-}
 .barcode-card {
   position: relative;
   /* top: 30px; */
   /* bottom: 100px; */
   /* margin-top: 80px; */
   /* margin-bottom: 100px; */
-  margin: 0 auto 100px;
+  margin: 0 auto;
   align-self: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 20px;
