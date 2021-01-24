@@ -49,5 +49,6 @@ h2 {
   max-width: 200px;
   border-radius: 8px;
   color: white;
+  margin: 0;
 }
 </style>

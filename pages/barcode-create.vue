@@ -61,7 +61,6 @@ export default {
         console.log(err);
       }
 
-
     },
   }
 };
@@ -70,10 +69,6 @@ export default {
 <style>
 .barcode-card {
   position: relative;
-  /* top: 30px; */
-  /* bottom: 100px; */
-  /* margin-top: 80px; */
-  /* margin-bottom: 100px; */
   margin: 0 auto;
   align-self: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -91,8 +86,7 @@ export default {
   padding: 5px;
   background-color: #e76c73;
   border: 0px;
-  /* margin: 0px; */
   color: white;
-  margin-top: 20px;
+  margin: 0;
 }
 </style>
