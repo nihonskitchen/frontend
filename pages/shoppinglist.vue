@@ -1,33 +1,29 @@
 <template>
-  <div class="container">
     <div class="shoppinglist-card">
       <h1>Shopping List</h1>
-      <!-- <div><h2>Ingredients</h2></div> -->
-      <!-- <div><button @click="amazonFresh">Amazon Fresh?</button></div> -->
+      <div v-if="itemList.length === 0">Your shopping list is currently empty!</div>
       <div
-        class="grid-item grid-padding"
-        v-for="(list, index) in this.$store.state.shoppinglist.shoppingList"
+        v-for="(list, index) in itemList"
         :key="list.ingredient_id"
       >
         <ul>
           <li class="flexbox">
             <button class="remove-btn" @click="removeFromShoppingList(index)">x</button>
-            <div class="item-amount">{{ list.amount }}</div>
-            <div class="item-units">{{ list.unit }}</div>
-            <div class="item-name">{{ list.name }}</div>
-            <div class="item-button">
-              <!-- <object type="image/svg+xml" data="~/assets/resources/rakuten.svg" width="166" height="50"></object> -->
-              <a :href="list.itemUrl" target="_blank">
-              <button @click="rakutenURL(list.itemUrl)">
-                Rakuten
+            <div>{{ list.amount }}</div>
+            <div>{{ list.unit }}</div>
+            <div>{{ list.name }}</div>
+            <div>
+              <!-- <button @click="rakutenURL(list.itemUrl)">
+                Buy on Rakuten
+              </button> -->
+              <button class="amazon-fresh" type="submit" @click="amazonURL(list.itemUrl)">
+                Amazon Fresh
               </button>
-              </a>
             </div>
           </li>
         </ul>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -38,6 +34,9 @@ export default {
     }
   },
   methods: {
+    amazonURL(item) {
+      window.open(`https://www.amazon.co.jp/s?k=${item}&i=amazonfresh`) 
+    },
     rakutenURL (url) {
       window.open(`https://search.rakuten.co.jp/search/mall/${url}/100227/?st=O`, '_blank')
     },
@@ -63,64 +62,15 @@ export default {
   background-color: #f4f2ee;
   border-radius: 8px;
   min-width: 360px;
-  max-width: 360px;
+  max-width: 400px;
 }
-h1 {
-    text-align: center;
-    padding: 10px;
-}
-.ingredients-list {
-  /* left: 50%; */
-  display: grid;
-  grid-template-columns: auto;
-  max-width: 360px;
-  /* justify-content: center; */
-}
-.grid-item {
-  justify-content: center;
-  /* margin-bottom: 10px; */
-  margin: 0px;
-  /* padding: 10px; */
-  /* left: 50%; */
-}
-button {
-  padding: 5px;
-  width: 100%;
-  margin: 5px;
-  background-color: #e76c73;
-  border: 0px;
-  font-size: 15px;
-  border-radius: 8px;
-}
-.flexbox {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.item-check {
-  flex-basis: 20px;
-}
-.item-amount {
-  flex-basis: 40px;
-}
-.item-units {
-  flex-basis: 70px;
-}
-.item-ingredient_name {
-  flex-basis: 180px;
-}
-.item-button {
-  flex-basis: 70px;
-}
-.item-button button {
-  width: 70px;
+.amazon-fresh {
+  background-color: rgb(106, 216, 106);
 }
 .remove-btn {
-  width: 20px;
-  height: 20px;
-  padding: 0px;
-  margin: 0px;
-  border-radius: 4px;
+  background-color: #f7b981;
+}
+.remove-btn:hover {
+  background-color: #ffa95d;
 }
 </style>

@@ -1,34 +1,34 @@
 <template>
-  <div class="container">
-    <div class="center-div">
-      <div class="form-card">
-        <form action="submit" method="POST" @submit.prevent="pressed">
-          <h2>Sign up</h2>
-          <br />
-          <input
-            id="create-id"
-            type="email"
-            placeholder="email address"
-            required
-            v-model="account.email"
-          />
-          <br />
-          <input
-            id="create-password"
-            type="password"
-            placeholder="password"
-            required
-            v-model="account.password"
-          />
-          <label for="create-password">Password must be at least 6 characters</label>
-          <input type="checkbox" id="password-checkbox" @click="showPassword">
-            <label for="password-checkbox">Show Password</label>
-          <br />
-          <button type="submit" class="large-btn">Sign up</button>
-          <br />
-          Already have an account? <nuxt-link to="/login">Log in!</nuxt-link>
-        </form>
-      </div>
+  <div class="center-div">
+    <div class="form-card">
+      <form action="submit" method="POST" @submit.prevent="pressed">
+        <h2>Sign up</h2>
+        <br />
+        <input
+          id="create-id"
+          type="email"
+          placeholder="email address"
+          required
+          v-model="account.email"
+        />
+        <br />
+        <input
+          id="create-password"
+          type="password"
+          placeholder="password"
+          required
+          v-model="account.password"
+        />
+        <label for="create-password"
+          >Password must be at least 6 characters</label
+        >
+        <input type="checkbox" id="password-checkbox" @click="showPassword" />
+        <label for="password-checkbox">Show Password</label>
+        <br />
+        <button type="submit" class="large-btn">Sign up</button>
+        <br />
+        Already have an account? <nuxt-link to="/login">Log in!</nuxt-link>
+      </form>
     </div>
   </div>
 </template>
@@ -50,7 +50,10 @@ export default {
     pressed() {
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.account.email, this.account.password)
+        .createUserWithEmailAndPassword(
+          this.account.email,
+          this.account.password
+        )
         .then((user) => {
           console.log(user);
           this.$router.push("/user");
@@ -70,35 +73,3 @@ export default {
   },
 };
 </script>
-
-<style>
-input {
-  width: 100%;
-  padding: 5px;
-  margin: 5px;
-}
-.large-btn {
-  padding: 5px;
-  width: 100%;
-  margin: 5px;
-  background-color: #F7B981;
-  border: 0px;
-  font-size: 15px;
-  border-radius: 8px;
-  color: white;
-}
-.large-btn:hover {
-  padding: 5px;
-  width: 100%;
-  margin: 5px;
-  background-color: #ffa95d;
-  border: 0px;
-  font-size: 15px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-}
-label {
-  font-size: 12px;
-}
-</style>
