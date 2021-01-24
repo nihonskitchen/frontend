@@ -59,11 +59,4 @@ export default {
   min-width: 360px;
   max-width: 360px;
 }
-.remove-btn {
-  width: 20px;
-  height: 20px;
-  padding: 0px;
-  margin: 0px;
-  border-radius: 4px;
-}
 </style>

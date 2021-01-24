@@ -42,7 +42,7 @@
       <h2 class="margins">Ingredients</h2>
       <div v-for="(ingredient, index) in recipe.ingredients" :key="ingredient">
         {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
-        <button id="remove-btn" @click="removeIngredient(index)">X</button>
+        <button class="remove-btn" @click="removeIngredient(index)">x</button>
       </div>
       <div>
         <input
@@ -57,10 +57,7 @@
           v-model="newIngredient.amount"
           maxlength="4"
         />
-        <div>
-        Measurement:
-
-        </div>
+        <div>Measurement:</div>
         <select name="unit" id="unit" class="unit" v-model="newIngredient.unit">
           <option value="" hidden>Select one</option>
           <option v-for="option in unit_options" :key="option">
@@ -76,7 +73,7 @@
       <h2 class="margins">Steps</h2>
       <div v-for="(step, index) in recipe.steps" :key="step">
         {{ step }}
-        <button id="remove-btn" @click="removeStep(index)">X</button>
+        <button class="remove-btn" @click="removeStep(index)">x</button>
       </div>
       <div>
         <input
@@ -122,7 +119,18 @@ export default {
   },
   data() {
     return {
-      unit_options: ["cup", "grams", "ml", "ounce", "piece", "pinch", "pound", "slice", "tablespoon", "teaspoon"],
+      unit_options: [
+        "cup",
+        "grams",
+        "ml",
+        "ounce",
+        "piece",
+        "pinch",
+        "pound",
+        "slice",
+        "tablespoon",
+        "teaspoon",
+      ],
       newIngredient: {},
       newStep: "",
       recipeID: null,
@@ -145,19 +153,15 @@ export default {
   },
   methods: {
     async addNewRecipe() {
-      console.log("POST req sent", this.recipe);
-      await this.$axios.$post("/recipes", this.recipe)
-      .then((res) => {
-        this.$router.push("/user/cookbook")
-      })
-      console.log("POST req completed");
+      await this.$axios.$post("/recipes", this.recipe).then((res) => {
+        this.$router.push("/user/cookbook");
+      });
     },
     addNewIngredient() {
       this.recipe.ingredients.push(this.newIngredient);
       this.newIngredient = {};
     },
     removeIngredient(index) {
-      console.log("remove ingredient");
       this.recipe.ingredients.splice(index, 1);
     },
     addNewStep() {
@@ -166,17 +170,14 @@ export default {
     },
     getUserID() {
       this.recipe.user_id = firebase.auth().currentUser.uid;
-      console.log("USER ID =", this.recipe.user_id);
     },
     removeStep(index) {
-      console.log("remove step", index);
       this.recipe.steps.splice(index, 1);
     },
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
     onUpload() {
-      console.log(this.selectedFile);
       let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`;
       firebase
         .storage()
@@ -184,12 +185,12 @@ export default {
         .put(this.selectedFile)
         .then(
           () => {
-            this.recipe.picture_url = refPath.substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
-            console.log("RECIPE =", this.recipe);
+            this.recipe.picture_url =
+              refPath.substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
             alert("Picture uploaded successfully!");
           },
           (error) => {
-            console.log("error", error.message);
+            console.error("error", error.message);
           }
         );
     },
@@ -207,30 +208,6 @@ export default {
   border: 0px;
   margin: 0px;
   color: white;
-  cursor: pointer;
-}
-.info-card {
-  position: relative;
-  top: 80px;
-  margin: 0 auto 100px;
-  align-self: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  text-align: center;
-  background-color: #f4f2ee;
-  border-radius: 8px;
-  min-width: 360px;
-  max-width: 360px;
-}
-#remove-btn {
-  width: 20px;
-  height: 20px;
-  padding: 0px;
-  margin: 0px;
-  border-radius: 4px;
-}
-.submit-btn {
-  border-radius: 8px;
   cursor: pointer;
 }
 .margins {

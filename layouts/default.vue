@@ -100,6 +100,19 @@ h4 {
   font-size: 14px;
   text-decoration: none;
 }
+.info-card {
+  position: relative;
+  top: 80px;
+  margin: 0 auto 100px;
+  align-self: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  background-color: #f4f2ee;
+  border-radius: 8px;
+  min-width: 360px;
+  max-width: 360px;
+}
 .ingredients-list {
   display: grid;
   grid-template-columns: auto;
@@ -162,10 +175,24 @@ p:last-of-type {
   border-top-right-radius: 8px;
   margin-bottom: 10px;
 }
+.remove-btn {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 4px;
+}
 .strong {
   color: #142c28;
   font-size: 16px;
   font-weight: bold;
+}
+.submit-btn {
+  border-radius: 8px;
+  cursor: pointer;
+}
+.wrapper {
+  display: inline-block;
 }
 
 @media screen and (max-width: 992px) {
