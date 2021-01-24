@@ -131,4 +131,11 @@ export default {
   max-width: 30%;
   border-radius: 5px;
 }
+.add-shopping-checkbox {
+  display: inline-block;
+  width: 20px;
+}
+.left {
+  justify-self: left;
+}
 </style>
