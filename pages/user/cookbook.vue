@@ -1,6 +1,7 @@
 <template>
   <div class="container wrapper">
-    <div class="toggle-btns">
+    <MyRecipes />
+    <!-- <div class="toggle-btns">
       <div v-if="myRecipes">
         <button class="active-btn my-recipes">My Recipes</button>
         <button class="inactive-btn favorites" @click.prevent="toggleView">
@@ -19,7 +20,7 @@
     </div>
     <div v-if="favorites" class="details">
       <Favorites />
-    </div>
+    </div> -->
   </div>
 </template>
 
