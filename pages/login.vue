@@ -1,5 +1,4 @@
 <template>
-  <div class="container">
     <div class="center-div">
       <div class="form-card">
         <div v-if="isError" class="alert">Wrong email address or password!</div>
@@ -29,7 +28,6 @@
         Don't have an account? <nuxt-link to="/signup">Sign up!</nuxt-link>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -48,7 +46,7 @@ export default {
   methods: {
     async login() {
       await this.$store.dispatch("users/login", this.account).catch((error) => {
-        console.log(error);
+        console.error(error);
         this.isError = true;
         this.errMsg = error.code;
 
@@ -64,10 +62,7 @@ export default {
         this.errMsg = error.code;
 
       });
-
-      // this.$router.push("/");
       const path = this.$store.state.users.lastURL === "" ? "/" : this.$store.state.users.lastURL;
-      // console.log(`Path: ${path}`);
       this.$router.push(path);
     },
     showPassword() {
@@ -83,38 +78,17 @@ export default {
 </script>
 
 <style>
-/* p {
-  color: black;
-} */
 .alert {
   background-color: red;
   width: 300px;
 }
-input {
-  width: 100%;
-  padding: 5px;
-  margin: 5px;
-}
 .login-large-btn {
-  padding: 5px;
-  width: 100%;
-  margin: 5px;
   background-color: #e76c73;
-  border: 0px;
-  font-size: 15px;
-  border-radius: 8px;
   color: white;
 }
 .login-large-btn:hover {
-  padding: 5px;
-  width: 100%;
-  margin: 5px;
   background-color: #E5536A;
-  border: 0px;
-  font-size: 15px;
-  border-radius: 8px;
   color: white;
-  cursor: pointer;
 }
 </style>
 

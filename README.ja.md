@@ -1,10 +1,10 @@
 # Nihon's Kitchen
 
-Welcome to Nihon's Kitchen! This project was created as a means to help English-speaking residents in Japan to share their awesome recipes that use Japanese ingredients. It can be difficult for newcomers to Japan to read and understand the packaging on Japanese food labels. So, we created a database where users can scan barcodes and enter English translations to help others.
+Nihon's Kitchenへようこそ！このプロジェクトは、日本に住んでいる英語圏の人たちが、日本の食材を使った素晴らしいレシピを共有できるようにするために作られました。日本に来たばかりの人にとって、日本の食品ラベルのパッケージを読んで理解するのは難しいかもしれません。そこで、ユーザーがバーコードをスキャンして英訳を入力することで、他の人たちを助けるためのデータベースを作りました。
 
-## Demo Link
+## リンク
 
-You can access and use Nihon's Kitchen here:
+Nihon's Kitchenへのアクセスはこちら：
 
 ### Staging Server
 
@@ -14,9 +14,9 @@ https://nihonskitchen.web.app
 
 https://nihonskitchen-prod.web.app
 
-## How to install the app
+## アプリのインストール方法
 
-If you wish to install the app and checkout how the code works, please fork this repository and run the following:
+アプリをインストールしてコードの動作を確認したい場合は、このリポジトリをフォークして以下を実行してください。
 
 ```bash
 # install dependencies
