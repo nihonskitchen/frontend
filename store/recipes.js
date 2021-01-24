@@ -15,6 +15,9 @@ export const mutations = {
   getCardDetails(state) {
     state.recipes = recipes["allRecipes"];
   },
+  setRecipes(state, data) {
+    state.recipes = data;
+  },
   showRecipeDetails(state, index) {
     // console.log("CLICK")
     // for (let i = 0; i < state.recipes.length; i++) {
