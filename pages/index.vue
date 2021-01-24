@@ -79,7 +79,8 @@ export default {
         });
     },
     passRecipeData(index) {
-      this.$store.state.recipes.selectedRecipe = this.recipes[index];
+      // this.$store.state.recipes.selectedRecipe = this.recipes[index];
+      this.$store.commit("recipes/showRecipeDetails", index);
     },
   },
 };

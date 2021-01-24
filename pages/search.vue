@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     passRecipeData(index) {
-      this.$store.state.recipes.selectedRecipe = this.recipes[index];
+      this.$store.commit("recipes/showRecipeDetails", index);
     },
   }
 
