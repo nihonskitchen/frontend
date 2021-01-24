@@ -8,27 +8,3 @@
       </div>
   </div>
 </template>
-
-<script>
-import BarcodeScan from "../components/BarcodeScan.vue"
-
-export default {
-  components: {
-    BarcodeScan
-  },
-  data: function () {
-    return {
-      //
-    }
-  },
-  methods: {
-    //
-  },
-};
-</script>
-
-<style>
-.form-card {
-  top: -30px;
-}
-</style>

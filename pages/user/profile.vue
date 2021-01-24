@@ -77,4 +77,12 @@ export default {
 </script>
 
 <style>
+.submit-btn {
+  background-color: #e76c73;
+  color: white;
+}
+.submit-btn:hover {
+  background-color: #e5536a;
+  color: white;
+}
 </style>
