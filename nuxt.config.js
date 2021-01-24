@@ -1,5 +1,5 @@
 const environment = process.env.NODE_ENV || development;
-const envSet = require(`./env.${environment}.js`);
+const envSet = require(`./.env.${environment}.js`);
 
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
