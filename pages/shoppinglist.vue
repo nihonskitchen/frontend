@@ -1,8 +1,9 @@
 <template>
     <div class="shoppinglist-card">
       <h1>Shopping List</h1>
+      <div v-if="itemList.length === 0">You currently don't have any items in your shopping list.</div>
       <div
-        v-for="(list, index) in this.$store.state.shoppinglist.shoppingList"
+        v-for="(list, index) in itemList"
         :key="list.ingredient_id"
       >
         <ul>

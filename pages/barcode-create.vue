@@ -68,9 +68,17 @@ export default {
 </script>
 
 <style>
+.container {
+  background: yellow;
+  position: absolute;
+  top: 50%; /*親要素を起点に上から50%*/
+  left: 50%;  /*親要素を起点に左から50%*/
+  transform: translateY(-50%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
+  -webkit-transform: translateY(-50%) translateX(-50%);
+}
 .barcode-card {
   position: relative;
-  top: 30px;
+  /* top: 30px; */
   /* bottom: 100px; */
   /* margin-top: 80px; */
   /* margin-bottom: 100px; */
