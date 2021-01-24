@@ -68,6 +68,15 @@ export default {
 </script>
 
 <style>
+.container {
+  display: flex; /* 子要素をflexboxで揃える */
+    flex-direction: column; /* 子要素をflexboxにより縦方向に揃える */
+    justify-content: center; /* 子要素をflexboxにより中央に配置する */
+    align-items: center;  /* 子要素をflexboxにより中央に配置する */
+    width: 100px; /* 見た目用 */
+    height: 50px; /* 見た目用 */
+    border: 1px solid; /* 見た目用 */
+}
 .barcode-card {
   position: relative;
   /* top: 30px; */
