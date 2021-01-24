@@ -45,8 +45,15 @@ export const actions = {
       // const profile = await this.$axios.$get(`https://nihons-kitchen-server.an.r.appspot.com/api/users/${uid}`);
       const profile = await this.$axios.$get(`/users/${uid}`);
       // console.log("profile");
-      // console.log(profile);
       commit("setProfile", profile.data.users);
+      console.log("profile =", profile);
+    } catch (error) {
+      throw error;
+    }
+  },
+  async addFavorites() {
+    try {
+
     } catch (error) {
       throw error;
     }
