@@ -54,6 +54,7 @@ export default {
   methods: {
     getRecipes() {
       // I don't know why variable of "this" to refer is need....
+      // Please don't remove this declaration.
       let self = this;
       // this.$axios.get("/recipes") -> res.data.data.recipes
       this.$axios
@@ -65,15 +66,15 @@ export default {
           });
         })
         .then(async () => {
-          let ref = firebase.storage().ref();
           self.recipes.map((element) => {
+            const ref = firebase.storage().ref();
             ref
               .child(element.picture_url)
               .getDownloadURL()
               .then((url) => (element.picture_url = url));
           });
           // console.log("self.recipes =", self.recipes);
-          this.$store.state.recipes.recipes = self.recipes;
+          this.$store.commit("recipes/setRecipes", self.recipes);
           return self.recipes;
         });
     },

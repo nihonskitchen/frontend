@@ -1,7 +1,15 @@
 <template>
   <div class="home-page">
     <h1>Search results</h1>
-    <nuxt-link to="recipe-details">
+
+    <a v-if="!this.$store.state.search.result">
+      <div class="card column nothing">
+        Sorry, not find recipes.<br />
+        Please try again.
+      </div>
+    </a>
+
+    <nuxt-link to="recipe-details" v-else>
       <div
         v-for="(recipe, index) in this.recipes"
         :key="index"
@@ -25,6 +33,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 
 export default {
   asyncData() {
@@ -40,13 +49,25 @@ export default {
   data() {
     return {
       recipes: this.$store.state.recipes.recipes,
+      result: this.$store.state.search.result,
     };
+  },
+  computed: {
+    //
+  },
+  mounted() {
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'recipes/setRecipes') {
+        this.recipes = this.$store.state.recipes.recipes;
+      }
+    });
   },
   methods: {
     passRecipeData(index) {
       this.$store.state.recipes.selectedRecipe = this.recipes[index];
     },
-  },
+  }
+
 };
 </script>
 
@@ -117,6 +138,11 @@ p {
   padding: 0px;
   margin: 20px;
   /* align-self: center; */
+}
+.nothing {
+  padding: 20px;
+  font-size: 14px;
+  color: #737A7B;
 }
 @media screen and (max-width: 992px) {
   .column {

@@ -5,7 +5,8 @@
 				type="text"
 				placeholder="Search"
 				v-model="searchWord"
-				@change="searching" />
+				@change="searching"
+        @focus="clear" />
 			<nuxt-link to="/barcode">Scan Barcode</nuxt-link>
 			<nuxt-link to="/user/create-recipe">Add Recipe</nuxt-link>
 	  </nav>
@@ -22,78 +23,57 @@ export default {
       searchRecipes: []
 		}
 	},
-	methods: {
+  mounted() {
+    this.$store.subscribe((mutation, state) => {
+      console.log(`mutation.type: ${mutation.type}`);
+      if (mutation.type === 'recipes/setRecipes') {
+        console.log('call mutation!');
+        console.log(state.recipes.recipes);
+      }
+    });
+  },
+  methods: {
+    clear() {
+      console.log('clear');
+      this.searchWord = "";
+    },
 		async searching() {
 			try {
         this.searchRecipes = [];
-				const data = await this.$axios.$get(`/recipes/name/${this.searchWord}`);
-				// console.log(data.data.recipes);
-				if (data.data.recipes === null) {
-					this.$store.commit("search/setResultFalse");
-				} else {
-          // console.log("success");
+        const data = await this.$axios.$get(`/recipes/name/${this.searchWord}`);
+        this.$store.commit("search/setResultFalse");
+        
+				if (data.data.recipes !== null) {
           data.data.recipes.map((element) => {
             this.searchRecipes.push(element);
           });
 
+          // This "self" declaration is necessary.
+          // (But sorry I don't know why) Please don't remove.
           self = this;
-          function imgLoad() {
-            let ref = firebase.storage().ref();
+          function imgLoad() {            
             self.searchRecipes.map((element) => {
+              const ref = firebase.storage().ref();
               ref
-              .child(element.picture_url)
-              .getDownloadURL()
-              .then((url) => (element.picture_url = url));
+                .child(element.picture_url)
+                .getDownloadURL()
+                .then((url) => (element.picture_url = url));
             });
-            self.$store.state.recipes.recipes = self.searchRecipes;
-            // console.log("after");
             return self.searchRecipes;
           }
-          // console.log("before");
           imgLoad();
+          this.$store.commit("search/setResultTrue");
         }
-        if (this.$route.path !== "/search") {
-          console.log("03");
-          this.$router.push("/search");
-        }
-				return;
+
+        this.$store.commit("recipes/setRecipes", this.searchRecipes);
+        this.$router.push("/search");
+        return;
+        
 			} catch (err) {
 				console.log("error");
 				console.log(err);
-			}
-			// try {
-			// 	console.log(this.searchWord);
-
-			// } catch (err) {
-			// 	console.log(err);
-			// }
-    },
-    getRecipes(data) {
-      data.map((element) => {
-        this.recipes.push(element);
-      });
-      async () => {
-        let ref = firebase.storage().ref();
-        this.recipes.map((element) => {
-          ref
-          .child(element.picture_url)
-          .getDownloadURL()
-          .then((url) => (element.picture_url = url));
-        });
-        this.$store.state.recipes.recipes = this.recipes;
-        return this.recipes;
-
-      // // I don't know why variable of "this" to refer is need....
-      // let self = this;
-      // // this.$axios.get("/recipes") -> res.data.data.recipes
-      // this.$axios
-      //   .$get("/recipes")
-      //   .then((res) => res.data.recipes)
-      //   .then((data) => {
-      //   })
-      //   .then(
       }
-    }
+    },
 	}
 }
 </script>
