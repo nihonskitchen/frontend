@@ -1,33 +1,35 @@
 <template>
-    <div class="center-div">
-      <div class="form-card">
-        <div v-if="isError" class="alert">Wrong email address or password!</div>
-        <form action="submit" method="POST" @submit.prevent>
-          <h2>Login</h2>
-          <br />
-          <input
-            id="user-id"
-            type="email"
-            placeholder="email address"
-            v-model="account.email"
-            required
-          />
-          <br />
-          <input
-            id="user-password"
-            type="password"
-            placeholder="password"
-            required
-            v-model="account.password"
-          />
-            <input type="checkbox" id="password-checkbox" @click="showPassword">
-            <label for="password-checkbox">Show Password</label>
-          <br />
-          <button @click="login" type="submit" class="login-large-btn">Login</button>
-        </form>
-        Don't have an account? <nuxt-link to="/signup">Sign up!</nuxt-link>
-      </div>
+  <div class="center-div">
+    <div class="form-card">
+      <div v-if="isError" class="alert">Wrong email address or password!</div>
+      <form action="submit" method="POST" @submit.prevent>
+        <h2>Login</h2>
+        <br />
+        <input
+          id="user-id"
+          type="email"
+          placeholder="email address"
+          v-model="account.email"
+          required
+        />
+        <br />
+        <input
+          id="user-password"
+          type="password"
+          placeholder="password"
+          required
+          v-model="account.password"
+        />
+        <input type="checkbox" id="password-checkbox" @click="showPassword" />
+        <label for="password-checkbox">Show Password</label>
+        <br />
+        <button @click="login" type="submit" class="login-large-btn">
+          Login
+        </button>
+      </form>
+      Don't have an account? <nuxt-link to="/signup">Sign up!</nuxt-link>
     </div>
+  </div>
 </template>
 
 <script>
@@ -53,16 +55,20 @@ export default {
         setTimeout(() => {
           this.isError = false;
         }, 5000);
-        return
+        return;
       });
 
-      await this.$store.dispatch("users/userDatas", this.$store.state.users.user.uid).catch((error) => {
-        console.log(error);
-        this.isError = true;
-        this.errMsg = error.code;
-
-      });
-      const path = this.$store.state.users.lastURL === "" ? "/" : this.$store.state.users.lastURL;
+      await this.$store
+        .dispatch("users/userDatas", this.$store.state.users.user.uid)
+        .catch((error) => {
+          console.log(error);
+          this.isError = true;
+          this.errMsg = error.code;
+        });
+      const path =
+        this.$store.state.users.lastURL === ""
+          ? "/"
+          : this.$store.state.users.lastURL;
       this.$router.push(path);
     },
     showPassword() {
@@ -87,7 +93,7 @@ export default {
   color: white;
 }
 .login-large-btn:hover {
-  background-color: #E5536A;
+  background-color: #e5536a;
   color: white;
 }
 </style>

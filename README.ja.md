@@ -1,6 +1,6 @@
 # Nihon's Kitchen
 
-Nihon's Kitchenへようこそ！このプロジェクトは、日本に住んでいる英語圏の人たちが、日本の食材を使った素晴らしいレシピを共有できるようにするために作られました。日本に来たばかりの人にとって、日本の食品ラベルのパッケージを読んで理解するのは難しいかもしれません。そこで、ユーザーがバーコードをスキャンして英訳を入力することで、他の人たちを助けるためのデータベースを作りました。
+Nihon's Kitchenへようこそ！このプロジェクトは、日本に住んでいる英語圏の人たちが、日本の食材を使った素晴らしいレシピを英語で共有できるようにするために作られました。日本に来たばかりの人にとって、日本の食品ラベルのパッケージを読んで理解するのは難しいかもしれません。そこで、ユーザーがバーコードをスキャンして英訳を入力することで、他の人たちを助けるためのデータベースを作りました。
 
 ## リンク
 
@@ -35,26 +35,26 @@ $ yarn generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-## Current Features
-1. Create and view recipes
-2. Find and share product information via the barcode scanner
-3. Add recipe ingredients to your shopping list and buy them online
-4. Create and manage your user profile
-5. Search to find specific recipes
+## 機能
+1. レシピの投稿と閲覧
+2. バーコードスキャナによる製品情報の検索と共有
+3. レシピの材料をショッピングリストに追加して、オンラインで購入
+4. ユーザープロフィールの作成と管理
+5. レシピ検索
 
-## Future Features
-1. Add recipes to your "Favorites" list
-2. Comment on recipes
-3. Give great recipes a thumbs up, or not-so-great ones a thumbs down
-4. Show recipe prices
-5. Recipe suggestions based on what you currently have in your refrigerator!
+## 追加予定の機能
+1. レシピを「お気に入り」リストに追加
+2. レシピへのコメント
+3. レシピの評価
+4. レシピの価格表示
+5. レシピの編集と削除
+6. 冷蔵庫にある材料を元にレシピ提案
 
-## Technologies Used
-
+## 使用した技術
 1. Vue.js: https://vuejs.org
 2. NuxtJS: https://nuxtjs.org
 3. QuaggaJS: https://serratus.github.io/quaggaJS
-5. Firebase: https://firebase.google.com  
+4. Firebase: https://firebase.google.com
     * Firebase Hosting
     * Firebase Authentication
     * Cloud Storage

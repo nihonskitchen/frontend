@@ -47,14 +47,15 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 2. Comment on recipes
 3. Give great recipes a thumbs up, or not-so-great ones a thumbs down
 4. Show recipe prices
-5. Recipe suggestions based on what you currently have in your refrigerator!
+5. Edit and delete recipes
+6. Recipe suggestions based on what you currently have in your refrigerator!
 
 ## Technologies Used
 
 1. Vue.js: https://vuejs.org
 2. NuxtJS: https://nuxtjs.org
 3. QuaggaJS: https://serratus.github.io/quaggaJS
-5. Firebase: https://firebase.google.com  
+4. Firebase: https://firebase.google.com
     * Firebase Hosting
     * Firebase Authentication
     * Cloud Storage
