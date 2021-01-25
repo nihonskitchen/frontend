@@ -1,45 +1,45 @@
 <template>
-  <div class="info-card">
-    <div class="recipe-inner">
-      <img
-        :src="this.recipeData.picture_url"
-        alt=""
-        class="recipe-detail-img"
-      />
-      <h2 class="recipe-title">{{ this.recipeData.recipe_name }}</h2>
-      <p class="recipe-text recipe-serving">
-        Number of servings:
-        <span class="strong">{{ this.recipeData.servings }}</span>
-      </p>
-      <p class="recipe-text recipe-time">
-        Preparation time: <span class="strong">{{ this.recipeData.time }}</span>
-      </p>
+  <div id="main-div">
+    <div class="info-card">
+      <div class="recipe-inner">
+        <img
+          :src="this.recipeData.picture_url"
+          alt=""
+          class="recipe-detail-img"
+        />
+        <h2 class="recipe-title">{{ this.recipeData.recipe_name }}</h2>
+        <p class="recipe-text recipe-serving">
+          Number of servings:
+          <span class="strong">{{ this.recipeData.servings }}</span>
+        </p>
+        <p class="recipe-text recipe-time">
+          Preparation time:
+          <span class="strong">{{ this.recipeData.time }}</span>
+        </p>
 
-      <p class="recipe-text">{{ this.recipeData.owner_comment }}</p>
-      <div class="button-area">
-        <h2 class="recipe-title">Ingredients</h2>
-      </div>
-      <div
-        class="ingredients-list"
-        v-for="(ingredient, index) of this.recipeData.ingredients"
-        :key="index"
-      >
-        <div class="left">
-          <input
-            type="checkbox"
-            class="add-shopping-checkbox"
-            :id="ingredient.name"
-            @click="addOrRemoveIngredient(ingredient, index)"
-          />
-          {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+        <p class="recipe-text">{{ this.recipeData.owner_comment }}</p>
+        <div class="button-area">
+          <h2 class="recipe-title">Ingredients</h2>
         </div>
-      </div>
-      <button @click="addToShoppingList">Add to shopping list</button>
-      <h2 class="recipe-title">Steps</h2>
-      <div v-for="(step, index) in this.recipeData.steps" :key="step">
-        <div>
-          {{ index + 1 }}. {{ step }}
-
+        <div
+          class="ingredients-list"
+          v-for="(ingredient, index) of this.recipeData.ingredients"
+          :key="index"
+        >
+          <div class="left">
+            <input
+              type="checkbox"
+              class="add-shopping-checkbox"
+              :id="ingredient.name"
+              @click="addOrRemoveIngredient(ingredient, index)"
+            />
+            {{ ingredient.amount }} {{ ingredient.unit }} {{ ingredient.name }}
+          </div>
+        </div>
+        <button @click="addToShoppingList">Add to shopping list</button>
+        <h2 class="recipe-title">Steps</h2>
+        <div v-for="(step, index) in this.recipeData.steps" :key="step">
+          <div class="margins">{{ index + 1 }}. {{ step }}</div>
         </div>
       </div>
     </div>
