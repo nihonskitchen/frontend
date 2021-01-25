@@ -1,6 +1,6 @@
 <template>
-<div>
-  <!-- <div id="main-div"> -->
+<!-- <div> -->
+  <div id="main-div">
     <Header />
     <Nuxt />
     <Footer />
@@ -123,6 +123,9 @@ input {
   width: 100%;
   padding: 5px;
   margin: 5px;
+  background-color: white;
+  border-style: solid;
+  border-radius: 3px;
 }
 label {
   font-size: 12px;

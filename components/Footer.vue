@@ -7,8 +7,12 @@
 				v-model="searchWord"
 				@change="searching"
         @focus="clear" />
-			<nuxt-link to="/barcode">Scan Barcode</nuxt-link>
-			<nuxt-link to="/user/create-recipe">Add Recipe</nuxt-link>
+
+			<nuxt-link to="/barcode">
+        <button class="barcode-button"><img src="~/assets/resources/barcode.png" alt="barcode scan"></button>
+      </nuxt-link>
+			<!-- <nuxt-link to="/barcode">Scan Barcode</nuxt-link> -->
+			<!-- <nuxt-link to="/user/create-recipe">Add Recipe</nuxt-link> -->
 	  </nav>
   </footer>
 </template>
@@ -92,17 +96,21 @@ footer {
 	align-items: center;
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
 }
-
-nav {
+footer nav {
 	display: flex;
 	align-items: center;
 	margin: 0 -15px;
 	/* color: white; */
 }
-nav a {
+footer nav a {
 	display: block;
 	margin: 0 15px;
-	color: #000;
-	
+	color: #000;	
+}
+.barcode-button {
+  padding: 5px 5px 0 5px;
+  border-radius: 3px;
+  border: 2px solid #F4F2EE;
+  background-color: #E5536A;
 }
 </style>
