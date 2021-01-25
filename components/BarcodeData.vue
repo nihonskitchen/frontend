@@ -26,15 +26,6 @@ export default {
     this.barcode_data = this.$store.state.barcode.details.barcode_data;
     this.ingredient_name = this.$store.state.barcode.details.ingredient_name;
     this.description = this.$store.state.barcode.details.description;
-    // if (this.mode === "show") {
-    //   this.barcode_data = this.$store.state.barcode.details.barcode_data;
-    //   this.ingredient_name = this.$store.state.barcode.details.ingredient_name;
-    //   this.description = this.$store.state.barcode.details.description;
-    // } else {
-    //   this.barcode = this.$store.state.barcode.newSubmit.BarcodeData;
-    //   this.product_name = this.$store.state.barcode.newSubmit.IngredientName;
-    //   this.description = this.$store.state.barcode.newSubmit.Description;
-    // }
   },
   methods: {
     //
