@@ -1,33 +1,72 @@
 <template>
   <header>
-    <div class="title">
-      <nuxt-link to="/" id="main-title">Nihon's Kitchen</nuxt-link>
-    </div>
     <nav>
-      <nuxt-link to="/shoppinglist">Shopping List</nuxt-link>
-      <nuxt-link to="/user/cookbook">Cookbook</nuxt-link>
-      <nuxt-link to="/user/profile">Profile</nuxt-link>
-      <div v-if="this.$store.state.users.user === null"><nuxt-link to="/login"><button class="login-btn">Login</button></nuxt-link> </div>
+      <v-app-bar app>
+        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+        <v-toolbar-title
+          ><nuxt-link to="/" id="main-title"
+            >Nihon's Kitchen</nuxt-link
+          ></v-toolbar-title
+        >
+        <div v-if="this.$store.state.users.user === null">
+          <nuxt-link to="/login"
+            ><button class="login-btn">Login</button></nuxt-link
+          >
+        </div>
 
-      <div v-if="this.$store.state.users.user !== null"><button @click="logout" class="logout-btn">Logout</button></div>
-      
+        <div v-if="this.$store.state.users.user !== null">
+          <button @click="logout" class="logout-btn">Logout</button>
+        </div>
+      </v-app-bar>
+      <v-navigation-drawer v-model="drawer" fixed temporary>
+        <v-list nav dense>
+          <v-list-item-group>
+            <v-list-item>
+              <v-list-item-title
+                ><nuxt-link to="/shoppinglist"
+                  >Shopping List</nuxt-link
+                ></v-list-item-title
+              >
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title
+                ><nuxt-link to="/user/cookbook"
+                  >Cookbook</nuxt-link
+                ></v-list-item-title
+              >
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title
+                ><nuxt-link to="/user/profile"
+                  >Profile</nuxt-link
+                ></v-list-item-title
+              >
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
     </nav>
   </header>
 </template>
 <script>
-import Cookie from 'js-cookie'
+import Cookie from "js-cookie";
 import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
+  data() {
+    return {
+      drawer: false,
+    };
+  },
   methods: {
     async logout() {
       await firebase.auth().signOut();
-      await Cookie.remove('access_token');
-      location.href = '/'
-    }
-  }
-}
+      await Cookie.remove("access_token");
+      location.href = "/";
+    },
+  },
+};
 </script>
 
 <style>
@@ -76,7 +115,7 @@ nav a {
   font-size: 15px;
   border-radius: 8px;
   padding: 5px;
-  background-color: #E5536A;
+  background-color: #e5536a;
   border: 0px;
   margin: 0px;
   color: white;
@@ -86,7 +125,7 @@ nav a {
   font-size: 15px;
   border-radius: 8px;
   padding: 5px;
-  background-color: #F7B981;
+  background-color: #f7b981;
   border: 0px;
   margin: 0px;
   color: white;

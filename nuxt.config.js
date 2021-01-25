@@ -34,7 +34,9 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
-  buildModules: [],
+  buildModules: [
+    '@nuxtjs/vuetify',
+  ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
@@ -86,7 +88,7 @@ export default {
     },
     "/Amazon": {
       target: "https://www.amazon.co.jp",
-      pathRewrite: {"^/Amazon": "/afx/ingredients/verify"}
+      pathRewrite: { "^/Amazon": "/afx/ingredients/verify" }
     }
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
