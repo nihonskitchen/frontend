@@ -59,7 +59,8 @@ export default {
     ],
     // '@nuxt/content',
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/pwa'
   ],
   env: envSet,
   axios: {
@@ -90,5 +91,20 @@ export default {
     }
   },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {}
+  build: {},
+    /*
+   ** @nuxtjs/pwa Configuration
+   ** https://github.com/nuxt-community/pwa-module
+   */
+  manifest: {
+    name: "Nihon's Kitchen",
+    lang: 'en',
+    short_name: "Nihon's",
+    title: "Nihon's Kitchen",
+    'og:title': "Nihon's Kitchen",
+    description: "Welcome to Nihon's Kitchen! This project was created as a means to help English-speaking residents in Japan to share their awesome recipes that use Japanese ingredients.",
+    'og:description': "Welcome to Nihon's Kitchen! This project was created as a means to help English-speaking residents in Japan to share their awesome recipes that use Japanese ingredients.",
+    theme_color: '#E5536A',
+    background_color: '#F4F2EE'
+  },
 };
