@@ -36,10 +36,11 @@
       </div>
       <button @click="addToShoppingList">Add to shopping list</button>
       <h2 class="recipe-title">Steps</h2>
-      <div v-for="step in this.recipeData.steps" :key="step">
-        <ol>
-          <li>{{ step }}</li>
-        </ol>
+      <div v-for="(step, index) in this.recipeData.steps" :key="step">
+        <div>
+          {{ index + 1 }}. {{ step }}
+
+        </div>
       </div>
     </div>
   </div>

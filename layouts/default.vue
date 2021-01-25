@@ -1,5 +1,6 @@
 <template>
-  <div id="main-div">
+<div>
+  <!-- <div id="main-div"> -->
     <Header />
     <Nuxt />
     <Footer />
