@@ -35,11 +35,11 @@ export default {
   },
   methods: {
     amazonURL(item) {
-      window.open(`https://www.amazon.co.jp/s?k=${item}&i=amazonfresh`) 
+      window.open(`https://www.amazon.co.jp/s?k=${item}&i=amazonfresh&tag=nihonskitchen-22`) 
     },
-    rakutenURL (url) {
-      window.open(`https://search.rakuten.co.jp/search/mall/${url}/100227/?st=O`, '_blank')
-    },
+    // rakutenURL (url) {
+    //   window.open(`https://search.rakuten.co.jp/search/mall/${url}/100227/?st=O`, '_blank')
+    // },
     removeFromShoppingList(index) {
       this.$store.commit(
         "shoppinglist/removeFromShoppingList",

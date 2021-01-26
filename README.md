@@ -2,6 +2,12 @@
 
 Welcome to Nihon's Kitchen! This project was created as a means to help English-speaking residents in Japan to share their awesome recipes that use Japanese ingredients. It can be difficult for newcomers to Japan to read and understand the packaging on Japanese food labels. So, we created a database where users can scan barcodes and enter English translations to help others.
 
+[日本語の説明はこちらです。](./README.js.md)
+
+### Back End Repo
+
+https://github.com/nihonskitchen/serverside
+
 ## Demo Link
 
 You can access and use Nihon's Kitchen here:
@@ -36,6 +42,7 @@ $ yarn generate
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
 ## Current Features
+
 1. Create and view recipes
 2. Find and share product information via the barcode scanner
 3. Add recipe ingredients to your shopping list and buy them online
@@ -43,6 +50,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 5. Search to find specific recipes
 
 ## Future Features
+
 1. Add recipes to your "Favorites" list
 2. Comment on recipes
 3. Give great recipes a thumbs up, or not-so-great ones a thumbs down
@@ -56,8 +64,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 2. NuxtJS: https://nuxtjs.org
 3. QuaggaJS: https://serratus.github.io/quaggaJS
 4. Firebase: https://firebase.google.com
-    * Firebase Hosting
-    * Firebase Authentication
-    * Cloud Storage
-    * Cloud Firestore
-
+   - Firebase Hosting
+   - Firebase Authentication
+   - Cloud Storage
+   - Cloud Firestore

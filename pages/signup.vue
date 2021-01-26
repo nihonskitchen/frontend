@@ -73,3 +73,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.center-div{
+  margin: -60px;
+}
+</style>

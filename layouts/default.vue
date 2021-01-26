@@ -1,4 +1,5 @@
 <template>
+<!-- <div> -->
   <div id="main-div">
     <Header />
     <Nuxt />
@@ -48,6 +49,12 @@ button {
   min-height: 90vh;
   display: flex;
   justify-content: center;
+}
+.scan-container {
+  margin: -60px;
+}
+.scan-container h2 {
+  margin: 0;
 }
 .column {
   float: left;
@@ -122,6 +129,9 @@ input {
   width: 100%;
   padding: 5px;
   margin: 5px;
+  background-color: white;
+  border-style: solid;
+  border-radius: 3px;
 }
 label {
   font-size: 12px;
@@ -195,7 +205,9 @@ p:last-of-type {
 .wrapper {
   display: inline-block;
 }
-
+.margins{
+  margin: 0;
+}
 @media screen and (max-width: 992px) {
   .column {
     width: 50%;

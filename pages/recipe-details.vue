@@ -12,7 +12,8 @@
         <span class="strong">{{ this.recipeData.servings }}</span>
       </p>
       <p class="recipe-text recipe-time">
-        Preparation time: <span class="strong">{{ this.recipeData.time }}</span>
+        Preparation time:
+        <span class="strong">{{ this.recipeData.time }}</span>
       </p>
 
       <p class="recipe-text">{{ this.recipeData.owner_comment }}</p>
@@ -36,10 +37,8 @@
       </div>
       <button @click="addToShoppingList">Add to shopping list</button>
       <h2 class="recipe-title">Steps</h2>
-      <div v-for="step in this.recipeData.steps" :key="step">
-        <ol>
-          <li>{{ step }}</li>
-        </ol>
+      <div v-for="(step, index) in this.recipeData.steps" :key="step">
+        <div class="margins">{{ index + 1 }}. {{ step }}</div>
       </div>
     </div>
   </div>
