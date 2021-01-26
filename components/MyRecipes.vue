@@ -69,4 +69,9 @@ export default {
 </script>
 
 <style>
+.home-page a {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 </style>

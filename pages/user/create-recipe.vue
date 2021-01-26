@@ -58,8 +58,12 @@
           maxlength="4"
         />
         <div>Measurement:</div>
-        <select name="unit" id="unit" class="unit" v-model="newIngredient.unit">
-          <option value="" hidden>Select one</option>
+        <!-- <v-select
+          :items="unit_options"
+          label="unit_options"
+        ></v-select> -->
+        <select name="unit" id="unit" class="unit measures" v-model="newIngredient.unit">
+          <option value="" disabled>Select one</option>
           <option v-for="option in unit_options" :key="option">
             {{ option }}
           </option>
@@ -218,6 +222,24 @@ export default {
   width: 100px;
   margin: 10px;
   height: 25px;
+}
+/* select.measures {
+  background-color: initial;
+  appearance: normal;
+  -moz-appearance: normal;
+  -webkit-appearance: normal;
+  border-style: solid;
+  border-radius: 3px;
+} */
+select.measures {
+  appearance: normal;
+  -moz-appearance: normal;
+  -webkit-appearance: normal;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+option[disabled] {
+  color: gray;
 }
 </style>
 
