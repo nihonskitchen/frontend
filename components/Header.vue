@@ -46,7 +46,7 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>
-                  <nuxt-link to="/user/create-recipe">My Cookbook</nuxt-link>
+                  <nuxt-link to="/user/cookbook">My Cookbook</nuxt-link>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -56,7 +56,7 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>
-                  <nuxt-link to="/user/cookbook">Add Recipe</nuxt-link>
+                  <nuxt-link to="/user/create-recipe">Add Recipe</nuxt-link>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>

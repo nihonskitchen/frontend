@@ -202,9 +202,9 @@ p:last-of-type {
   border-radius: 8px;
   cursor: pointer;
 }
-.wrapper {
+/* .wrapper {
   display: inline-block;
-}
+} */
 .margins{
   margin: 0;
 }
