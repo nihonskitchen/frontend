@@ -2,7 +2,7 @@
   <header>
     <nav>
       <nuxt-link to="/" id="main-title">
-        <img :src="require('~/assets/resources/logo.png')" alt="Nihon's Kitchen">
+        <img :src="require('~/assets/resources/logo.png')" alt="Nihon's Kitchen" class="logo">
       </nuxt-link>
       <!-- <div class="header-right"> -->
         <!-- <div v-if="this.$store.state.users.user === null">
@@ -31,24 +31,44 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
-              <v-list-item-title>
-                <nuxt-link to="/shoppinglist">Shopping List</nuxt-link>
-              </v-list-item-title>
+              <v-list-item-icon>
+                <v-icon medium>mdi-format-list-bulleted</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <nuxt-link to="/user/shoppinglist">Shopping List</nuxt-link>
+                </v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-title>
-                <nuxt-link to="/user/cookbook">Cookbook</nuxt-link>
-              </v-list-item-title>
+              <v-list-item-icon>
+                <v-icon medium>mdi-notebook-outline</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <nuxt-link to="/user/create-recipe">My Cookbook</nuxt-link>
+                </v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-title>
-                <nuxt-link to="/user/cookbook">Add Recipe</nuxt-link>
-              </v-list-item-title>
+              <v-list-item-icon>
+                <v-icon medium>mdi-notebook-edit</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <nuxt-link to="/user/cookbook">Add Recipe</nuxt-link>
+                </v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
             <v-list-item>
-              <v-list-item-title>
-                <nuxt-link to="/user/profile">Profile</nuxt-link>
-              </v-list-item-title>
+              <v-list-item-icon>
+                <v-icon medium>mdi-account-circle</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>
+                  <nuxt-link to="/user/profile">Profile</nuxt-link>
+                </v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -82,7 +102,7 @@ header {
     top: 0;
     left: 0; */
   width: 100%;
-  padding: 15px 30px;
+  padding: 10px 20px;
   background-color: #f4f2ee;
   display: flex;
   justify-content: space-between;
@@ -114,6 +134,9 @@ header nav {
 nav a {
   display: block;
   /* margin: 0 15px; */
+}
+.logo {
+  width: 200px;
 }
 .login-btn {
   width: 80px;
@@ -155,5 +178,8 @@ nav a {
   margin: 0px;
   color: white;
   cursor: pointer;
+}
+.v-list-item__content{
+  margin-left: 5px;
 }
 </style>

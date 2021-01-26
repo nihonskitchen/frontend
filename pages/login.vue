@@ -83,7 +83,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .alert {
   background-color: red;
   width: 300px;
@@ -95,6 +95,9 @@ export default {
 .login-large-btn:hover {
   background-color: #e5536a;
   color: white;
+}
+.center-div{
+  margin: -60px;
 }
 </style>
 

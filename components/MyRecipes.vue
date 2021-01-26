@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>My Recipes</h1>
+  <div class="home-page">
+    <h1>My Cookbook</h1>
     <nuxt-link to="/recipe-details">
       <div
         v-for="(recipe, index) in this.recipes"

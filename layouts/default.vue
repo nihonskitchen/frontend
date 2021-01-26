@@ -50,6 +50,12 @@ button {
   display: flex;
   justify-content: center;
 }
+.scan-container {
+  margin: -60px;
+}
+.scan-container h2 {
+  margin: 0;
+}
 .column {
   float: left;
   width: 25%;
@@ -199,7 +205,9 @@ p:last-of-type {
 .wrapper {
   display: inline-block;
 }
-
+.margins{
+  margin: 0;
+}
 @media screen and (max-width: 992px) {
   .column {
     width: 50%;
