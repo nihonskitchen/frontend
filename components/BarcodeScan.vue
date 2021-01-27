@@ -64,7 +64,7 @@ export default {
       const config = {
         locate: true,
         numOfWorkers: navigator.hardwareConcurrency || 4,
-        inputStream: { name: "Live", type: "LiveStream", target: "#cameraArea", constraints: { facingMode: "environment"} },
+        inputStream: { name: "Live", type: "LiveStream", target: "#cameraArea", constraints: { width: 640, height: 480, facingMode: "environment" } },
         frequency: 10,
         decoder: { readers: [ 'ean_reader' ], multiple: false },
         locator: { halfSample: true, patchSize: "medium" },

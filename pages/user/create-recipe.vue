@@ -110,7 +110,7 @@
         <button class="add-btn" @click="onUpload">Upload Picture</button>
       </div>
       <div>
-        <button class="submit-btn margins" type="submit" @click="addNewRecipe">
+        <button class="submit-btn margins" type="submit" @click="addNewRecipe" accept="image/*">
           Submit
         </button>
       </div>
