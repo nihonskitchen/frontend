@@ -4,8 +4,7 @@
 
     <a v-if="!this.$store.state.search.result">
       <div class="card column nothing">
-        Sorry, not find recipes.<br />
-        Please try again.
+        Sorry, we didn't find any recipes with that name!<br />
       </div>
     </a>
 
