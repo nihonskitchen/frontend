@@ -6,12 +6,6 @@ Nihon's Kitchenへようこそ！このプロジェクトは、日本に住ん�
 
 Nihon's Kitchenへのアクセスはこちら：
 
-### Staging Server
-
-https://nihonskitchen.web.app
-
-### Production Server
-
 https://nihonskitchen-prod.web.app
 
 ## アプリのインストール方法
