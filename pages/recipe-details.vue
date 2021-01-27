@@ -37,7 +37,7 @@
       </div>
       <button @click="addToShoppingList">Add to shopping list</button>
       <h2 class="recipe-title">Steps</h2>
-      <div v-for="(step, index) in this.recipeData.steps" :key="step">
+      <div v-for="(step, index) in this.recipeData.steps" :key="step" class="recipe-steps">
         <div class="margins">{{ index + 1 }}. {{ step }}</div>
       </div>
     </div>
@@ -105,5 +105,11 @@ export default {
 .recipe-time {
   color: #737a7b;
   font-size: 12px;
+}
+.recipe-steps {
+  text-align: left;
+  text-indent: -1.3em;
+  margin-left: 1.3em;
+  line-height: 1.5em;
 }
 </style>
