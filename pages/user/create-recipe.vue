@@ -202,6 +202,7 @@ export default {
       this.selectedFile = event.target.files[0];
     },
     uuidv4() {
+      // credit for this function https://gist.github.com/jed/982883
       return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
         (
           c ^
@@ -213,12 +214,10 @@ export default {
       if (this.selectedFile === null) {
         alert("Select a picture to upload!");
       } else {
-        // let tempIndex = this.selectedFile.name.indexOf(".");
-        // let tempPic = this.selectedFile.name.splice(tempIndex);
         let refPath = `recipes/${this.$store.state.users.user.uid}/${
           this.uuidv4()
         }`;
-        console.log("refPath =", refPath);
+        // console.log("refPath =", refPath);
         firebase
           .storage()
           .ref(refPath)
@@ -227,7 +226,6 @@ export default {
             () => {
               this.recipe.picture_url = refPath + 
               "_500x500";
-              // .substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
               alert("Picture uploaded successfully!");
               this.pictureUploaded = true;
             },
