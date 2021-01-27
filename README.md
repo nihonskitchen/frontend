@@ -2,7 +2,7 @@
 
 Welcome to Nihon's Kitchen! This project was created as a means to help English-speaking residents in Japan to share their awesome recipes that use Japanese ingredients. It can be difficult for newcomers to Japan to read and understand the packaging on Japanese food labels. So, we created a database where users can scan barcodes and enter English translations to help others.
 
-[日本語の説明はこちらです。](./README.js.md)
+[日本語の説明はこちらです。](./README.ja.md)
 
 ### Back End Repo
 
