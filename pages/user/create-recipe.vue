@@ -62,7 +62,12 @@
           :items="unit_options"
           label="unit_options"
         ></v-select> -->
-        <select name="unit" id="unit" class="unit measures" v-model="newIngredient.unit">
+        <select
+          name="unit"
+          id="unit"
+          class="unit measures"
+          v-model="newIngredient.unit"
+        >
           <option value="" disabled>Select one</option>
           <option v-for="option in unit_options" :key="option">
             {{ option }}
@@ -105,7 +110,7 @@
         <button class="add-btn" @click="onUpload">Upload Picture</button>
       </div>
       <div>
-        <button class="submit-btn margins" type="submit" @click="addNewRecipe">
+        <button class="submit-btn margins" type="submit" @click="addNewRecipe" accept="image/*">
           Submit
         </button>
       </div>
@@ -123,6 +128,7 @@ export default {
   },
   data() {
     return {
+      pictureUploaded: false,
       unit_options: [
         "cup",
         "grams",
@@ -157,9 +163,18 @@ export default {
   },
   methods: {
     async addNewRecipe() {
-      await this.$axios.$post("https://nihons-kitchen-server.an.r.appspot.com/api/recipes", this.recipe).then((res) => {
-        this.$router.push("/user/cookbook");
-      });
+      if (this.pictureUploaded === true) {
+        await this.$axios
+          .$post(
+            "https://nihons-kitchen-server.an.r.appspot.com/api/recipes",
+            this.recipe
+          )
+          .then((res) => {
+            this.$router.push("/user/cookbook");
+          });
+      } else {
+        alert("Please click the 'Upload Picture' button first!");
+      }
     },
     addNewIngredient() {
       this.recipe.ingredients.push(this.newIngredient);
@@ -182,21 +197,26 @@ export default {
       this.selectedFile = event.target.files[0];
     },
     onUpload() {
-      let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`;
-      firebase
-        .storage()
-        .ref(refPath)
-        .put(this.selectedFile)
-        .then(
-          () => {
-            this.recipe.picture_url =
-              refPath.substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
-            alert("Picture uploaded successfully!");
-          },
-          (error) => {
-            console.error("error", error.message);
-          }
-        );
+      if (this.selectedFile === null) {
+        alert("Select a picture to upload!");
+      } else {
+        let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`;
+        firebase
+          .storage()
+          .ref(refPath)
+          .put(this.selectedFile)
+          .then(
+            () => {
+              this.recipe.picture_url =
+                refPath.substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
+              alert("Picture uploaded successfully!");
+              this.pictureUploaded = true;
+            },
+            (error) => {
+              console.error("error", error.message);
+            }
+          );
+      }
     },
   },
 };
