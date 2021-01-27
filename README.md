@@ -12,12 +12,6 @@ https://github.com/nihonskitchen/serverside
 
 You can access and use Nihon's Kitchen here:
 
-### Staging Server
-
-https://nihonskitchen.web.app
-
-### Production Server
-
 https://nihonskitchen-prod.web.app
 
 ## How to install the app
