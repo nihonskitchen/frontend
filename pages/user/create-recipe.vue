@@ -110,7 +110,12 @@
         <button class="add-btn" @click="onUpload">Upload Picture</button>
       </div>
       <div>
-        <button class="submit-btn margins" type="submit" @click="addNewRecipe" accept="image/*">
+        <button
+          class="submit-btn margins"
+          type="submit"
+          @click="addNewRecipe"
+          accept="image/*"
+        >
           Submit
         </button>
       </div>
@@ -196,19 +201,31 @@ export default {
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
+    uuidv4() {
+      // credit for this function https://gist.github.com/jed/982883
+      return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+        (
+          c ^
+          (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+        ).toString(16)
+      );
+    },
     onUpload() {
       if (this.selectedFile === null) {
         alert("Select a picture to upload!");
       } else {
-        let refPath = `recipes/${this.$store.state.users.user.uid}/${this.selectedFile.name}`;
+        let refPath = `recipes/${this.$store.state.users.user.uid}/${
+          this.uuidv4()
+        }`;
+        // console.log("refPath =", refPath);
         firebase
           .storage()
           .ref(refPath)
           .put(this.selectedFile)
           .then(
             () => {
-              this.recipe.picture_url =
-                refPath.substr(0, refPath.lastIndexOf(".")) + "_500x500.jpg";
+              this.recipe.picture_url = refPath + 
+              "_500x500";
               alert("Picture uploaded successfully!");
               this.pictureUploaded = true;
             },
