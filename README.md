@@ -14,6 +14,26 @@ You can access and use Nihon's Kitchen here:
 
 https://nihonskitchen-prod.web.app
 
+## Usage   
+
+### 1. Click on a recipe card to see a detailed list of ingredients and steps necessary to make the recipe.
+
+
+![Image of the main view](./assets/resources/main-page.png)
+
+### 2. To create a new recipe simply fill out the fields, upload a picture, and click submit.
+
+
+![Image of the create recipe view](./assets/resources/create-recipe.png)  
+
+### 3. Use the barcode scanner to get information about Japanese ingredients.  
+
+![Image of the barcode scanner](./assets/resources/barcode-scanner.png) 
+
+### 4. Add ingredients from recipes to your shopping list and buy them easily online.   
+
+![Image of the shopping list view](./assets/resources/shoppinglist.png) 
+
 ## How to install the app
 
 If you wish to install the app and checkout how the code works, please fork this repository and run the following:
