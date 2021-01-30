@@ -18,7 +18,6 @@ https://nihonskitchen-prod.web.app
 
 ### 1. Click on a recipe card to see a detailed list of ingredients and steps necessary to make the recipe.
 
-  
 
 ![Image of the main view](./assets/resources/main-page.png)
 
