@@ -10,9 +10,15 @@ https://github.com/nihonskitchen/serverside
 
 ## Demo Link
 
-You can access and use Nihon's Kitchen here:
+You can try out Nihon's Kitchen here:
 
 https://nihonskitchen-prod.web.app
+
+## Live Presentation
+
+Watch our team's live presentation of **Nihon's Kitchen** here: 
+
+[![Nihon's Kitchen](./assets/resources/live-demo.png)](https://youtu.be/9_AITMa-fxw?t=1720)
 
 ## Usage   
 
