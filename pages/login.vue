@@ -27,7 +27,12 @@
           Login
         </button>
       </form>
+      Forgot your password? <nuxt-link to="/reset-password">Reset it!</nuxt-link>
+      <br />
+      <br />
       Don't have an account? <nuxt-link to="/signup">Sign up!</nuxt-link>
+      
+      
     </div>
   </div>
 </template>
