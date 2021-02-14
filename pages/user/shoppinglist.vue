@@ -9,8 +9,8 @@
         <ul>
           <li class="flexbox">
             <button class="remove-btn" @click="removeFromShoppingList(index)">x</button>
-            <div>{{ list.amount }}</div>
-            <div>{{ list.unit }}</div>
+            <!-- <div>{{ list.amount }}</div>
+            <div>{{ list.unit }}</div> -->
             <div>{{ list.name }}</div>
             <div>
               <!-- <button @click="rakutenURL(list.itemUrl)">
