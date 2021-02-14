@@ -61,6 +61,11 @@ $ yarn generate
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
+## Report Bugs  
+Please use the following form to report any bugs you find or feel free to open an issue in this repository!
+
+[Bug Report Form](https://docs.google.com/forms/d/13ORMRfIRev7oxtHPcd6Ex2HlCxKsaJuoFmBTHiSc-Po/edit)
+
 ## Current Features
 
 1. Create and view recipes
